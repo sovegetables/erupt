@@ -5,14 +5,11 @@
 
     <artifactId>erupt-upms</artifactId>
     <description>User Permissions Management</description>
-
     <parent>
         <groupId>xyz.erupt</groupId>
         <artifactId>erupt</artifactId>
         <version>1.12.2</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
-
     <properties>
         <java.version>1.8</java.version>
     </properties>
@@ -79,6 +76,5 @@
             </resource>
         </resources>
     </build>
-
 </project>
 

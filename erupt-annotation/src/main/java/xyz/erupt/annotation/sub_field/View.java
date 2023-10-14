@@ -26,6 +26,9 @@ public @interface View {
     @Comment("修饰类型为实体类对象时必须指定列名")
     String column() default "";
 
+    @Comment("是否能控制列表展示")
+    boolean columnShowed() default true;
+
     @EruptProperty(alias = "viewType")
     ViewType type() default ViewType.AUTO;
 

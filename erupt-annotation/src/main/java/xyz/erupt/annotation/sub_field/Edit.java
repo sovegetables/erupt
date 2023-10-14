@@ -28,6 +28,9 @@ public @interface Edit {
     @Comment("是否显示")
     boolean show() default true;
 
+    @Comment("编辑是否展示是否显示")
+    boolean editShow() default true;
+
     @Transient
     @Comment("动态渲染配置")
     ExprBool ifRender() default @ExprBool;

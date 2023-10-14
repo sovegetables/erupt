@@ -17,6 +17,7 @@ public @interface InputType {
 
     @Comment("是否整行显示")
     boolean fullSpan() default false;
+    boolean enableAutoComplete() default true;
 
     @Transient
     @Comment("对提交内容进行正则校验")

@@ -20,6 +20,7 @@ import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTreeType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.core.constant.MenuTypeEnum;
 import xyz.erupt.core.constant.RegexConst;
+import xyz.erupt.upms.filter.TenantFilter;
 import xyz.erupt.upms.looker.LookerSelf;
 import xyz.erupt.upms.model.input.ResetPassword;
 import xyz.erupt.upms.model.input.ResetPasswordExec;
@@ -42,6 +43,7 @@ import java.util.Set;
         name = "用户配置",
         dataProxy = EruptUserDataProxy.class,
         linkTree = @LinkTree(field = "eruptOrg"),
+        filter = @Filter(value = "EruptUser.tenantId", conditionHandler = TenantFilter.class),
         orderBy = "EruptUser.id",
         rowOperation = @RowOperation(title = "重置密码",
                 icon = "fa fa-refresh",
@@ -68,19 +70,10 @@ public class EruptUser extends LookerSelf implements FilterHandler {
     private String name;
 
     @EruptField(
-            views = @View(title = "账户状态", sortable = true),
-            edit = @Edit(
-                    title = "账户状态",
-                    search = @Search,
-                    type = EditType.BOOLEAN,
-                    notNull = true,
-                    boolType = @BoolType(
-                            trueText = "激活",
-                            falseText = "锁定"
-                    )
-            )
+            views = @View(title = "工号", column = "empno"),
+            edit = @Edit(title = "工号", search = @Search(vague = true), notNull = true)
     )
-    private Boolean status = true;
+    private String empno;
 
     @EruptField(
             edit = @Edit(title = "手机号码", search = @Search(vague = true), inputType = @InputType(regex = RegexConst.PHONE_REGEX))
@@ -92,13 +85,6 @@ public class EruptUser extends LookerSelf implements FilterHandler {
     )
     private String email;
 
-    @EruptField(
-            views = @View(title = "超管用户", sortable = true),
-            edit = @Edit(
-                    title = "超管用户", notNull = true, search = @Search(vague = true)
-            )
-    )
-    private Boolean isAdmin = false;
 
     @ManyToOne
     @EruptField(
@@ -126,24 +112,12 @@ public class EruptUser extends LookerSelf implements FilterHandler {
     )
     private EruptPost eruptPost;
 
-    @Transient
-    @EruptField(
-            edit = @Edit(title = "密码", type = EditType.DIVIDE)
-    )
-    private String pwdDivide;
-
     private String password;
 
     @Transient
-    @EruptField(
-            edit = @Edit(title = "密码", readonly = @Readonly(add = false))
-    )
     private String passwordA;
 
     @Transient
-    @EruptField(
-            edit = @Edit(title = "确认密码", readonly = @Readonly(add = false))
-    )
     private String passwordB;
 
     @EruptField(
@@ -151,16 +125,6 @@ public class EruptUser extends LookerSelf implements FilterHandler {
     )
     private Date resetPwdTime;
 
-    @EruptField(
-            edit = @Edit(
-                    title = "md5加密", type = EditType.BOOLEAN, notNull = true,
-                    readonly = @Readonly(add = false),
-                    boolType = @BoolType(
-                            trueText = "加密",
-                            falseText = "不加密"
-                    )
-            )
-    )
     private Boolean isMd5 = true;
 
     @EruptField(
@@ -168,6 +132,29 @@ public class EruptUser extends LookerSelf implements FilterHandler {
             edit = @Edit(title = "账号失效时间")
     )
     private Date expireDate;
+
+    @EruptField(
+            views = @View(title = "账户状态", sortable = true),
+            edit = @Edit(
+                    title = "账户状态",
+                    search = @Search,
+                    type = EditType.BOOLEAN,
+                    notNull = true,
+                    boolType = @BoolType(
+                            trueText = "激活",
+                            falseText = "锁定"
+                    )
+            )
+    )
+    private Boolean status = true;
+
+    @EruptField(
+            views = @View(title = "超管用户", sortable = true),
+            edit = @Edit(
+                    title = "超管用户", notNull = true, search = @Search(vague = true)
+            )
+    )
+    private Boolean isAdmin = false;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
@@ -204,6 +191,12 @@ public class EruptUser extends LookerSelf implements FilterHandler {
             )
     )
     private String remark;
+
+    @EruptField
+    private Boolean isSuperAdmin = false;
+
+    @EruptField
+    private Long tenantId;
 
     public EruptUser() {
     }

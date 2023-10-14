@@ -28,7 +28,7 @@ import java.util.Date;
 @Erupt(
         name = "在线用户",
         filter = @Filter(conditionHandler = EruptOnlineFilterHandler.class),
-        power = @Power(add = false, edit = false, viewDetails = false, delete = false, export = true),
+        power = @Power(add = false, edit = false, viewDetails = false, delete = false),
         orderBy = "loginTime desc",
         rowOperation = @RowOperation(code = "out", title = "强退", icon = "fa fa-trash-o text-red",
                 operationHandler = LogOutOperationHandler.class)

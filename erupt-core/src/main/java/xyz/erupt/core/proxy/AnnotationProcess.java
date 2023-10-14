@@ -1,6 +1,7 @@
 package xyz.erupt.core.proxy;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import lombok.SneakyThrows;
 import org.springframework.boot.configurationprocessor.json.JSONException;
@@ -9,14 +10,21 @@ import org.springframework.expression.EvaluationContext;
 import org.springframework.expression.ExpressionParser;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 import org.springframework.expression.spel.support.StandardEvaluationContext;
+import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.config.EruptProperty;
 import xyz.erupt.annotation.config.Match;
 import xyz.erupt.annotation.config.ToMap;
 import xyz.erupt.annotation.constant.AnnotationConst;
+import xyz.erupt.annotation.sub_erupt.LinkTree;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.EditTypeMapping;
 import xyz.erupt.annotation.sub_field.EditTypeSearch;
+import xyz.erupt.core.config.GsonFactory;
+import xyz.erupt.core.controller.EruptBuildController;
+import xyz.erupt.core.service.EruptCoreService;
 import xyz.erupt.core.util.TypeUtil;
+import xyz.erupt.core.view.EruptBuildModel;
+import xyz.erupt.core.view.EruptModel;
 
 import java.beans.Transient;
 import java.lang.annotation.Annotation;
@@ -112,7 +120,18 @@ public class AnnotationProcess {
                 } else if (method.getReturnType().isEnum()) {
                     jsonObject.addProperty(methodName, result.toString());
                 } else if (method.getReturnType().isAnnotation()) {
-                    jsonObject.add(methodName, annotationToJsonByReflect((Annotation) result));
+                    JsonObject value = annotationToJsonByReflect((Annotation) result);
+                    if(result instanceof LinkTree){
+                        try {
+                            String fieldName = ((LinkTree) result).fieldClass();
+                            EruptBuildModel eruptBuildModel = EruptBuildController.getEruptBuildModel(fieldName);
+                            JsonElement element = GsonFactory.getGson().toJsonTree(eruptBuildModel);
+                            value.add("model", element);
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    jsonObject.add(methodName, value);
                 } else if (Class.class.getSimpleName().equals(returnType)) {
                     jsonObject.addProperty(methodName, ((Class<?>) result).getSimpleName());
                 }

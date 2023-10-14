@@ -25,7 +25,7 @@ import javax.persistence.*;
 @Erupt(
         name = "字典项",
         orderBy = "sort",
-        power = @Power(export = true, importable = true)
+        power = @Power()
 )
 @Getter
 @Setter

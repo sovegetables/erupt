@@ -31,6 +31,10 @@ public class EruptBuildController {
     @EruptRouter(authIndex = 1, verifyType = EruptRouter.VerifyType.ERUPT)
     @SneakyThrows
     public EruptBuildModel getEruptBuild(@PathVariable("erupt") String eruptName) {
+        return getEruptBuildModel(eruptName);
+    }
+
+    public static EruptBuildModel getEruptBuildModel(String eruptName) {
         EruptModel eruptView = EruptCoreService.getEruptView(eruptName);
         {
             //default search conditions
@@ -52,7 +56,7 @@ public class EruptBuildController {
                 case TAB_TABLE_ADD:
                 case TAB_TABLE_REFER:
                     eruptBuildModel.setTabErupts(Optional.ofNullable(eruptBuildModel.getTabErupts()).orElse(new LinkedHashMap<>()));
-                    eruptBuildModel.getTabErupts().put(fieldModel.getFieldName(), getEruptBuild(fieldModel.getFieldReturnName()));
+                    eruptBuildModel.getTabErupts().put(fieldModel.getFieldName(), getEruptBuildModel(fieldModel.getFieldReturnName()));
                     break;
                 case COMBINE:
                     eruptBuildModel.setCombineErupts(Optional.ofNullable(eruptBuildModel.getCombineErupts()).orElse(new LinkedHashMap<>()));

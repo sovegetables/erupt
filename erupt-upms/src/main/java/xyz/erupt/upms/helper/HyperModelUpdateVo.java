@@ -30,14 +30,18 @@ public class HyperModelUpdateVo extends HyperModel {
     @ManyToOne
     @EruptField(
             views = @View(title = "更新人", width = "100px", column = "name"),
-            edit = @Edit(title = "更新人", readonly = @Readonly, type = EditType.REFERENCE_TABLE)
+            edit = @Edit(title = "更新人", readonly = @Readonly,
+                    editShow = false,
+                    type = EditType.REFERENCE_TABLE)
     )
     @EruptSmartSkipSerialize
     private EruptUserVo updateUser;
 
     @EruptField(
             views = @View(title = "更新时间", sortable = true),
-            edit = @Edit(title = "更新时间", readonly = @Readonly, dateType = @DateType(type = DateType.Type.DATE_TIME))
+            edit = @Edit(title = "更新时间", readonly = @Readonly,
+                    editShow = false,
+                    dateType = @DateType(type = DateType.Type.DATE_TIME))
     )
     @EruptSmartSkipSerialize
     private Date updateTime;

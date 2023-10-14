@@ -1,0 +1,65 @@
+# TODO 根据实际情况将数据源改成mysql等数据库
+erupt-app:
+  waterMark: false
+  # 登录失败几次出现验证码，值为0时表示一直需要登录验证码
+  verifyCodeCount: 2
+  # 登录密码是否加密传输，特殊场景如：LDAP登录可关闭该功能获取密码明文
+  pwdTransferEncrypt: false
+  # 多语言配置，默认支持：简体中文、繁体中文、英文、日文；具体配置详见erupt-i18n模块
+  locales: [ "zh-CN","zh-TW"]
+erupt:
+  # 是否开启csrf防御
+  csrfInspect: true
+  # 是否开启redis方式存储session，默认false，开启后需在配置文件中添加redis配置（同 spring boot）
+  redisSession: true
+  # 附件上传存储路径, 默认路径为：/opt/erupt-attachment
+  uploadPath: ./upload
+  # 是否保留上传文件原始名称
+  keepUploadFileName: false
+  # 登录session时长（redisSession为true时有效）
+  upms.expireTimeByLogin: 10080
+  # 是否记录操作日志，默认true，该功能开启后可在【系统管理 → 操作日志】中查看操作日志
+  security.recordOperateLog: true
+spring:
+  profiles:
+    active: local
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  datasource:
+    url: jdbc:mysql://175.178.155.249:13307/mes_guzhuo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&autoReconnect=true
+    username: root
+    password: 123456
+    driverClassName: com.mysql.cj.jdbc.Driver
+  jpa:
+    show-sql: true
+    generate-ddl: false
+    database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
+    database: mysql
+  flyway:
+    clean-disabled: true
+    enabled: true
+    encoding: UTF-8
+    locations: classpath:db/migration
+    table: flyway_schema_history
+    baseline-on-migrate: true
+    baseline-version: 1.0.0
+    out-of-order: true
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    database: 0
+  servlet:
+    multipart:
+      max-file-size: 100MB
+      max-request-size: 100MB
+server:
+  max-http-header-size: 20000KB
+  # 启用 gzip 压缩
+  compression:
+    mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
+    enabled: true
+  error:
+    includeException: true
+    includeStacktrace: ALWAYS
+    includeMessage: ALWAYS

@@ -6,7 +6,6 @@
         <groupId>xyz.erupt</groupId>
         <artifactId>erupt</artifactId>
         <version>1.12.2</version>
-        <relativePath>../../pom.xml</relativePath>
     </parent>
 
     <artifactId>erupt-jpa</artifactId>

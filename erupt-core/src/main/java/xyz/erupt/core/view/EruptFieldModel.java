@@ -38,6 +38,12 @@ public class EruptFieldModel extends CloneSupport<EruptFieldModel> {
 
     private String fieldName;
 
+    private String fieldClassName;
+
+    private String modelName;
+
+    private String primaryKeyCol;
+
     private JsonObject eruptFieldJson;
 
     private Object value;
@@ -49,6 +55,10 @@ public class EruptFieldModel extends CloneSupport<EruptFieldModel> {
         this.eruptField = field.getAnnotation(EruptField.class);
         Edit edit = eruptField.edit();
         this.fieldName = field.getName();
+        String clazzName = field.getDeclaringClass().getName();
+        this.modelName = clazzName.substring(clazzName.lastIndexOf(".") + 1);
+        String fieldClazzName = field.getType().getName();
+        this.fieldClassName = fieldClazzName.substring(fieldClazzName.lastIndexOf(".") + 1);
         //数字类型转换
         if (TypeUtil.isNumberType(field.getType().getSimpleName())) {
             this.fieldReturnName = JavaType.NUMBER;
@@ -66,6 +76,10 @@ public class EruptFieldModel extends CloneSupport<EruptFieldModel> {
                 } catch (Exception e) {
                     throw ExceptionAnsi.styleEruptFieldException(this, "Component modification field is incorrect");
                 }
+                break;
+            case REFERENCE_TABLE:
+                // TODO: 10/13/23 should use edit.type to get primary key
+                this.primaryKeyCol = "id";
                 break;
         }
         this.eruptField = eruptFieldAnnotationProxy.newProxy(this.getEruptField());

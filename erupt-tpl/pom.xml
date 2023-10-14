@@ -6,7 +6,7 @@
     <artifactId>erupt-tpl</artifactId>
     <name>erupt-tpl</name>
     <description>erupt template</description>
-
+    <packaging>pom</packaging>
     <parent>
         <groupId>xyz.erupt</groupId>
         <artifactId>erupt</artifactId>

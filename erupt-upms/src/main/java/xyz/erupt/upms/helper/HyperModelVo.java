@@ -28,7 +28,9 @@ public class HyperModelVo extends HyperModel {
 
     @Transient
     @EruptField(
-            edit = @Edit(title = "数据审计", type = EditType.DIVIDE)
+            edit = @Edit(title = "数据审计",
+                    editShow = false,
+                    type = EditType.DIVIDE)
     )
     @EruptSmartSkipSerialize
     private String divide;
@@ -36,14 +38,18 @@ public class HyperModelVo extends HyperModel {
     @ManyToOne
     @EruptField(
             views = @View(title = "创建人", width = "100px", column = "name"),
-            edit = @Edit(title = "创建人", readonly = @Readonly, type = EditType.REFERENCE_TABLE)
+            edit = @Edit(title = "创建人", readonly = @Readonly,
+                    editShow = false,
+                    type = EditType.REFERENCE_TABLE)
     )
     @EruptSmartSkipSerialize
     private EruptUserVo createUser;
 
     @EruptField(
             views = @View(title = "创建时间", sortable = true),
-            edit = @Edit(title = "创建时间", readonly = @Readonly, dateType = @DateType(type = DateType.Type.DATE_TIME))
+            edit = @Edit(title = "创建时间", readonly = @Readonly,
+                    editShow = false,
+                    dateType = @DateType(type = DateType.Type.DATE_TIME))
     )
     @EruptSmartSkipSerialize
     private Date createTime;
@@ -51,14 +57,18 @@ public class HyperModelVo extends HyperModel {
     @ManyToOne
     @EruptField(
             views = @View(title = "更新人", width = "100px", column = "name"),
-            edit = @Edit(title = "更新人", readonly = @Readonly, type = EditType.REFERENCE_TABLE)
+            edit = @Edit(title = "更新人", readonly = @Readonly,
+                    editShow = false,
+                    type = EditType.REFERENCE_TABLE)
     )
     @EruptSmartSkipSerialize
     private EruptUserVo updateUser;
 
     @EruptField(
             views = @View(title = "更新时间", sortable = true),
-            edit = @Edit(title = "更新时间", readonly = @Readonly, dateType = @DateType(type = DateType.Type.DATE_TIME))
+            edit = @Edit(title = "更新时间", readonly = @Readonly,
+                    editShow = false,
+                    dateType = @DateType(type = DateType.Type.DATE_TIME))
     )
     @EruptSmartSkipSerialize
     private Date updateTime;

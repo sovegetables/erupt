@@ -25,14 +25,16 @@ public class MetaModelUpdateVo extends MetaModel {
 
     @EruptField(
             views = @View(title = "更新人", width = "100px"),
-            edit = @Edit(title = "更新人", readonly = @Readonly)
+            edit = @Edit(title = "更新人", readonly = @Readonly, editShow = false)
     )
     @EruptSmartSkipSerialize
     private String updateBy;
 
     @EruptField(
             views = @View(title = "更新时间", sortable = true),
-            edit = @Edit(title = "更新时间", readonly = @Readonly, dateType = @DateType(type = DateType.Type.DATE_TIME))
+            edit = @Edit(title = "更新时间", readonly = @Readonly,
+                    editShow = false,
+                    dateType = @DateType(type = DateType.Type.DATE_TIME))
     )
     @EruptSmartSkipSerialize
     private LocalDateTime updateTime;
