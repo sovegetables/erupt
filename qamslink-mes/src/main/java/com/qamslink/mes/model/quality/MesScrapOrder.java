@@ -18,9 +18,8 @@ import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.ChoiceType;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
-import xyz.erupt.annotation.sub_field.sub_edit.VL;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Convert;
 import javax.persistence.Entity;
@@ -41,7 +40,7 @@ import javax.persistence.Table;
         power = @Power(add = false)
 )
 @SQLDelete(sql = "update mes_scrap_order set deleted = true where id = ?")
-public class MesScrapOrder extends TenantCreatorModel {
+public class MesScrapOrder extends HyperModelVo {
     @EruptField(
             views = @View(title = "报废单号"),
             edit = @Edit(title = "报废单号",readonly = @Readonly, search = @Search(vague = true),notNull = true)

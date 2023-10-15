@@ -17,10 +17,8 @@ import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.ChoiceType;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
-import xyz.erupt.annotation.sub_field.sub_edit.VL;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.util.List;
@@ -40,7 +38,7 @@ import java.util.UUID;
         power = @Power(add = false, delete = false, edit = false)
 )
 @SQLDelete(sql = "update mes_rejection_slip set deleted = true where id = ?")
-public class MesRejectionSlip extends TenantCreatorModel {
+public class MesRejectionSlip extends HyperModelVo {
 
     @EruptField(
         views = @View(title = "拒收单号"),

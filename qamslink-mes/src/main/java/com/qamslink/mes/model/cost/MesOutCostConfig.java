@@ -30,7 +30,6 @@ import java.util.Date;
 @Getter
 @Setter
 @Erupt(name = "外协成本配置",
-//        dataProxy = MesOutCostConfigService.class,
         orderBy = "MesOutCostConfig.createTime desc",
         power = @Power(viewDetails = false),
         filter = @Filter(value = "MesOutCostConfig.tenantId",
@@ -102,8 +101,7 @@ public class MesOutCostConfig extends BaseModel {
     @EruptField
     private Long createUserId;
 
-    @EruptField
-    private Long tenantId;
+
 
     @EruptField
     private Boolean deleted;

@@ -13,8 +13,7 @@ import xyz.erupt.annotation.sub_field.Readonly;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -31,7 +30,7 @@ import javax.persistence.Table;
                 params = {"and MesMouldStockRecord.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_mould_stock_record set deleted = true where id = ?")
-public class MesMouldStockRecord extends TenantCreatorModel {
+public class MesMouldStockRecord extends HyperModelVo {
 
     @ManyToOne
     @EruptField(

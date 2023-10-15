@@ -66,6 +66,5 @@ public class MesRejectionSlipStock extends BaseModel {
     )
     private String remark;
 
-    @EruptField
-    private Long tenantId;
+
 }

@@ -111,10 +111,7 @@ public class MesSaleReturnBarcodePrint extends HyperModelCreatorVo {
     )
     private String url;
 
-    @EruptField(
-            views = @View(title = "租户", show = false)
-    )
-    private Long tenantId;
+    
 
     private Boolean deleted = false;
 }

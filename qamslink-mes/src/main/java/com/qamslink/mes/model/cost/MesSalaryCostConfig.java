@@ -85,8 +85,7 @@ public class MesSalaryCostConfig extends BaseModel {
     @EruptField
     private Long createUserId;
 
-    @EruptField
-    private Long tenantId;
+
 
     @EruptField
     private Boolean deleted;

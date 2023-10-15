@@ -92,6 +92,5 @@ public class MesWarehoseTemporaryCollection extends HyperModelCreatorVo {
 
     private Boolean deleted = false;
 
-    @EruptField
-    private Long tenantId;
+
 }

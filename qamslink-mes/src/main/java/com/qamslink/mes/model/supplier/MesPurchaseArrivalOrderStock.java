@@ -54,7 +54,6 @@ public class MesPurchaseArrivalOrderStock extends BaseModel {
     )
     private BigDecimal rejectQuantity;
 
-    @EruptField
-    private Long tenantId;
+
 }
 

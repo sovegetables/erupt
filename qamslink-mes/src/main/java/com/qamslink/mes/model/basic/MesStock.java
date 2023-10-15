@@ -10,18 +10,14 @@ import xyz.erupt.annotation.sub_erupt.LinkTree;
 import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
-import xyz.erupt.annotation.sub_field.Readonly;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
-import xyz.erupt.jpa.model.BaseModel;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 import xyz.erupt.upms.model.EruptOrg;
-import xyz.erupt.upms.model.base.HyperModel;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @Table(name = "mes_stock")
@@ -34,7 +30,7 @@ import java.util.List;
         linkTree = @LinkTree(field = "stockCategory", fieldClass = "MesStockCategory"),
         filter = @Filter(value = "MesStock.tenantId", params = {"and MesStock.deleted = false"}, conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_stock set deleted = true where id = ?")
-public class MesStock extends TenantModel {
+public class MesStock extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "物料名称"),

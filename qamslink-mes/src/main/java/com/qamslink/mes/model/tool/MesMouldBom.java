@@ -1,24 +1,10 @@
 package com.qamslink.mes.model.tool;
 
-import cn.hutool.core.collection.CollUtil;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.util.ObjectUtil;
-import cn.hutool.core.util.StrUtil;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.poi.hssf.usermodel.HSSFWorkbook;
-import org.apache.poi.ss.usermodel.DataFormatter;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.hibernate.annotations.SQLDelete;
-import org.springframework.stereotype.Service;
-import org.springframework.util.FileCopyUtils;
-import org.springframework.web.multipart.MultipartFile;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
-import xyz.erupt.annotation.fun.DataProxy;
 import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.Edit;
@@ -26,26 +12,12 @@ import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.NumberType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
-import xyz.erupt.core.exception.EruptApiErrorTip;
-import xyz.erupt.core.exception.EruptWebApiRuntimeException;
-import xyz.erupt.excel.service.EruptExcelService;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
-import xyz.erupt.upms.model.EruptUser;
-import xyz.erupt.upms.service.EruptUserService;
+import xyz.erupt.upms.helper.HyperModelVo;
 
-import javax.annotation.Resource;
 import javax.persistence.*;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.math.BigDecimal;
-import java.net.URLEncoder;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "mes_mould_bom")
@@ -59,7 +31,7 @@ import java.util.stream.Collectors;
                 params = {"and MesMouldBom.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_mould_bom set deleted = true where id = ?")
-public class MesMouldBom extends TenantCreatorModel {
+public class MesMouldBom extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "工具BOM名称"),

@@ -107,10 +107,7 @@ public class MesProductRecord extends HyperModelCreatorVo {
     )
     private List<MesInspectionRecordDetail> inspectionRecordDetails;
 
-    @EruptField(
-            views = @View(title = "租户", show = false)
-    )
-    private Long tenantId;
+    
 
     private Boolean deleted = false;
 }

@@ -13,7 +13,7 @@ import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.InputType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -37,7 +37,7 @@ import java.util.Set;
 )
 @Data
 @SQLDelete(sql = "update mes_customer set deleted = true where id = ?")
-public class MesCustomer extends TenantModel {
+public class MesCustomer extends HyperModelVo {
 
     @EruptField(
             views = @View(

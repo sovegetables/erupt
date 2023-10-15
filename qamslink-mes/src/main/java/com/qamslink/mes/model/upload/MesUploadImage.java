@@ -11,7 +11,8 @@ import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.AttachmentType;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
+
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -31,7 +32,7 @@ import javax.persistence.Table;
                 params = {"and MesUploadImage.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_upload_image set deleted = true where id = ?")
-public class MesUploadImage extends TenantCreatorModel {
+public class MesUploadImage extends HyperModelVo {
     private static final long serialVersionUID = -4295434994046365861L;
     @EruptField(
             views = @View(title = "图片"),

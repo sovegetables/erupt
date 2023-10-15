@@ -77,8 +77,7 @@ public class MesProcessRoute extends BaseModel {
     )
     private Date createTime;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 

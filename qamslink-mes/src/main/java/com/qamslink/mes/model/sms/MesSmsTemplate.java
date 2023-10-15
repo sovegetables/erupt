@@ -14,8 +14,7 @@ import xyz.erupt.annotation.sub_field.sub_edit.InputType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.annotation.sub_field.sub_edit.VL;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -31,7 +30,7 @@ import java.util.Set;
                 params = {"and MesSmsTemplate.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_sms_template set deleted = true where id = ?")
-public class MesSmsTemplate extends TenantCreatorModel {
+public class MesSmsTemplate extends HyperModelVo {
 
     @EruptField(
             views = @View(

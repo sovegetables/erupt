@@ -96,6 +96,5 @@ public class MesOrderStock extends BaseModel {
     )
     private Boolean status = true;
 
-    @EruptField
-    private Long tenantId;
+
 }

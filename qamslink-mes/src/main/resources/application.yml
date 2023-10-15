@@ -27,7 +27,8 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   datasource:
-    url: jdbc:mysql://175.178.155.249:13307/mes_guzhuo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&autoReconnect=true
+#    url: jdbc:mysql://175.178.155.249:13307/mes_guzhuo?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&autoReconnect=true
+    url: jdbc:mysql://127.0.0.1:3306/qsl_auto_mes?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&autoReconnect=true
     username: root
     password: 123456
     driverClassName: com.mysql.cj.jdbc.Driver

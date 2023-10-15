@@ -75,8 +75,7 @@ public class MesSecret extends HyperModelCreatorVo {
     )
     private String corpsecret;
 
-    @EruptField
-    private Long tenantId;
+
 
 //    @EruptField(
 //            views = @View(

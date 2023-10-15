@@ -11,7 +11,7 @@ import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 import xyz.erupt.upms.model.EruptUser;
 
 import javax.persistence.*;
@@ -28,7 +28,7 @@ import java.util.Set;
                 params = {"and MesGroup.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_group set deleted = true where id = ?")
-public class MesGroup extends TenantCreatorModel {
+public class MesGroup extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "班组名称"),

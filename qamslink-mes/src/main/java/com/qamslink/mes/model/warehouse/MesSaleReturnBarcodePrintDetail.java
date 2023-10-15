@@ -14,7 +14,7 @@ import xyz.erupt.annotation.sub_field.Readonly;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantBaseModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -31,7 +31,7 @@ import java.util.Date;
                 params = {"and MesSaleReturnBarcodePrintDetail.barcodeStatus = 1"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_stock_barcode_print_detail set barcode_status = 0 where id = ?")
-public class MesSaleReturnBarcodePrintDetail extends TenantBaseModel {
+public class MesSaleReturnBarcodePrintDetail extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "条码类型"),

@@ -61,7 +61,6 @@ public class MesDeliveryOrderFeeding extends BaseModel {
     )
     private BigDecimal shippedCapacity;
 
-    @EruptField
-    private Long tenantId;
+
 }
 

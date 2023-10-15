@@ -35,9 +35,5 @@ public class MesEquipmentCategory extends HyperModelCreatorVo {
             edit = @Edit(title = "设备分类编码", notNull = true, search = @Search(vague = true))
     )
     private String code;
-
-    @EruptField
-    private Long tenantId;
-
     private Boolean deleted = false;
 }

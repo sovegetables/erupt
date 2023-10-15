@@ -111,10 +111,7 @@ public class MesProductBatchPrinterDetail extends BaseModel {
     )
     private Boolean barcodeStatus;
 
-    @EruptField(
-            views = @View(title = "租户", show = false)
-    )
-    private Long tenantId;
+    
 
     // 物料ID
     private Long stockId;

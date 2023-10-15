@@ -11,8 +11,7 @@ import xyz.erupt.annotation.sub_field.*;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -30,7 +29,7 @@ import java.util.Set;
                 conditionHandler = TenantFilter.class),
         power = @Power(add = false, delete = false))
 @SQLDelete(sql = "update mes_out_order_material_out set deleted = true where id = ?")
-public class MesOutOrderMaterialOut extends TenantCreatorModel {
+public class MesOutOrderMaterialOut extends HyperModelVo {
     @ManyToOne
     @EruptField(
             views = {
@@ -70,10 +69,7 @@ public class MesOutOrderMaterialOut extends TenantCreatorModel {
     )
     private String depositor;
 
-    @EruptField(
-            views = @View(title = "租户", show = false)
-    )
-    private Long tenantId;
+    
 
     private Boolean deleted = false;
 }

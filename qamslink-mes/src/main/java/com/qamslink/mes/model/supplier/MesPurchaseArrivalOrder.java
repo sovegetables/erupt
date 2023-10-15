@@ -18,8 +18,7 @@ import xyz.erupt.annotation.sub_field.sub_edit.BoolType;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -40,7 +39,7 @@ import java.util.Set;
         power = @Power(add = false, edit = false, delete = false)
 )
 @SQLDelete(sql = "update mes_purchase_arrival_order set deleted = true where id = ?")
-public class MesPurchaseArrivalOrder extends TenantCreatorModel {
+public class MesPurchaseArrivalOrder extends HyperModelVo {
 
     @EruptField(
             views = {
@@ -126,7 +125,6 @@ public class MesPurchaseArrivalOrder extends TenantCreatorModel {
 
     private Boolean deleted = false;
 
-    @EruptField
-    private Long tenantId;
+
 
 }

@@ -12,7 +12,7 @@ import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.NumberType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -29,7 +29,7 @@ import java.math.BigDecimal;
                 params = {"and MesBarcodeModel.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_barcode_model set deleted = true where id = ?")
-public class MesBarcodeModel extends TenantCreatorModel {
+public class MesBarcodeModel extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "模板名称"),
@@ -55,8 +55,7 @@ public class MesBarcodeModel extends TenantCreatorModel {
     )
     private String detail;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 }

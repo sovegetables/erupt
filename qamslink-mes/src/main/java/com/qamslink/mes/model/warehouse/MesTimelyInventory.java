@@ -138,7 +138,7 @@ public class MesTimelyInventory extends BaseModel {
             QueryDTO queryDTO = new QueryDTO();
             queryDTO.setPageNum(page.getPageIndex());
             queryDTO.setPageSize(page.getPageSize());
-            queryDTO.setTenantId(getTenantId());
+//            queryDTO.setTenantId(getTenantId());
             List<Condition> conditions = eruptQuery.getConditions();
             Map<String, Consumer<String>> propertyMap = new HashMap<>();
             propertyMap.put("stock", queryDTO::setStockId);
@@ -178,9 +178,9 @@ public class MesTimelyInventory extends BaseModel {
             return page;
         }
 
-        private Long getTenantId() {
-            return eruptUserService.getCurrentEruptUser().getTenantId();
-        }
+//        private Long getTenantId() {
+//            return eruptUserService.getCurrentEruptUser().getTenantId();
+//        }
     }
 
     public static class InnerDataProxy implements DataProxy<MesTimelyInventory> {

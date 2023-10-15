@@ -14,7 +14,7 @@ import xyz.erupt.annotation.sub_field.Readonly;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantMetaModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 import xyz.erupt.upms.model.EruptOrg;
 
 import javax.persistence.*;
@@ -31,7 +31,7 @@ import java.util.List;
         filter = @Filter(
                 value = "MesOtherIn.tenantId",
                 conditionHandler = TenantFilter.class))
-public class MesOtherIn extends TenantMetaModel {
+public class MesOtherIn extends HyperModelVo {
 
 
     @EruptField(

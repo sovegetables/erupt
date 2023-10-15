@@ -63,7 +63,6 @@ public class MesProductionChangeOrder extends BaseModel {
     )
     private List<MesProductionChangeOrderDetail> details;
 
-    @EruptField
-    private Long tenantId;
+
 
 }

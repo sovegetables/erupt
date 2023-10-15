@@ -16,8 +16,7 @@ import xyz.erupt.annotation.sub_field.sub_edit.BoolType;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.util.List;
@@ -46,7 +45,7 @@ import java.util.UUID;
         }
 )
 @SQLDelete(sql = "update mes_delivery_plan_order set deleted = true where id = ?")
-public class MesDeliveryPlanOrder extends TenantCreatorModel {
+public class MesDeliveryPlanOrder extends HyperModelVo {
 
 
         @EruptField(

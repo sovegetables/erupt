@@ -50,8 +50,7 @@ public class MesStockCategory extends HyperModel {
     )
     private MesStockCategory parentCategory;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 }

@@ -15,8 +15,7 @@ import xyz.erupt.annotation.sub_field.sub_edit.ChoiceType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.annotation.sub_field.sub_edit.VL;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -34,7 +33,7 @@ import java.util.Set;
         conditionHandler = TenantFilter.class)
 )
 @SQLDelete(sql = "update mes_order set deleted = true where id = ?")
-public class MesOrder extends TenantCreatorModel {
+public class MesOrder extends HyperModelVo {
 
     @ManyToOne
     @EruptField(
@@ -107,8 +106,7 @@ public class MesOrder extends TenantCreatorModel {
     )
     private Set<MesOrderStock> orderStocks;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 

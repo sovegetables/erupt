@@ -90,8 +90,7 @@ public class MesCustomerOrder extends HyperModelCreatorVo {
     private Set<MesCustomerOrderStockVO> customerOrderStocks;
 
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 

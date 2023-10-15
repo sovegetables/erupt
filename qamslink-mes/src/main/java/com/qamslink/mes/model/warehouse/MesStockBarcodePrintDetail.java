@@ -158,9 +158,6 @@ public class MesStockBarcodePrintDetail extends BaseModel {
     )
     private Boolean barcodeStatus = true;
 
-    @EruptField
-    private Long tenantId;
-
     // 物料ID
     private Long stockId;
 

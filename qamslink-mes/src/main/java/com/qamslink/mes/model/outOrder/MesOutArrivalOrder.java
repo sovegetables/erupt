@@ -17,8 +17,7 @@ import xyz.erupt.annotation.sub_field.sub_edit.BoolType;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -38,7 +37,7 @@ import java.util.Set;
         )
 )
 @SQLDelete(sql = "update mes_out_arrival_order set deleted = true where id = ?")
-public class MesOutArrivalOrder extends TenantCreatorModel {
+public class MesOutArrivalOrder extends HyperModelVo {
 
     @EruptField(
             views = {@View(title = "到货单号")},
@@ -117,8 +116,7 @@ public class MesOutArrivalOrder extends TenantCreatorModel {
     )
     private Boolean status = false;
 
-    @EruptField
-    private Long tenantId;
+
     @EruptField
     private Boolean deleted = false;
 

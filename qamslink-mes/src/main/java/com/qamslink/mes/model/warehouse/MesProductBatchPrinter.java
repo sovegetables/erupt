@@ -18,8 +18,7 @@ import xyz.erupt.annotation.sub_field.sub_edit.DateType;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.VL;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -38,7 +37,7 @@ import java.util.List;
                 conditionHandler = TenantFilter.class),
         power = @Power(add = false, delete = false))
 @SQLDelete(sql = "update mes_product_batch_printer set deleted = true where id = ?")
-public class MesProductBatchPrinter extends TenantCreatorModel {
+public class MesProductBatchPrinter extends HyperModelVo {
 
     @ManyToOne
     @EruptField(
@@ -125,10 +124,7 @@ public class MesProductBatchPrinter extends TenantCreatorModel {
     )
     private String url;
 
-    @EruptField(
-            views = @View(title = "租户", show = false)
-    )
-    private Long tenantId;
+    
 
     private Boolean deleted = false;
 }

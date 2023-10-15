@@ -11,7 +11,7 @@ import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.AttachmentType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.util.List;
@@ -28,7 +28,7 @@ import java.util.List;
 )
 @Data
 @SQLDelete(sql = "update mes_esop_management set deleted = true where id = ?")
-public class MesESOPManagement extends TenantCreatorModel {
+public class MesESOPManagement extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "ESOP名称"),
@@ -63,8 +63,7 @@ public class MesESOPManagement extends TenantCreatorModel {
     private List<MesStock> stocks;
 
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 

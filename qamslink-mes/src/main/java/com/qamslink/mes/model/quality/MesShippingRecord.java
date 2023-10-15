@@ -11,8 +11,7 @@ import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -31,7 +30,7 @@ import java.util.List;
         )
 )
 @SQLDelete(sql = "update mes_inspection_record set deleted = true where id = ?")
-public class MesShippingRecord extends TenantCreatorModel {
+public class MesShippingRecord extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "检验单号"),

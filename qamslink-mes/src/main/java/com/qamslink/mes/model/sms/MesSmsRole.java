@@ -8,9 +8,8 @@ import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
-import xyz.erupt.jpa.model.BaseModel;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -26,7 +25,7 @@ import javax.persistence.Table;
                 conditionHandler = TenantFilter.class
         )
 )
-public class MesSmsRole extends TenantModel {
+public class MesSmsRole extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "编码"),

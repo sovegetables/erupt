@@ -15,8 +15,7 @@ import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.ViewType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -39,7 +38,7 @@ import java.util.Date;
                 conditionHandler = TenantFilter.class),
         power = @Power(add = false, delete = false))
 @SQLDelete(sql = "update mes_out_order_in set deleted = true where id = ?")
-public class MesOutOrderIn extends TenantCreatorModel {
+public class MesOutOrderIn extends HyperModelVo {
     @EruptField(
             views = @View(title = "条码编号"),
             edit = @Edit(title = "条码编号", notNull = true, show = false, search = @Search(vague = true))
@@ -97,10 +96,7 @@ public class MesOutOrderIn extends TenantCreatorModel {
     )
     private String remark;
 
-    @EruptField(
-            views = @View(title = "租户", show = false)
-    )
-    private Long tenantId;
+    
 
     private Boolean deleted = false;
 }

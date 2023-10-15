@@ -35,6 +35,5 @@ public class MesShiftGroup extends BaseModel {
     )
     private EruptUser manager;
 
-    @EruptField
-    private Long tenantId;
+
 }

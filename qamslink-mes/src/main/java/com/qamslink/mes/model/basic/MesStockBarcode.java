@@ -15,8 +15,7 @@ import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.annotation.sub_field.sub_edit.ShowBy;
 import xyz.erupt.annotation.sub_field.sub_edit.VL;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -33,7 +32,7 @@ import javax.persistence.Table;
                 params = {"and MesStockBarcode.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_stock_barcode set deleted = true where id = ?")
-public class MesStockBarcode extends TenantCreatorModel {
+public class MesStockBarcode extends HyperModelVo {
 
     public static final int TYPE_MATERIAL_CODE = 1;
     public static final int TYPE_MATERIAL_CATEGORY = 2;

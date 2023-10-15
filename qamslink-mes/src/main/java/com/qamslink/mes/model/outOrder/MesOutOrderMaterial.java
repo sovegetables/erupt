@@ -16,9 +16,7 @@ import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.annotation.sub_field.sub_edit.VL;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
-import xyz.erupt.upms.helper.TenantModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -42,7 +40,7 @@ import java.util.Set;
         )
 )
 @SQLDelete(sql = "update mes_out_order_material set deleted = true where id = ?")
-public class MesOutOrderMaterial extends TenantCreatorModel {
+public class MesOutOrderMaterial extends HyperModelVo {
 
         @EruptField(
                 views = @View(title = "委外发料单号"),

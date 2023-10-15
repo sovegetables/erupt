@@ -17,8 +17,7 @@ import xyz.erupt.annotation.sub_field.Readonly;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -49,7 +48,7 @@ import java.util.List;
         }
 )
 @SQLDelete(sql = "update mes_production_schedule set deleted = true where id = ?")
-public class MesProductionSchedule extends TenantCreatorModel {
+public class MesProductionSchedule extends HyperModelVo {
 
     private static final long serialVersionUID = -704535462879694811L;
 
@@ -183,8 +182,7 @@ public class MesProductionSchedule extends TenantCreatorModel {
     @JsonIgnore
     private List<MesProductionScheduleDetail> details;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
     @Transient

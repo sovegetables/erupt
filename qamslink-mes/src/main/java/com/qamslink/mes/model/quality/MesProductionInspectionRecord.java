@@ -19,7 +19,7 @@ import xyz.erupt.annotation.sub_field.Readonly;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -58,7 +58,7 @@ import java.util.List;
         }
 )
 @SQLDelete(sql = "update mes_production_inspection_record set deleted = true where id = ?")
-public class MesProductionInspectionRecord extends TenantCreatorModel {
+public class MesProductionInspectionRecord extends HyperModelVo {
 
     private static final long serialVersionUID = -539594804177088426L;
     @EruptField(

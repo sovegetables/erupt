@@ -75,10 +75,7 @@ public class MesBarcodeOperationRecordDetail extends BaseModel {
     )
     private Integer status;
 
-    @EruptField(
-            views = @View(title = "租户", show = false)
-    )
-    private Long tenantId;
+    
 
     // 物料ID
     private Long stockId;

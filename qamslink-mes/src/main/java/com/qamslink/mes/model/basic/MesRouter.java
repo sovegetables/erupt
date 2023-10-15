@@ -69,8 +69,7 @@ public class MesRouter extends HyperModelCreatorVo implements Tpl.TplHandler{
     )
     private String description;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 

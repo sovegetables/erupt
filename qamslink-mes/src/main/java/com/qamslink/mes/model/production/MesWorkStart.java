@@ -17,8 +17,7 @@ import xyz.erupt.annotation.sub_field.sub_edit.DateType;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 import xyz.erupt.upms.model.EruptUser;
 
 import javax.persistence.*;
@@ -41,7 +40,7 @@ import java.util.Date;
 
 )
 @SQLDelete(sql = "update mes_work_start set deleted = true where id = ?")
-public class MesWorkStart extends TenantCreatorModel {
+public class MesWorkStart extends HyperModelVo {
 
     @ManyToOne
     @EruptField(

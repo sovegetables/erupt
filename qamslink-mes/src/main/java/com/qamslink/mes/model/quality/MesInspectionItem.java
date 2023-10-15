@@ -14,8 +14,7 @@ import xyz.erupt.annotation.sub_field.sub_edit.ChoiceType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.annotation.sub_field.sub_edit.VL;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -31,7 +30,7 @@ import javax.persistence.Table;
                 params = {"and MesInspectionItem.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_inspection_item set deleted = true where id = ?")
-public class MesInspectionItem extends TenantCreatorModel {
+public class MesInspectionItem extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "检测项名称"),
@@ -73,8 +72,7 @@ public class MesInspectionItem extends TenantCreatorModel {
     )
     private Boolean status = true;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 }

@@ -201,9 +201,9 @@ public class BarcodeList extends BaseModel {
 //        @Resource
 //        private MesStockBarcodePrintDetailService printDetailService;
 
-        private Long getTenantId() {
-            return eruptUserService.getCurrentEruptUser().getTenantId();
-        }
+//        private Long getTenantId() {
+//            return eruptUserService.getCurrentEruptUser().getTenantId();
+//        }
 
         @Data
         public static class QueryDTO {
@@ -227,7 +227,7 @@ public class BarcodeList extends BaseModel {
             QueryDTO queryDTO = new QueryDTO();
             queryDTO.setPageNum(page.getPageIndex());
             queryDTO.setPageSize(page.getPageSize());
-            queryDTO.setTenantId(getTenantId());
+//            queryDTO.setTenantId(getTenantId());
 
             Map<String, Consumer<String>> propertyMap = new HashMap<>();
             propertyMap.put("barcodeNum", queryDTO::setBarcodeNum);

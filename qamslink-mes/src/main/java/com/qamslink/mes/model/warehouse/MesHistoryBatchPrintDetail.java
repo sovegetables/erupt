@@ -99,9 +99,6 @@ public class MesHistoryBatchPrintDetail extends BaseModel {
     )
     private Boolean barcodeStatus;
 
-    @EruptField(
-            views = @View(title = "租户", show = false)
-    )
-    private Long tenantId;
+    
 
 }

@@ -19,8 +19,7 @@ import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.annotation.sub_field.sub_edit.VL;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -38,7 +37,7 @@ import java.util.Set;
                 params = {"and MesOrderStockIn.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_order_stock_in set deleted = true where id = ?")
-public class MesOrderStockIn extends TenantCreatorModel {
+public class MesOrderStockIn extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "采购入库单号"),
@@ -95,8 +94,7 @@ public class MesOrderStockIn extends TenantCreatorModel {
     private Set<MesOrderStockInDetail> stockBarcodePrintDetails;
 
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 

@@ -76,7 +76,6 @@ public class MesDeliveryOrderBarcodeDetail extends BaseModel {
     )
     private MesDeliveryOrderFeeding deliveryOrderStock;
 
-    @EruptField
-    private Long tenantId;
+
 }
 

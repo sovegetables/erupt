@@ -12,8 +12,7 @@ import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.BoolType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -29,7 +28,7 @@ import javax.persistence.Table;
                 params = {"and MesInspectionItemMeasure.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_inspection_item_measure set deleted = true where id = ?")
-public class MesInspectionItemMeasure extends TenantCreatorModel {
+public class MesInspectionItemMeasure extends HyperModelVo {
 
     @ManyToOne
     @EruptField(

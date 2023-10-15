@@ -14,7 +14,7 @@ import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.NumberType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -34,7 +34,7 @@ import java.math.BigDecimal;
                 params = {"and MesMouldComponent.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_mould_component set deleted = true where id = ?")
-public class MesMouldComponent extends TenantCreatorModel {
+public class MesMouldComponent extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "构件名称"),

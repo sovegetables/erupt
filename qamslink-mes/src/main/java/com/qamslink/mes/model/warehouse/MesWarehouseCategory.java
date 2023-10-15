@@ -48,8 +48,7 @@ public class MesWarehouseCategory extends HyperModel {
     ))
     private Boolean virtualStorage = false;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 }

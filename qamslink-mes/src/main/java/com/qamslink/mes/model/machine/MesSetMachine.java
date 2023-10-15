@@ -18,7 +18,7 @@ import xyz.erupt.annotation.sub_field.Readonly;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 import xyz.erupt.upms.model.EruptUser;
 
 import javax.persistence.*;
@@ -42,7 +42,7 @@ import java.util.List;
                 params = {"and MesSetMachine.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_set_machine set deleted = true where id = ?")
-public class MesSetMachine extends TenantCreatorModel {
+public class MesSetMachine extends HyperModelVo {
 
     private static final long serialVersionUID = -5811398935637123655L;
 

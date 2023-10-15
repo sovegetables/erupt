@@ -95,10 +95,7 @@ public class MesBarcodeOperationRecord extends HyperModelCreatorVo {
     )
     private List<MesBarcodeOperationRecordDetail> barcodeOperationRecordDetails;
 
-    @EruptField(
-            views = @View(title = "租户", show = false)
-    )
-    private Long tenantId;
+    
 
     private Boolean deleted = false;
 }

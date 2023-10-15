@@ -12,7 +12,7 @@ import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 import xyz.erupt.upms.model.EruptOrg;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -30,7 +30,7 @@ import javax.persistence.Table;
                 params = {"and MesWarehouse.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_warehouse set deleted = true where id = ?")
-public class MesWarehouse extends TenantModel {
+public class MesWarehouse extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "仓库名称"),

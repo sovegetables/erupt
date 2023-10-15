@@ -108,8 +108,7 @@ public class MesProductionBarcodeRecord extends HyperModelCreatorVo {
     )
     private String remark;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 

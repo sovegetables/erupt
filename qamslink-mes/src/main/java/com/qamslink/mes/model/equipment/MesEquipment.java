@@ -118,8 +118,7 @@ public class MesEquipment extends HyperModelCreatorVo {
     )
     private Set<MesMouldBom> mouldBoms;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 }

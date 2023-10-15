@@ -86,8 +86,7 @@ public class MesSupplier extends HyperModelCreatorVo {
     )
     private String remark;
 
-    @EruptField
-    private Long tenantId;
+
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "supplier_id")

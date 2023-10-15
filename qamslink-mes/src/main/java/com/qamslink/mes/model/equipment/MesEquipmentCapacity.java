@@ -141,8 +141,5 @@ public class MesEquipmentCapacity extends HyperModelCreatorVo {
                     boolType = @BoolType(trueText = "已启用", falseText = "已禁用"))
     )
     private Boolean status = true;
-
-    private Long tenantId;
-
     private Boolean deleted = false;
 }

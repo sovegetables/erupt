@@ -16,8 +16,7 @@ import xyz.erupt.annotation.sub_field.sub_edit.NumberType;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -36,7 +35,7 @@ import java.math.BigDecimal;
                 params = {"and MesInventory.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_warehouse set deleted = true where id = ?")
-public class MesInventory extends TenantCreatorModel {
+public class MesInventory extends HyperModelVo {
 
     @ManyToOne
     @EruptField(

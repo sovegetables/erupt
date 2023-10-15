@@ -14,8 +14,7 @@ import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -34,7 +33,7 @@ import java.util.Date;
                 params = {"and MesRepairRecord.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_repair_record set deleted = true where id = ?")
-public class MesRepairRecord extends TenantCreatorModel {
+public class MesRepairRecord extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "维修单号"),

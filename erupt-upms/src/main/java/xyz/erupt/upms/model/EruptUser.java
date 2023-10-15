@@ -75,6 +75,9 @@ public class EruptUser extends LookerSelf implements FilterHandler {
     )
     private String empno;
 
+    @Convert(converter = UserType.Converter.class)
+    private UserType type;
+
     @EruptField(
             edit = @Edit(title = "手机号码", search = @Search(vague = true), inputType = @InputType(regex = RegexConst.PHONE_REGEX))
     )
@@ -195,8 +198,7 @@ public class EruptUser extends LookerSelf implements FilterHandler {
     @EruptField
     private Boolean isSuperAdmin = false;
 
-    @EruptField
-    private Long tenantId;
+
 
     public EruptUser() {
     }

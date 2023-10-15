@@ -16,8 +16,7 @@ import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.annotation.sub_field.sub_edit.VL;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -35,7 +34,7 @@ import java.util.Set;
                 params = {"and MesPickingRecord.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_picking_record set deleted = true where id = ?")
-public class MesPickingRecord extends TenantCreatorModel {
+public class MesPickingRecord extends HyperModelVo {
 
     @ManyToOne
     @EruptField(

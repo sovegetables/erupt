@@ -83,6 +83,5 @@ public class MesDeliveryPlanOrderStock extends BaseModel {
     )
     private Date endDate;
 
-    @EruptField
-    private Long tenantId;
+
 }

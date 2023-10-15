@@ -12,8 +12,7 @@ import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.ViewType;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantModel;
-import xyz.erupt.upms.model.base.HyperModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -28,7 +27,7 @@ import javax.persistence.Table;
         filter = @Filter(value = "MesWorkingProcedure.tenantId",
                 params = {"and MesWorkingProcedure.deleted = false"}, conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_working_procedure set deleted = true where id = ?")
-public class MesWorkingProcedure extends TenantModel {
+public class MesWorkingProcedure extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "工序名称"),
@@ -105,8 +104,7 @@ public class MesWorkingProcedure extends TenantModel {
     )
     private String attachment;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 

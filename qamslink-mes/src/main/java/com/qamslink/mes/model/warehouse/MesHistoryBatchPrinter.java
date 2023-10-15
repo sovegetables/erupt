@@ -10,8 +10,7 @@ import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_field.*;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -29,7 +28,7 @@ import java.util.List;
                 params = {"and MesHistoryBatchPrinter.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_history_batch_printer set deleted = true where id = ?")
-public class MesHistoryBatchPrinter extends TenantCreatorModel {
+public class MesHistoryBatchPrinter extends HyperModelVo {
 
     @ManyToOne
     @EruptField(

@@ -9,7 +9,7 @@ import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantBaseModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -25,7 +25,7 @@ import javax.persistence.Table;
                 conditionHandler = TenantFilter.class
         )
 )
-public class MesGroupUser extends TenantBaseModel {
+public class MesGroupUser extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "姓名"),
@@ -39,6 +39,5 @@ public class MesGroupUser extends TenantBaseModel {
     )
     private String phone;
 
-    @EruptField
-    private Long tenantId;
+
 }

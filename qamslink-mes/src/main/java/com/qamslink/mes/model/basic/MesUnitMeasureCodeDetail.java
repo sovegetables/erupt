@@ -15,9 +15,8 @@ import xyz.erupt.annotation.sub_field.Readonly;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.DateType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
-import xyz.erupt.jpa.model.BaseModel;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantBaseModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 import xyz.erupt.upms.model.EruptUserVo;
 
 import javax.persistence.Entity;
@@ -36,7 +35,7 @@ import java.util.Date;
         power = @Power(importable = true),
         filter = @Filter(value = "MesUnitMeasureCodeDetail.tenantId", params = {"and MesUnitMeasureCodeDetail.deleted = false"}, conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_unit_measure_code_detail set deleted = true where id = ?")
-public class MesUnitMeasureCodeDetail extends TenantBaseModel {
+public class MesUnitMeasureCodeDetail extends HyperModelVo {
 
     @ManyToOne
     @EruptField(
@@ -68,8 +67,7 @@ public class MesUnitMeasureCodeDetail extends TenantBaseModel {
     )
     private BigDecimal conversionRate;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 

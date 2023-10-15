@@ -107,8 +107,7 @@ public class MesEquipmentRunCondition extends HyperModelCreatorVo{
     //工位ID
     private Long resourceId;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 }

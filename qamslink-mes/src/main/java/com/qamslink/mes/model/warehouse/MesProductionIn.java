@@ -59,6 +59,5 @@ public class MesProductionIn extends HyperModelCreatorVo {
     )
     private Set<MesProductionInDetail> productionInDetails;
 
-    @EruptField
-    private Long tenantId;
+
 }

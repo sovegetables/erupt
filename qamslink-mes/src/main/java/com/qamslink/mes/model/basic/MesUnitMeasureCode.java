@@ -46,8 +46,7 @@ public class MesUnitMeasureCode extends BaseModel {
     private String unitCode;
 
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 

@@ -13,13 +13,7 @@ public class TenantFilter implements FilterHandler {
     private EruptUserService eruptUserService;
     @Override
     public String filter(String condition, String[] params) {
-        EruptUser currentUser = eruptUserService.getCurrentEruptUser();
-        StringBuilder sql;
-        if(currentUser.getIsSuperAdmin()) {
-            sql = new StringBuilder("1=1");
-        }else {
-            sql = new StringBuilder(condition + " = " + currentUser.getTenantId());
-        }
+        StringBuilder sql = new StringBuilder();
         if(params != null) {
             for (String param : params) {
                 sql.append(" ").append(param);

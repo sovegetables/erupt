@@ -104,8 +104,7 @@ public class WIPInventory extends BaseModel {
     )
     private BigDecimal quantity;
 
-    @EruptField
-    private Long tenantId;
+
 
     static {
         DataProcessorManager.register("WIP-inventory", WIPInventoryDataProcessor.class);
@@ -147,7 +146,7 @@ public class WIPInventory extends BaseModel {
             QueryDTO queryDTO = new QueryDTO();
             queryDTO.setPageNum(page.getPageIndex());
             queryDTO.setPageSize(page.getPageSize());
-            queryDTO.setTenantId(getTenantId());
+//            queryDTO.setTenantId(getTenantId());
 
             Map<String, Consumer<String>> propertyMap = new HashMap<>();
             propertyMap.put("stockName", queryDTO::setStockName);
@@ -180,9 +179,9 @@ public class WIPInventory extends BaseModel {
             return page;
         }
 
-        private Long getTenantId() {
-            return eruptUserService.getCurrentEruptUser().getTenantId();
-        }
+//        private Long getTenantId() {
+//            return eruptUserService.getCurrentEruptUser().getTenantId();
+//        }
     }
 
     public static class InnerDataProxy implements DataProxy<WIPInventory> {}

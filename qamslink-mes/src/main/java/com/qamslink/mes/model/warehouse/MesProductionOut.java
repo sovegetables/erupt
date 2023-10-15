@@ -87,10 +87,7 @@ public class MesProductionOut extends HyperModelCreatorVo {
     )
     private String remark;
 
-    @EruptField(
-            views = @View(title = "租户", show = false)
-    )
-    private Long tenantId;
+    
 
     private Boolean deleted = false;
 }

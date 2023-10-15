@@ -19,8 +19,7 @@ import xyz.erupt.annotation.sub_field.sub_edit.NumberType;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -39,7 +38,7 @@ import java.util.List;
                 params = {"and MesMould.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_mould set deleted = true where id = ?")
-public class MesMould extends TenantCreatorModel {
+public class MesMould extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "工具名称"),
@@ -119,8 +118,7 @@ public class MesMould extends TenantCreatorModel {
     )
     private List<MesStock> stocks;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 }

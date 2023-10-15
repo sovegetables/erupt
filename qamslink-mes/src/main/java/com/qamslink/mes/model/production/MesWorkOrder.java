@@ -17,8 +17,7 @@ import xyz.erupt.annotation.sub_field.Readonly;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -64,7 +63,7 @@ import java.util.List;
         }
 )
 @SQLDelete(sql = "update mes_work_order set deleted = true where id = ?")
-public class MesWorkOrder extends TenantCreatorModel {
+public class MesWorkOrder extends HyperModelVo {
 
     public static final int STATUS_UN_START = 0;
     public static final int STATUS_SOME_START = 1;
@@ -189,8 +188,7 @@ public class MesWorkOrder extends TenantCreatorModel {
     )
     private Boolean isGenerate = false;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 }

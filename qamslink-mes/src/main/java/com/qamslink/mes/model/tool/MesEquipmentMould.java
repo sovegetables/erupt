@@ -14,8 +14,7 @@ import xyz.erupt.annotation.sub_field.sub_edit.ChoiceType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.annotation.sub_field.sub_edit.VL;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
@@ -32,7 +31,7 @@ import javax.persistence.Table;
                 params = {"and MesEquipmentMould.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_equipment_mould set deleted = true where id = ?")
-public class MesEquipmentMould extends TenantCreatorModel {
+public class MesEquipmentMould extends HyperModelVo {
 
     @ManyToOne
     @EruptField(

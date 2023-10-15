@@ -12,8 +12,7 @@ import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.BoolType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.util.List;
@@ -27,7 +26,7 @@ import java.util.List;
         orderBy = "MesBom.createTime desc",
         filter = @Filter(value = "MesBom.tenantId",params = {"and MesBom.deleted = false"},conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_bom set deleted = true where id = ?")
-public class MesBom extends TenantCreatorModel {
+public class MesBom extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "物料清单名称"),
@@ -81,8 +80,7 @@ public class MesBom extends TenantCreatorModel {
     )
     private List<MesBomWorkingProcedure> bomWorkingProcedures;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 }

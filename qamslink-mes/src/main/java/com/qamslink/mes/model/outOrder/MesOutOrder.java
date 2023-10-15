@@ -14,8 +14,7 @@ import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -49,7 +48,7 @@ import java.util.Set;
         }
 )
 @SQLDelete(sql = "update mes_out_order set deleted = true where id = ?")
-public class MesOutOrder extends TenantCreatorModel {
+public class MesOutOrder extends HyperModelVo {
 
         @EruptField(
                 views = {@View(title = "委外工单号")},

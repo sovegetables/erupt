@@ -163,8 +163,7 @@ public class MesFlowCardDetail extends BaseModel {
     @Comment("更新时间")
     private Date updateTime;
 
-    @EruptField
-    private Long tenantId;
+
 
     static {
         DataProcessorManager.register("mes-flow-card", FlowCardDataProcessor.class);
@@ -203,11 +202,11 @@ public class MesFlowCardDetail extends BaseModel {
         @Override
         public Page queryList(EruptModel eruptModel, Page page, EruptQuery eruptQuery) {
             EruptUser currentEruptUser = eruptUserService.getCurrentEruptUser();
-            Long tenantId = currentEruptUser.getTenantId();
+//            Long tenantId = currentEruptUser.getTenantId();
             QueryDTO queryDTO = new QueryDTO();
             queryDTO.setPageNum(page.getPageIndex());
             queryDTO.setPageSize(page.getPageSize());
-            queryDTO.setTenantId(tenantId);
+//            queryDTO.setTenantId(tenantId);
             List<Condition> conditions = eruptQuery.getConditions();
             for (Condition condition : conditions) {
                 String conditionKey = condition.getKey();

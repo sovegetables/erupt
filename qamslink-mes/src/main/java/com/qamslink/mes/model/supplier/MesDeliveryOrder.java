@@ -8,7 +8,6 @@ import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
 import xyz.erupt.annotation.sub_erupt.Power;
-import xyz.erupt.annotation.sub_erupt.RowOperation;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.Readonly;
@@ -16,8 +15,7 @@ import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.BoolType;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.util.List;
@@ -42,7 +40,7 @@ import java.util.List;
 //        }
 )
 @SQLDelete(sql = "update mes_delivery_order set deleted = true where id = ?")
-public class MesDeliveryOrder extends TenantCreatorModel {
+public class MesDeliveryOrder extends HyperModelVo {
 
         @EruptField(
                 views = {

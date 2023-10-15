@@ -17,7 +17,8 @@ import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
+
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Table;
@@ -33,7 +34,7 @@ import javax.persistence.Table;
                 params = {"and MesBarcodeRule.deleted = false"},
                 conditionHandler = TenantFilter.class))
 @SQLDelete(sql = "update mes_barcode_rule set deleted = true where id = ?")
-public class MesBarcodeRule extends TenantCreatorModel {
+public class MesBarcodeRule extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "类型"),
@@ -138,8 +139,7 @@ public class MesBarcodeRule extends TenantCreatorModel {
     )
     private Boolean isUsed = true;
 
-    @EruptField
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 }

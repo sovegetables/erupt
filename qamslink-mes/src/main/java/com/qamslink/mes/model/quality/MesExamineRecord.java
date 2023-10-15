@@ -16,8 +16,7 @@ import xyz.erupt.annotation.sub_field.Readonly;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.upms.filter.TenantFilter;
-import xyz.erupt.upms.helper.HyperModelCreatorVo;
-import xyz.erupt.upms.helper.TenantCreatorModel;
+import xyz.erupt.upms.helper.HyperModelVo;
 import xyz.erupt.upms.model.EruptUser;
 
 import javax.persistence.Entity;
@@ -42,7 +41,7 @@ import java.math.BigDecimal;
         )
 )
 @SQLDelete(sql = "update mes_examine_record set deleted = true where id = ?")
-public class MesExamineRecord extends TenantCreatorModel {
+public class MesExamineRecord extends HyperModelVo {
     private static final long serialVersionUID = 2780907069821665641L;
 
     @EruptField(
