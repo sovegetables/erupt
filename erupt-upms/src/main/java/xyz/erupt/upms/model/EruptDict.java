@@ -13,7 +13,8 @@ import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
-import xyz.erupt.jpa.model.MetaModelUpdateVo;
+import xyz.erupt.core.annotation.CodeGenerator;
+import xyz.erupt.upms.model.base.HyperModel;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -41,13 +42,14 @@ import javax.persistence.UniqueConstraint;
 )
 @Getter
 @Setter
-public class EruptDict extends MetaModelUpdateVo {
+public class EruptDict extends HyperModel {
 
     @Column(length = AnnotationConst.CODE_LENGTH)
     @EruptField(
-            views = @View(title = "编码", sortable = true),
-            edit = @Edit(title = "编码", notNull = true, search = @Search(vague = true))
+            views = @View(title = "编码", sortable = true, highlight = true),
+            edit = @Edit(title = "编码", placeHolder = "保存时自动生成", search = @Search(vague = true), notNull = true)
     )
+    @CodeGenerator
     private String code;
 
     @EruptField(

@@ -64,7 +64,7 @@ public class MesWarehouse extends HyperModelVo {
     )
     private String address;
 
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 }

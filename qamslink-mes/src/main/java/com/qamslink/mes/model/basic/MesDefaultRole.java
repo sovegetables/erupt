@@ -44,7 +44,7 @@ public class MesDefaultRole extends BaseModel {
     public static final String CODE_SUPPLIER_MANAGER = "supplier_manager";
 
     @EruptField(
-            views = @View(title = "编码"),
+            views = @View(title = "编码", highlight = true),
             edit = @Edit(title = "编码", notNull = true, search = @Search(vague = true))
     )
     private String code;

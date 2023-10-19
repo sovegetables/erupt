@@ -33,7 +33,7 @@ public class EruptPost extends BaseModel {
     @Column(length = AnnotationConst.CODE_LENGTH)
     @EruptField(
             views = @View(title = "岗位编码", sortable = true),
-            edit = @Edit(title = "岗位编码", notNull = true, search = @Search(vague = true))
+            edit = @Edit(title = "岗位编码", placeHolder = "保存时自动生成", search = @Search(vague = true))
     )
     private String code;
 

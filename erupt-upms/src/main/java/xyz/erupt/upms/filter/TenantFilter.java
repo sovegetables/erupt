@@ -9,11 +9,9 @@ import xyz.erupt.upms.service.EruptUserService;
 @Component
 public class TenantFilter implements FilterHandler {
 
-    @Autowired
-    private EruptUserService eruptUserService;
     @Override
     public String filter(String condition, String[] params) {
-        StringBuilder sql = new StringBuilder();
+        StringBuilder sql = new StringBuilder("1=1");
         if(params != null) {
             for (String param : params) {
                 sql.append(" ").append(param);

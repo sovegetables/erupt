@@ -219,7 +219,7 @@ public class BarcodeList extends BaseModel {
             private String workOrderCode;
             private String warehouseName;
             private String locationCode;
-            private Long tenantId;
+
         }
 
         @Override

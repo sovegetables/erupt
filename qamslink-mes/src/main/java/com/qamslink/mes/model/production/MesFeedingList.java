@@ -90,7 +90,7 @@ public class MesFeedingList extends HyperModelVo {
     @EruptField(
             views = @View(title = "租户", show = false, columnShowed = false)
     )
-    private Long tenantId;
+
 
     @Transient
     private Long workOrderId;

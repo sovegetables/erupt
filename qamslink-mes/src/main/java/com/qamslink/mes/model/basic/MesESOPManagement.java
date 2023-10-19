@@ -10,6 +10,7 @@ import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.AttachmentType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
+import xyz.erupt.core.annotation.CodeGenerator;
 import xyz.erupt.upms.filter.TenantFilter;
 import xyz.erupt.upms.helper.HyperModelVo;
 
@@ -20,27 +21,28 @@ import java.util.List;
 @Table(name="mes_esop_management")
 @Erupt(name = "ESOP管理",
 //        dataProxy = MesESOPManagementService.class,
-        orderBy = "MesESOPManagement.createTime desc",
-        filter = @Filter(value = "MesESOPManagement.tenantId",
-                params = {"and MesESOPManagement.deleted = false"},
-                conditionHandler = TenantFilter.class
-        )
+        orderBy = "MesESOPManagement.createTime desc"
+//        ,
+//        filter = @Filter(value = "MesESOPManagement.tenantId",
+//                params = {"and MesESOPManagement.deleted = false"},
+//                conditionHandler = TenantFilter.class
+//        )
 )
 @Data
-@SQLDelete(sql = "update mes_esop_management set deleted = true where id = ?")
 public class MesESOPManagement extends HyperModelVo {
+
+    @EruptField(
+            views = @View(title = "ESOP编码"),
+            edit = @Edit(title = "ESOP编码", placeHolder = "保存时自动生成",notNull = true, search = @Search(vague = true))
+    )
+    @CodeGenerator
+    private String ESOPCode;
 
     @EruptField(
             views = @View(title = "ESOP名称"),
             edit = @Edit(title = "ESOP名称", notNull = true, search = @Search(vague = true))
     )
     private String ESOPName;
-
-    @EruptField(
-            views = @View(title = "ESOP编码"),
-            edit = @Edit(title = "ESOP编码", notNull = true, search = @Search(vague = true))
-    )
-    private String ESOPCode;
 
     @EruptField(
             views = @View(title = "附件上传"),

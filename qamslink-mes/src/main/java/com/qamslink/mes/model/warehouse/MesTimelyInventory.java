@@ -85,9 +85,6 @@ public class MesTimelyInventory extends BaseModel {
     private MesWarehouse warehouse;
 
     @Transient
-    private Long tenantId;
-
-    @Transient
     private Long stockId;
 
     @Transient
@@ -126,7 +123,7 @@ public class MesTimelyInventory extends BaseModel {
 
             private String barcodeNum;
 
-            private Long tenantId;
+
 
             public int getOffset() {
                 return (pageNum - 1) * pageSize;

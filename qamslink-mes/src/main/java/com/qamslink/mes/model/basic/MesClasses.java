@@ -2,16 +2,14 @@ package com.qamslink.mes.model.basic;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
-import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.BoolType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
-import xyz.erupt.upms.filter.TenantFilter;
+import xyz.erupt.core.annotation.CodeGenerator;
 import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
@@ -23,12 +21,16 @@ import java.util.List;
 @Table(name = "aps_classes")
 @Erupt(name = "班次定义",
 //        dataProxy = ApsClassesService.class,
-        orderBy = "createTime desc",
-        filter = @Filter(value = "MesClasses.tenantId",
-                params = {"and MesClasses.deleted = false"},
-                conditionHandler = TenantFilter.class))
-@SQLDelete(sql = "update aps_classes set deleted = true where id = ?")
+        orderBy = "createTime desc"
+        )
 public class MesClasses extends HyperModelVo {
+
+    @EruptField(
+            views = @View(title = "编码", highlight = true),
+            edit = @Edit(title = "编码", placeHolder = "保存时自动生成", search = @Search(vague = true), notNull = true)
+    )
+    @CodeGenerator
+    private String code;
 
     @EruptField(
             views = @View(title = "班次名称"),
@@ -71,6 +73,6 @@ public class MesClasses extends HyperModelVo {
     )
     private List<MesClassesTime> classesTimes;
 
-    private Long tenantId;
+
     private Boolean deleted = false;
 }

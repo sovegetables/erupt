@@ -8,6 +8,7 @@ import com.qamslink.mes.type.BarCodeType;
 import com.qamslink.mes.type.TicketType;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.poi.ss.formula.functions.T;
 import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
@@ -29,11 +30,7 @@ import javax.persistence.Table;
 @Setter
 @Erupt(name = "条码规则",
 //        dataProxy = MesBarcodeRuleService.class,
-        orderBy = "MesBarcodeRule.createTime desc",
-        filter = @Filter(value = "MesBarcodeRule.tenantId",
-                params = {"and MesBarcodeRule.deleted = false"},
-                conditionHandler = TenantFilter.class))
-@SQLDelete(sql = "update mes_barcode_rule set deleted = true where id = ?")
+        orderBy = "MesBarcodeRule.createTime desc")
 public class MesBarcodeRule extends HyperModelVo {
 
     @EruptField(
@@ -70,7 +67,7 @@ public class MesBarcodeRule extends HyperModelVo {
             )
     )
     @Convert(converter = TicketTypeConverter.class)
-    private TicketType categoryCode;
+    private TicketType categoryCode = TicketType.NOT;
 
     @EruptField(
             views = @View(title = "版本号"),

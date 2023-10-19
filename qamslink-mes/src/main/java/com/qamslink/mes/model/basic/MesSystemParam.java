@@ -19,9 +19,8 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "mes_system_param")
 @Erupt(
-        name = "参数配置",
+        name = "参数配置"
 //        dataProxy = MesSystemParamService.class,
-        filter = @Filter(value = "MesSystemParam.tenantId", conditionHandler = TenantFilter.class)
 )
 @EruptI18n
 @Getter
@@ -29,11 +28,12 @@ import javax.persistence.Table;
 @NoArgsConstructor
 public class MesSystemParam extends HyperModel {
 
-    public static final String PARAM_CODE_FLOWCARD = "flowCard";
+    public static final String PARAM_CODE_FLOW_CARD = "flowCard";
 
     @EruptField(
             views = @View(title = "参数编码", sortable = true),
-            edit = @Edit(title = "参数编码", notNull = true, search = @Search(vague = true))
+            edit = @Edit(title = "参数编码", placeHolder = "保存时自动生成",
+                    search = @Search(vague = true))
     )
     private String code;
 
@@ -43,8 +43,6 @@ public class MesSystemParam extends HyperModel {
             edit = @Edit(title = "参数名称", notNull = true, search = @Search(vague = true))
     )
     private String name;
-
-    private Long tenantId;
 
     @EruptField(
             views = @View(title = "参数值"),

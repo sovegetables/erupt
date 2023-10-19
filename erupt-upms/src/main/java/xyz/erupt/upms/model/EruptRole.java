@@ -13,6 +13,7 @@ import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.BoolType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
+import xyz.erupt.core.annotation.CodeGenerator;
 import xyz.erupt.upms.handler.RoleMenuFilter;
 import xyz.erupt.upms.helper.HyperModelUpdateVo;
 import xyz.erupt.upms.model.data_proxy.EruptRoleDataProxy;
@@ -26,7 +27,7 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "e_upms_role", uniqueConstraints = {
-        @UniqueConstraint(columnNames = "code")
+     @UniqueConstraint(columnNames = "code")
 })
 @Erupt(name = "角色管理", dataProxy = EruptRoleDataProxy.class, orderBy = "EruptRole.sort asc")
 @EruptI18n
@@ -37,9 +38,10 @@ public class EruptRole extends HyperModelUpdateVo {
 
     @Column(length = AnnotationConst.CODE_LENGTH)
     @EruptField(
-            views = @View(title = "编码"),
-            edit = @Edit(title = "编码", notNull = true, search = @Search(vague = true))
+            views = @View(title = "编码", highlight = true),
+            edit = @Edit(title = "编码", placeHolder = "保存时自动生成", search = @Search(vague = true), notNull = true)
     )
+    @CodeGenerator
     private String code;
 
     @EruptField(

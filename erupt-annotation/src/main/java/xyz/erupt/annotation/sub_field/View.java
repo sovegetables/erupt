@@ -16,6 +16,7 @@ public @interface View {
     String title();
 
     String desc() default "";
+    boolean highlight() default false;
 
     @Comment("可在模板中使用row变量，获取当前行的数据")
     Tpl tpl() default @Tpl(path = "", enable = false);

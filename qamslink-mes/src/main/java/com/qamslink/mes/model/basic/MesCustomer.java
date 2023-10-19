@@ -1,43 +1,53 @@
 package com.qamslink.mes.model.basic;
 
 import lombok.Data;
-import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
-import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_erupt.LinkTree;
-import xyz.erupt.annotation.sub_erupt.RowOperation;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.InputType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
-import xyz.erupt.upms.filter.TenantFilter;
+import xyz.erupt.core.annotation.CodeGenerator;
 import xyz.erupt.upms.helper.HyperModelVo;
-
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="mes_customer")
+@Table(name="mes_customer", uniqueConstraints={ @UniqueConstraint(columnNames = "code")})
 @Erupt(name = "往来单位",
 //        dataProxy = MesCustomerService.class,
         linkTree = @LinkTree(field = "customerType"),
-        orderBy = "MesCustomer.createTime desc",
-        filter = @Filter(value = "MesCustomer.tenantId",params = {"and MesCustomer.deleted = false"}, conditionHandler = TenantFilter.class),
-        rowOperation = {
-                @RowOperation(
-                        code = "customer",
-                        title = "生成供应商账号",
-                        mode = RowOperation.Mode.MULTI
+        orderBy = "MesCustomer.createTime desc"
+//        ,
+//        rowOperation = {
+//                @RowOperation(
+//                        code = "customer",
+//                        title = "生成供应商账号",
+//                        mode = RowOperation.Mode.MULTI
 //                        ,
 //                        operationHandler = CustomerHandler.class
-                )
-        }
+//                )
+//        }
 )
 @Data
-@SQLDelete(sql = "update mes_customer set deleted = true where id = ?")
 public class MesCustomer extends HyperModelVo {
+
+    @EruptField(
+            views = @View(
+                    title = "单位编码", highlight = true
+            ),
+            edit = @Edit(
+                    title = "单位编码",
+                    type = EditType.INPUT, search = @Search(vague = true),
+                    notNull = true,
+                    placeHolder = "保存时自动生成",
+                    inputType = @InputType
+            )
+    )
+    @CodeGenerator
+    private String code;
 
     @EruptField(
             views = @View(
@@ -54,7 +64,7 @@ public class MesCustomer extends HyperModelVo {
     @ManyToOne
     @EruptField(
             views = @View(title = "类型", column = "name"),
-            edit = @Edit(title = "类型", notNull = true, type = EditType.REFERENCE_TABLE, search = @Search(vague = false))
+            edit = @Edit(title = "类型", notNull = true, type = EditType.REFERENCE_TABLE)
     )
     private MesCustomerType customerType;
 
@@ -69,18 +79,6 @@ public class MesCustomer extends HyperModelVo {
             )
     )
     private String alias;
-
-    @EruptField(
-            views = @View(
-                    title = "单位编码"
-            ),
-            edit = @Edit(
-                    title = "单位编码",
-                    type = EditType.INPUT, search = @Search(vague = true), notNull = true,
-                    inputType = @InputType
-            )
-    )
-    private String code;
 
     @EruptField(
             views = @View(
@@ -112,6 +110,5 @@ public class MesCustomer extends HyperModelVo {
     )
     private Set<MesCustomerContact> contacts;
 
-    @EruptField(views = @View(title = "是否删除", show = false, columnShowed = false))
     private Boolean deleted = false;
 }

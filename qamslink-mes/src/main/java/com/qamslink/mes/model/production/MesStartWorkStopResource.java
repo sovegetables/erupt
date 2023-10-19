@@ -91,7 +91,7 @@ public class MesStartWorkStopResource extends BaseModel {
     @EruptField(
             edit = @Edit(title = "租户", readonly = @Readonly, show = false)
     )
-    private Long tenantId;
+
 
     @Transient
     private Long userId;

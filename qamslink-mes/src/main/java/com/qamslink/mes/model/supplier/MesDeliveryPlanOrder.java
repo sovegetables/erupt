@@ -87,12 +87,7 @@ public class MesDeliveryPlanOrder extends HyperModelVo {
 
         private Boolean deleted = false;
 
-        @EruptField
-        private Long tenantId;
-
-
         private String code(){
-
                 String subCode = "JH_";
                 String substring = UUID.randomUUID().toString().substring(0,10);//后缀
                 return subCode+substring;

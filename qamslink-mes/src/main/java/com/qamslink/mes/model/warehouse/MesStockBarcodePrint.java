@@ -109,7 +109,7 @@ public class MesStockBarcodePrint extends HyperModelCreatorVo {
     )
     private List<MesStockBarcodePrintDetail> stockBarcodePrintDetails;
 
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 }

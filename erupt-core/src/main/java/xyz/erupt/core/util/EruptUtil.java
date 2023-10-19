@@ -17,10 +17,8 @@ import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.EditTypeSearch;
 import xyz.erupt.annotation.sub_field.View;
-import xyz.erupt.annotation.sub_field.sub_edit.ChoiceType;
-import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
-import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTreeType;
-import xyz.erupt.annotation.sub_field.sub_edit.TagsType;
+import xyz.erupt.annotation.sub_field.sub_edit.*;
+import xyz.erupt.core.annotation.CodeGenerator;
 import xyz.erupt.core.annotation.EruptAttachmentUpload;
 import xyz.erupt.core.config.GsonFactory;
 import xyz.erupt.core.constant.EruptConst;
@@ -33,6 +31,10 @@ import xyz.erupt.core.view.EruptApiModel;
 import xyz.erupt.core.view.EruptFieldModel;
 import xyz.erupt.core.view.EruptModel;
 
+import javax.script.Invocable;
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+import javax.script.ScriptException;
 import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -236,11 +238,34 @@ public class EruptUtil {
     }
 
     public static EruptApiModel validateEruptValue(EruptModel eruptModel, JsonObject jsonObject) {
+        Map<String, String> valueMap = eruptModel.getEruptFieldModels()
+                .stream()
+                .filter(f -> jsonObject.get(f.getFieldName()) != null)
+                .collect(Collectors.toMap(EruptFieldModel::getFieldName,
+                        f -> jsonObject.get(f.getFieldName()).getAsString()));
         for (EruptFieldModel field : eruptModel.getEruptFieldModels()) {
             Edit edit = field.getEruptField().edit();
             JsonElement value = jsonObject.get(field.getFieldName());
-            if (field.getEruptField().edit().notNull()) {
-                if (null == value || value.isJsonNull()) {
+            CodeGenerator codeGenerator = field.getField().getAnnotation(CodeGenerator.class);
+            if (field.getEruptField().edit().notNull() && codeGenerator == null) {
+                ShowBy showBy = edit.showBy();
+                String expr = showBy.expr();
+                String dependField = showBy.dependField();
+                Boolean dependShowBy = true;
+                if(StringUtils.isNotBlank(dependField) && StringUtils.isNotBlank(expr)){
+                    String dependFieldValue = valueMap.get(dependField);
+                    ScriptEngineManager sem = new ScriptEngineManager();
+                    ScriptEngine engine = sem.getEngineByName("javascript");
+                    try {
+                        String function = String.format("function at(){var value = %s; return %s;}", dependFieldValue, expr);
+                        engine.eval(function);
+                        Invocable jsInvoke = (Invocable) engine;
+                        dependShowBy = (Boolean) jsInvoke.invokeFunction("at");
+                    } catch (ScriptException | NoSuchMethodException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (dependShowBy && (null == value || value.isJsonNull())) {
                     return EruptApiModel.errorNoInterceptMessage(field.getEruptField().edit().title() + " " + I18nTranslate.$translate("erupt.notnull"));
                 } else if (String.class.getSimpleName().equals(field.getFieldReturnName())) {
                     if (StringUtils.isBlank(value.getAsString())) {

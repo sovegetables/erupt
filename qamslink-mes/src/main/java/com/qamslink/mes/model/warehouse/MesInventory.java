@@ -82,7 +82,7 @@ public class MesInventory extends HyperModelVo {
     )
     private MesWarehouse mesWarehouse;
 
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 }

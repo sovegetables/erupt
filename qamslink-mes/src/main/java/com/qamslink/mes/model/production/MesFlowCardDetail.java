@@ -196,7 +196,7 @@ public class MesFlowCardDetail extends BaseModel {
 
             private String stockCode;
 
-            private Long tenantId;
+
         }
 
         @Override

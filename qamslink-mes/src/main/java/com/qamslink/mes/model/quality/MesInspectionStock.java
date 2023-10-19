@@ -109,7 +109,7 @@ public class MesInspectionStock extends HyperModelVo {
     @EruptField(
             views = @View(title = "租户", show = false, columnShowed = false)
     )
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 }

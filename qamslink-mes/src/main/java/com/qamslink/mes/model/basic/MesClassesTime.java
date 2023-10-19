@@ -26,13 +26,13 @@ public class MesClassesTime extends BaseModel {
 
     @EruptField(
             views = @View(title = "开始时间"),
-            edit = @Edit(title = "开始时间", type = EditType.DATE, dateType = @DateType(type = DateType.Type.TIME))
+            edit = @Edit(title = "开始时间", notNull = true, type = EditType.DATE, dateType = @DateType(type = DateType.Type.TIME))
     )
     private String startTime;
 
     @EruptField(
             views = @View(title = "结束时间"),
-            edit = @Edit(title = "结束时间", type = EditType.DATE, dateType = @DateType(type = DateType.Type.TIME))
+            edit = @Edit(title = "结束时间", notNull = true,  type = EditType.DATE, dateType = @DateType(type = DateType.Type.TIME))
     )
     private String endTime;
 

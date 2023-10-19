@@ -25,12 +25,12 @@ import java.time.LocalDateTime;
 @EruptI18n
 public class MetaModelVo extends MetaModel {
 
-    @Transient
-    @EruptField(
-            edit = @Edit(title = "数据审计", type = EditType.DIVIDE)
-    )
-    @EruptSmartSkipSerialize
-    private String divide;
+//    @Transient
+//    @EruptField(
+//            edit = @Edit(title = "数据审计", type = EditType.DIVIDE)
+//    )
+//    @EruptSmartSkipSerialize
+//    private String divide;
 
     @EruptField(
             views = @View(title = "创建人", width = "100px"),

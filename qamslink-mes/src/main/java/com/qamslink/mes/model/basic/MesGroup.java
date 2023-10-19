@@ -2,15 +2,13 @@ package com.qamslink.mes.model.basic;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
-import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
-import xyz.erupt.upms.filter.TenantFilter;
+import xyz.erupt.core.annotation.CodeGenerator;
 import xyz.erupt.upms.helper.HyperModelVo;
 import xyz.erupt.upms.model.EruptUser;
 
@@ -23,12 +21,17 @@ import java.util.Set;
 @Getter
 @Erupt(name = "班组管理",
 //        dataProxy = MesGroupService.class,
-        orderBy = "MesGroup.createTime desc",
-        filter = @Filter(value = "MesGroup.tenantId",
-                params = {"and MesGroup.deleted = false"},
-                conditionHandler = TenantFilter.class))
-@SQLDelete(sql = "update mes_group set deleted = true where id = ?")
+        orderBy = "MesGroup.createTime desc")
 public class MesGroup extends HyperModelVo {
+
+    @EruptField(
+            views = @View(title = "班组编码", highlight = true),
+            edit = @Edit(title = "班组编码", placeHolder = "保存时自动生成",
+                    notNull = true,
+                    search = @Search(vague = true))
+    )
+    @CodeGenerator
+    private String code;
 
     @EruptField(
             views = @View(title = "班组名称"),

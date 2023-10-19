@@ -14,6 +14,7 @@ import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTreeType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.jpa.model.BaseModel;
+import xyz.erupt.core.annotation.CodeGenerator;
 
 import javax.persistence.*;
 
@@ -37,8 +38,9 @@ public class EruptOrg extends BaseModel {
     @Column(length = AnnotationConst.CODE_LENGTH)
     @EruptField(
             views = @View(title = "组织编码", sortable = true),
-            edit = @Edit(title = "组织编码", notNull = true, search = @Search(vague = true))
+            edit = @Edit(title = "组织编码", placeHolder = "保存时自动生成", search = @Search(vague = true), notNull = true)
     )
+    @CodeGenerator
     private String code;
 
     @EruptField(

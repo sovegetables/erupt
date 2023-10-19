@@ -51,7 +51,7 @@ public class MesProductionScheduleDetailProductionLine extends BaseModel {
     private String description;
 
 
-    private Long tenantId;
+
 
     private Boolean deleted;
 

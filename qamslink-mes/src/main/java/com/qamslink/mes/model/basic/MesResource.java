@@ -3,17 +3,15 @@ package com.qamslink.mes.model.basic;
 import com.qamslink.mes.model.equipment.MesEquipment;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
-import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.BoolType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
-import xyz.erupt.upms.filter.TenantFilter;
+import xyz.erupt.core.annotation.CodeGenerator;
 import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
@@ -27,23 +25,23 @@ import javax.persistence.Table;
 @Erupt(name = "工位定义",
 //        dataProxy = MesResourceService.class,
         orderBy = "MesResource.createTime desc",
-        power = @Power(importable = true),
-        filter = @Filter(value = "MesResource.tenantId",
-                params = {"and MesResource.deleted = false"},
-                conditionHandler = TenantFilter.class))
-@SQLDelete(sql = "update mes_resource set deleted = true where id = ?")
+        power = @Power(importable = true)
+        )
 public class MesResource extends HyperModelVo {
+
+    @EruptField(
+            views = @View(title = "编码", highlight = true),
+            edit = @Edit(title = "编码", placeHolder = "保存时自动生成",
+                    search = @Search(vague = true), notNull = true)
+    )
+    @CodeGenerator
+    private String code;
+
     @EruptField(
             views = @View(title = "名称"),
             edit = @Edit(title = "名称", search = @Search(vague = true), notNull = true)
     )
     private String name;
-
-    @EruptField(
-            views = @View(title = "编码"),
-            edit = @Edit(title = "编码", search = @Search(vague = true), notNull = true)
-    )
-    private String code;
 
     @ManyToOne
     @EruptField(
@@ -71,7 +69,7 @@ public class MesResource extends HyperModelVo {
     @ManyToOne
     @EruptField(
             views = @View(title = "设备", column = "name"),
-            edit = @Edit(title = "设备",type = EditType.REFERENCE_TABLE, notNull = true)
+            edit = @Edit(title = "设备",type = EditType.REFERENCE_TABLE)
     )
     private MesEquipment equipment;
 

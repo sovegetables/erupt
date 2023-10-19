@@ -98,10 +98,4 @@ public class MesSaleReturnRecord extends HyperModelCreatorVo {
             @BoolType(trueText = "已入库", falseText = "未入库"))
     )
     private Boolean orderStatus = false;
-
-    @EruptField(
-            views = @View(title = "租户", show = false, columnShowed = false)
-    )
-    private Long tenantId;
-
 }

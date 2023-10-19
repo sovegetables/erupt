@@ -131,7 +131,7 @@ public class MesWorkStart extends HyperModelVo {
     @EruptField(
             edit = @Edit(title = "租户", readonly = @Readonly, show = false)
     )
-    private Long tenantId;
+
 
     private String barcodeNum;
 

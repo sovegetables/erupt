@@ -14,6 +14,7 @@ import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.Readonly;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.DateType;
+import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.upms.filter.TenantFilter;
 import xyz.erupt.upms.helper.HyperModelVo;
@@ -22,26 +23,27 @@ import xyz.erupt.upms.model.EruptUserVo;
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import java.math.BigDecimal;
 import java.util.Date;
 
 @Entity
-@Table(name = "mes_unit_measure_code_detail")
+@Table(name = "mes_unit_measure_code_detail", uniqueConstraints = @UniqueConstraint(columnNames = "stock_id"))
 @Setter
 @Getter
 @Erupt(name = "计量单位转换",
 //        dataProxy = MesUnitMeasureCodeDetailService.class,
         orderBy = "MesUnitMeasureCodeDetail.createTime desc",
-        power = @Power(importable = true),
-        filter = @Filter(value = "MesUnitMeasureCodeDetail.tenantId", params = {"and MesUnitMeasureCodeDetail.deleted = false"}, conditionHandler = TenantFilter.class))
-@SQLDelete(sql = "update mes_unit_measure_code_detail set deleted = true where id = ?")
+        power = @Power(importable = true)
+        )
 public class MesUnitMeasureCodeDetail extends HyperModelVo {
 
     @ManyToOne
     @EruptField(
-            views ={@View(title = "物料名称",column = "name"),
+            views ={@View(title = "物料名称",column = "name", highlight = true),
                     @View(title = "物料编码",column = "code")},
-            edit = @Edit(title = "物料",notNull = true, search = @Search(vague = true), type = EditType.REFERENCE_TABLE)
+            edit = @Edit(title = "物料编码",notNull = true, search = @Search(vague = true),
+                    type = EditType.REFERENCE_TABLE, referenceTableType = @ReferenceTableType(label = "code"))
     )
     private MesStock stock;
 
@@ -66,24 +68,4 @@ public class MesUnitMeasureCodeDetail extends HyperModelVo {
             edit = @Edit(title = "转换率", notNull = true)
     )
     private BigDecimal conversionRate;
-
-
-
-    private Boolean deleted = false;
-
-    @ManyToOne
-    @EruptField(
-            views = @View(title = "创建人", width = "100px", column = "name"),
-            edit = @Edit(title = "创建人", editShow = false , readonly = @Readonly, type = EditType.REFERENCE_TABLE)
-    )
-    @EruptSmartSkipSerialize
-    private EruptUserVo createUser;
-
-    @EruptField(
-            views = @View(title = "创建时间", sortable = true),
-            edit = @Edit(title = "创建时间", editShow = false , readonly = @Readonly, dateType = @DateType(type = DateType.Type.DATE_TIME))
-    )
-    @EruptSmartSkipSerialize
-    private Date createTime;
-
 }

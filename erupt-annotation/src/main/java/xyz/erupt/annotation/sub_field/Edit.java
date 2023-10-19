@@ -28,7 +28,7 @@ public @interface Edit {
     @Comment("是否显示")
     boolean show() default true;
 
-    @Comment("编辑是否展示是否显示")
+    @Comment("新增时是否展示")
     boolean editShow() default true;
 
     @Transient
@@ -41,6 +41,9 @@ public @interface Edit {
 
     @Comment("表单提示信息")
     String placeHolder() default "";
+
+    @Comment("搜索提示信息")
+    String searchPlaceHolder() default "";
 
     @Match("#value.dependField() != ''")
     @Comment("显示依赖")

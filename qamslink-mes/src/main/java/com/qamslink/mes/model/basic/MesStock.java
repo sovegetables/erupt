@@ -20,20 +20,19 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 
 @Entity
-@Table(name = "mes_stock")
+@Table(name = "mes_stock", uniqueConstraints = @UniqueConstraint(columnNames = "code"))
 @Setter
 @Getter
 @Erupt(name = "物料列表",
 //        dataProxy = MesStockService.class,
         orderBy = "MesStock.createTime desc",
         power = @Power(importable = true),
-        linkTree = @LinkTree(field = "stockCategory", fieldClass = "MesStockCategory"),
-        filter = @Filter(value = "MesStock.tenantId", params = {"and MesStock.deleted = false"}, conditionHandler = TenantFilter.class))
-@SQLDelete(sql = "update mes_stock set deleted = true where id = ?")
+        linkTree = @LinkTree(field = "stockCategory", fieldClass = "MesStockCategory")
+)
 public class MesStock extends HyperModelVo {
 
     @EruptField(
-            views = @View(title = "物料名称"),
+            views = @View(title = "物料名称", highlight = true),
             edit = @Edit(title = "物料名称", search = @Search(vague = true), notNull = true)
     )
     private String name;
@@ -146,42 +145,25 @@ public class MesStock extends HyperModelVo {
     private Integer inspectionType;
 
     @EruptField(
-            views = @View(title = "是否需要来料检验"),
-            edit = @Edit(title = "是否需要来料检验",
+            views = @View(title = "是否来料检验"),
+            edit = @Edit(title = "是否来料检验",
                     boolType = @BoolType(trueText = "是", falseText = "否"))
     )
     private Boolean iqcInspection = true;
 
     @EruptField(
-            views = @View(title = "是否需要产品检验"),
-            edit = @Edit(title = "是否需要产品检验",
+            views = @View(title = "是否产品检验"),
+            edit = @Edit(title = "是否产品检验",
                     boolType = @BoolType(trueText = "是", falseText = "否"))
     )
     private Boolean pqcInspection = true;
 
     @EruptField(
-            views = @View(title = "是否需要出货检验"),
-            edit = @Edit(title = "是否需要出货检验",
+            views = @View(title = "是否出货检验"),
+            edit = @Edit(title = "是否出货检验",
                     boolType = @BoolType(trueText = "是", falseText = "否"))
     )
     private Boolean fqcInspection = true;
 
-//    @Transient
-//    @OneToMany
-//    @EruptField(
-//            views = @View(title = "工序列表", show = false),
-//            edit = @Edit(
-//                    title = "工序列表",
-//                    type = EditType.TAB_TABLE_REFER,
-//                    show = false,
-//                    readonly = @Readonly
-//            ),
-//            extra = @Extra(clazz = MesBomWorkingProcedureVO.class, idClass = BaseModel.class, params = {"id"},
-//                    sql = "select wp.id, wp.name, bwp.sort from mes_bom_working_procedure bwp left join mes_bom b on b.id = bwp.bom_id " +
-//                            "left join mes_working_procedure wp on wp.id = bwp.working_procedure_id where b.main_stock_id = #{0}")
-//    )
-//    private List<MesBomWorkingProcedureVO> bomWorkingProcedures;
-
     private String label;
-    private Boolean deleted = false;
 }

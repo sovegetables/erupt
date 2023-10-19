@@ -89,7 +89,7 @@ public class MesShipment extends HyperModel {
     @EruptField(
             views = @View(title = "租户", show = false, columnShowed = false)
     )
-    private Long tenantId;
+
 
     private Boolean deleted = false;
 }

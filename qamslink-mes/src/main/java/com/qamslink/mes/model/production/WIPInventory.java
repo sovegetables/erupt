@@ -134,8 +134,6 @@ public class WIPInventory extends BaseModel {
 
             private String stockCode;
 
-            private Long tenantId;
-
             public int getOffset() {
                 return (pageNum - 1) * pageSize;
             }

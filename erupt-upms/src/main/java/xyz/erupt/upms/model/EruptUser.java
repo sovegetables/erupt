@@ -43,7 +43,6 @@ import java.util.Set;
         name = "用户配置",
         dataProxy = EruptUserDataProxy.class,
         linkTree = @LinkTree(field = "eruptOrg"),
-        filter = @Filter(value = "EruptUser.tenantId", conditionHandler = TenantFilter.class),
         orderBy = "EruptUser.id",
         rowOperation = @RowOperation(title = "重置密码",
                 icon = "fa fa-refresh",
@@ -58,7 +57,7 @@ public class EruptUser extends LookerSelf implements FilterHandler {
 
     @Column(length = AnnotationConst.CODE_LENGTH)
     @EruptField(
-            views = @View(title = "用户名", sortable = true),
+            views = @View(title = "用户名", sortable = true, highlight = true),
             edit = @Edit(title = "用户名", desc = "登录用户名", notNull = true, search = @Search(vague = true))
     )
     private String account;

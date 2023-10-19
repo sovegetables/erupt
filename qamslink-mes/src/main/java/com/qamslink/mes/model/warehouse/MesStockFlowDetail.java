@@ -114,11 +114,6 @@ public class MesStockFlowDetail extends BaseModel {
             edit = @Edit(title = "单据号", notNull = true, search = @Search(vague = true))
     )
     private String orderCode;
-
-    @EruptField
-    @Comment("租户id")
-    private Long tenantId;
-
     @EruptField
     private Date createTime;
 }

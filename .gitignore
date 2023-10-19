@@ -31,3 +31,4 @@ build/
 .vscode/
 /erupt.lock.db
 /erupt.mv.db
+/.erupt/
