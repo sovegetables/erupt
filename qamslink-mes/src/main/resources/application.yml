@@ -27,10 +27,10 @@ spring:
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/qsl_auto_mes?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&autoReconnect=true
+    url: jdbc:p6spy:mysql://127.0.0.1:3306/qsl_auto_mes?useUnicode=true&characterEncoding=utf8&serverTimezone=Asia/Shanghai&useSSL=false&autoReconnect=true
     username: root
     password: 123456
-    driverClassName: com.mysql.cj.jdbc.Driver
+    driverClassName: com.p6spy.engine.spy.P6SpyDriver
   jpa:
     show-sql: true
     generate-ddl: true
@@ -63,3 +63,9 @@ server:
     includeException: true
     includeStacktrace: ALWAYS
     includeMessage: ALWAYS
+decorator:
+  datasource:
+    p6spy:
+      logging: file
+      log-file: spy.log
+      log-format: executionTime:%(executionTime) | sql:%(sqlSingleLine)
