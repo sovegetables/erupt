@@ -25,6 +25,7 @@ import xyz.erupt.core.constant.EruptConst;
 import xyz.erupt.core.exception.EruptApiErrorTip;
 import xyz.erupt.core.i18n.I18nTranslate;
 import xyz.erupt.core.proxy.AnnotationProcess;
+import xyz.erupt.core.query.IEnum;
 import xyz.erupt.core.service.EruptApplication;
 import xyz.erupt.core.service.EruptCoreService;
 import xyz.erupt.core.view.EruptApiModel;
@@ -119,7 +120,11 @@ public class EruptUtil {
                         map.put(field.getName(), list);
                         break;
                     default:
-                        map.put(field.getName(), value);
+                        if(value instanceof IEnum){
+                            map.put(field.getName(), ((IEnum<?>) value).getValue());
+                        }else {
+                            map.put(field.getName(), value);
+                        }
                         break;
                 }
             }
@@ -240,7 +245,10 @@ public class EruptUtil {
     public static EruptApiModel validateEruptValue(EruptModel eruptModel, JsonObject jsonObject) {
         Map<String, String> valueMap = eruptModel.getEruptFieldModels()
                 .stream()
-                .filter(f -> jsonObject.get(f.getFieldName()) != null)
+                .filter(f -> {
+                    JsonElement jsonElement = jsonObject.get(f.getFieldName());
+                    return jsonElement != null && !(jsonElement instanceof JsonObject);
+                })
                 .collect(Collectors.toMap(EruptFieldModel::getFieldName,
                         f -> jsonObject.get(f.getFieldName()).getAsString()));
         for (EruptFieldModel field : eruptModel.getEruptFieldModels()) {

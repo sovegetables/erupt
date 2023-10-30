@@ -26,14 +26,14 @@ import java.math.BigDecimal;
 public class MesBarcodeModel extends HyperModelVo {
 
     @EruptField(
-            views = @View(title = "模板编码"),
-            edit = @Edit(title = "模板编码", placeHolder = "保存时自动生成",notNull = true, search = @Search(vague = true))
+            views = @View(title = "编码"),
+            edit = @Edit(title = "编码", placeHolder = "保存时自动生成",notNull = true, search = @Search(vague = true))
     )
     private String code;
 
     @EruptField(
-            views = @View(title = "模板名称"),
-            edit = @Edit(title = "模板名称", notNull = true, search = @Search(vague = true))
+            views = @View(title = "名称"),
+            edit = @Edit(title = "名称", notNull = true, search = @Search(vague = true))
     )
     private String name;
 

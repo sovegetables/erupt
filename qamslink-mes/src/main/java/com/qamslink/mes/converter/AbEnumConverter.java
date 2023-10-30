@@ -1,12 +1,15 @@
 package com.qamslink.mes.converter;
 
-import com.qamslink.mes.core.IEnum;
+import com.google.gson.JsonDeserializer;
+import xyz.erupt.core.query.IEnum;
 
 import javax.persistence.AttributeConverter;
 
-public abstract class AbEnumConverter<T extends IEnum<Integer>> implements AttributeConverter<T, Integer> {
+public abstract class AbEnumConverter<T extends IEnum<Integer>> implements AttributeConverter<T, Integer>, JsonDeserializer<T> {
     @Override
     public Integer convertToDatabaseColumn(T t) {
-        return t.getValue();
+        return t == null? convertNullToColumn(): t.getValue();
     }
+
+    protected abstract Integer convertNullToColumn();
 }

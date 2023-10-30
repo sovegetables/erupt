@@ -1,8 +1,6 @@
-package com.qamslink.mes.core;
+package xyz.erupt.core.query;
 
-import com.qamslink.mes.type.BarCodeType;
 import xyz.erupt.annotation.fun.VLModel;
-
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;

@@ -5,6 +5,7 @@ import xyz.erupt.annotation.query.Condition;
 import xyz.erupt.core.annotation.EruptDataSource;
 import xyz.erupt.core.constant.EruptConst;
 import xyz.erupt.core.query.EruptQuery;
+import xyz.erupt.core.query.IEnum;
 import xyz.erupt.core.util.EruptUtil;
 import xyz.erupt.core.view.EruptFieldModel;
 import xyz.erupt.core.view.EruptModel;
@@ -13,9 +14,7 @@ import xyz.erupt.jpa.service.EntityManagerService;
 
 import javax.annotation.Resource;
 import javax.persistence.Query;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author YuePeng
@@ -94,7 +93,24 @@ public class EruptJpaDao {
             }
             page.setTotal((Long) countQuery.getSingleResult());
             if (page.getTotal() > 0) {
-                page.setList(query.setMaxResults(page.getPageSize()).setFirstResult((page.getPageIndex() - 1) * page.getPageSize()).getResultList());
+                Query firstResult = query.setMaxResults(page.getPageSize()).setFirstResult((page.getPageIndex() - 1) * page.getPageSize());
+                List resultList = firstResult.getResultList();
+                for (Object obj : resultList) {
+                    if(obj instanceof HashMap){
+                        HashMap map = (HashMap) obj;
+                        Set<? extends Map.Entry<?, ?>> entries = map.entrySet();
+                        for (Map.Entry<?, ?> entry : entries) {
+                            Object key = entry.getKey();
+                            Object value = entry.getValue();
+                            if(value instanceof IEnum){ // 枚举类
+                                IEnum<?> iEnum = (IEnum<?>) value;
+                                Object enumValue = iEnum.getValue();
+                                map.put(key, enumValue);
+                            }
+                        }
+                    }
+                }
+                page.setList(resultList);
             } else {
                 page.setList(new ArrayList<>(0));
             }

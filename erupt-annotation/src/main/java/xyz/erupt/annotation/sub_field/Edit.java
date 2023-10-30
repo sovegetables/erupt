@@ -30,7 +30,8 @@ public @interface Edit {
 
     @Comment("新增时是否展示")
     boolean editShow() default true;
-
+    @Comment("一对多时是否开启行编辑")
+    boolean editLine() default true;
     @Transient
     @Comment("动态渲染配置")
     ExprBool ifRender() default @ExprBool;

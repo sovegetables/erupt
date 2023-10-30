@@ -26,7 +26,7 @@ import javax.persistence.Table;
 public class MesWorkingProcedure extends HyperModelVo {
 
     @EruptField(
-            views = @View(title = "工序编码"),
+            views = @View(title = "工序编码", highlight = true),
             edit = @Edit(title = "工序编码", placeHolder = "保存时自动生成", notNull = true,
                     search = @Search(vague = true))
     )

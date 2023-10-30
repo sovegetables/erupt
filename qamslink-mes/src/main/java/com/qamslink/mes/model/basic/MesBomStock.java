@@ -7,14 +7,13 @@ import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
-import xyz.erupt.annotation.sub_field.Readonly;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.jpa.model.BaseModel;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Entity
 @Table(name = "mes_bom_stock")
@@ -27,12 +26,16 @@ public class MesBomStock extends BaseModel {
 
     @ManyToOne
     @EruptField(
-            views = {@View(title = "物料名称", column = "name"),
+            views = {
                     @View(title = "物料编码", column = "code"),
+                    @View(title = "物料名称", column = "name"),
                     @View(title = "规格型号", column = "spec"),
                     @View(title = "物料分类", column = "stockCategory.name"),
                     @View(title = "单位", column = "unit")},
-            edit = @Edit(title = "物料名称", notNull = true, search = @Search(vague = true),type = EditType.REFERENCE_TABLE)
+            edit = @Edit(title = "物料编码", notNull = true,
+                    search = @Search(vague = true),
+                    referenceTableType = @ReferenceTableType(label = "code"),
+                    type = EditType.REFERENCE_TABLE)
     )
     private MesStock stock;
 
@@ -69,7 +72,7 @@ public class MesBomStock extends BaseModel {
             views = {
                     @View(title = "预扣仓", column = "name")
             },
-            edit = @Edit(title = "预扣仓", notNull = false, search = @Search(vague = true),
+            edit = @Edit(title = "预扣仓", notNull = true, search = @Search(vague = true),
                     type = EditType.REFERENCE_TABLE,
                     referenceTableType = @ReferenceTableType())
     )

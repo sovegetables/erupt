@@ -64,17 +64,17 @@ public class MesStock extends HyperModelVo {
     )
     private EruptOrg Org;
 
+    @ManyToOne
     @EruptField(
-            views = @View(title = "主计量单位"),
-            edit = @Edit(title = "主计量单位", notNull = true)
+            views = @View(title = "主计量单位", column = "name"),
+            edit = @Edit(title = "主计量单位", notNull = true, type = EditType.REFERENCE_TABLE)
     )
-    private String unit;
+    private MesUnitMeasureCode unit;
 
     @ManyToOne
     @EruptField(
             views = @View(title = "销售默认单位" ,show = false,column = "name"),
             edit = @Edit(title = "销售默认单位", type = EditType.REFERENCE_TABLE)
-
     )
     private MesUnitMeasureCode salesUnitMeasure;
     @ManyToOne

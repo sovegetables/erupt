@@ -27,10 +27,7 @@ import xyz.erupt.core.view.TableQueryVo;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.BiConsumer;
 import java.util.stream.Stream;
 
@@ -61,8 +58,41 @@ public class EruptService {
             if (null == tableQueryVo.getLinkTreeVal()) {
                 if (dependTree.dependNode()) return new Page();
             } else {
-                EruptModel treeErupt = EruptCoreService.getErupt(ReflectUtil.findClassField(eruptModel.getClazz(), dependTree.field()).getType().getSimpleName());
-                conditionStrings.add(String.format("%s = '%s'", dependTree.field() + EruptConst.DOT + treeErupt.getErupt().primaryKeyCol(), tableQueryVo.getLinkTreeVal()));
+                String fieldName = dependTree.field();
+                EruptModel treeErupt = EruptCoreService.getErupt(ReflectUtil.findClassField(eruptModel.getClazz(), fieldName).getType().getSimpleName());
+                String key = fieldName + EruptConst.DOT + treeErupt.getErupt().primaryKeyCol();
+                Object linkTreeVal = tableQueryVo.getLinkTreeVal();
+                if(linkTreeVal != null){
+                    // 修复树视图,父分类查询数据为空的问题
+                    Page p = new Page(1, Page.PAGE_MAX_DATA, "");
+                    ArrayList<Condition> conditions = new ArrayList<>();
+                    String pid = treeErupt.getErupt().tree().pid();
+                    Condition condition = new Condition(pid, Long.parseLong(linkTreeVal.toString()), QueryExpression.EQ);
+                    conditions.add(condition);
+                    EruptQuery treeQuery = EruptQuery.builder()
+                            .conditions(conditions)
+                            .build();
+                    Page page = DataProcessorManager.getEruptDataProcessor(treeErupt.getClazz()).queryList(treeErupt, p,
+                            treeQuery);
+                    Collection<Map<String, Object>> list = page.getList();
+                    if(list.isEmpty()){
+                        conditionStrings.add(String.format("%s = '%s'", key, linkTreeVal));
+                    }else {
+                        StringBuilder builder = new StringBuilder();
+                        for (Map<String, Object> map : list) {
+                            Object id = map.get("id");
+                            if(id != null){
+                                builder.append(id).append(",");
+                            }
+                        }
+                        int length = builder.length();
+                        if(length > 0){
+                            builder.deleteCharAt(length - 1);
+                        }
+                        String format = String.format("%s in (%s)", key, builder.toString());
+                        conditionStrings.add(format);
+                    }
+                }
             }
         }
         this.drillProcess(eruptModel, (link, val) -> conditionStrings.add(String.format("%s = '%s'", link.linkErupt().getSimpleName() + EruptConst.DOT + link.joinColumn(), val)));

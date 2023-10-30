@@ -1,5 +1,6 @@
 package com.qamslink.mes.model.basic;
 
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.qamslink.mes.converter.BarCodeRuleTypeConverter;
 import com.qamslink.mes.converter.BarCodeTypeConverter;
 import com.qamslink.mes.converter.TicketTypeConverter;
@@ -8,16 +9,12 @@ import com.qamslink.mes.type.BarCodeType;
 import com.qamslink.mes.type.TicketType;
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.poi.ss.formula.functions.T;
-import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
-import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
-import xyz.erupt.upms.filter.TenantFilter;
 import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Convert;
@@ -70,7 +67,7 @@ public class MesBarcodeRule extends HyperModelVo {
     private TicketType categoryCode = TicketType.NOT;
 
     @EruptField(
-            views = @View(title = "版本号"),
+            views = @View(title = "版本号", highlight = true),
             edit = @Edit(title = "版本号", notNull = true)
     )
     private String version;

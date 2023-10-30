@@ -1,16 +1,9 @@
 package com.qamslink.mes.type;
 
-import com.qamslink.mes.core.IEnum;
+import xyz.erupt.core.query.IEnum;
 import org.springframework.stereotype.Component;
-import xyz.erupt.annotation.EruptField;
 import xyz.erupt.annotation.fun.ChoiceFetchHandler;
 import xyz.erupt.annotation.fun.VLModel;
-import xyz.erupt.annotation.sub_field.Edit;
-import xyz.erupt.annotation.sub_field.EditType;
-import xyz.erupt.annotation.sub_field.View;
-import xyz.erupt.annotation.sub_field.sub_edit.ChoiceType;
-import xyz.erupt.annotation.sub_field.sub_edit.Search;
-import xyz.erupt.annotation.sub_field.sub_edit.VL;
 
 import java.util.List;
 import java.util.Objects;
