@@ -1,7 +1,7 @@
 package com.qamslink.mes.model.warehouse;
 
 import com.qamslink.mes.model.basic.MesCustomer;
-import com.qamslink.mes.model.production.MesOrder;
+import com.qamslink.mes.model.production.PurOrder;
 import com.qamslink.mes.model.supplier.MesPurchaseArrivalOrder;
 import lombok.Getter;
 import lombok.Setter;
@@ -52,7 +52,7 @@ public class MesPurchaseReturnRecord extends HyperModelCreatorVo {
                     referenceTableType = @ReferenceTableType(label = "orderCode"),
                     search = @Search(vague = true))
     )
-    private MesOrder purchaseOrder;
+    private PurOrder purchaseOrder;
 
     @ManyToOne
     @EruptField(

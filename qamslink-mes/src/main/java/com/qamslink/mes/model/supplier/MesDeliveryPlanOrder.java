@@ -1,6 +1,6 @@
 package com.qamslink.mes.model.supplier;
 
-import com.qamslink.mes.model.production.MesOrder;
+import com.qamslink.mes.model.production.PurOrder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -65,7 +65,7 @@ public class MesDeliveryPlanOrder extends HyperModelVo {
                 edit = @Edit(title = "采购订单号", type = EditType.REFERENCE_TABLE, search = @Search(vague = true),
                         referenceTableType = @ReferenceTableType(label = "orderCode"))
         )
-        private MesOrder order;
+        private PurOrder order;
 
         @EruptField(
                 views = @View(title = "状态", sortable = true),

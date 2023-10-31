@@ -51,7 +51,7 @@ public class MesOrderStockIn extends HyperModelVo {
             edit = @Edit(title = "采购单号", notNull = true, search = @Search(vague = true), type = EditType.REFERENCE_TABLE
                     , referenceTableType = @ReferenceTableType(label = "orderCode"))
     )
-    private MesOrder order;
+    private PurOrder order;
 
 
     @ManyToOne

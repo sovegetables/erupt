@@ -5,20 +5,17 @@ import com.qamslink.mes.model.basic.MesStock;
 import com.qamslink.mes.model.warehouse.MesLocation;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
-import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_erupt.LinkTree;
 import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
-import xyz.erupt.annotation.sub_field.ViewType;
 import xyz.erupt.annotation.sub_field.sub_edit.NumberType;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
-import xyz.erupt.upms.filter.TenantFilter;
+import xyz.erupt.core.annotation.CodeGenerator;
 import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
@@ -33,12 +30,17 @@ import java.util.List;
 //        dataProxy = MesMouldService.class,
         orderBy = "MesMould.createTime desc",
         power = @Power(importable = true),
-        linkTree = @LinkTree(field = "mouldComponent"),
-        filter = @Filter(value = "MesMould.tenantId",
-                params = {"and MesMould.deleted = false"},
-                conditionHandler = TenantFilter.class))
-@SQLDelete(sql = "update mes_mould set deleted = true where id = ?")
+        linkTree = @LinkTree(field = "mouldComponent")
+        )
 public class MesMould extends HyperModelVo {
+
+    @EruptField(
+            views = @View(title = "工具编码"),
+            edit = @Edit(title = "工具编码", notNull = true, placeHolder = "保存时自动生成",
+                    search = @Search(vague = true))
+    )
+    @CodeGenerator
+    private String code;
 
     @EruptField(
             views = @View(title = "工具名称"),
@@ -46,16 +48,10 @@ public class MesMould extends HyperModelVo {
     )
     private String name;
 
-    @EruptField(
-            views = @View(title = "工具编码"),
-            edit = @Edit(title = "工具编码", notNull = true, search = @Search(vague = true))
-    )
-    private String code;
-
     @ManyToOne
     @EruptField(
-            views = @View(title = "所属构件名称", column = "name"),
-            edit = @Edit(title = "所属构件名称", notNull = true, search = @Search(vague = true),
+            views = @View(title = "所属构件", column = "name"),
+            edit = @Edit(title = "所属构件", notNull = true, search = @Search(vague = true),
                     type = EditType.REFERENCE_TABLE)
     )
     private MesMouldComponent mouldComponent;
@@ -63,7 +59,8 @@ public class MesMould extends HyperModelVo {
     @ManyToOne
     @EruptField(
             views = @View(title = "供应商", column = "name"),
-            edit = @Edit(title = "供应商", notNull = true, search = @Search(vague = true), type = EditType.REFERENCE_TABLE)
+            edit = @Edit(title = "供应商", notNull = true,
+                    search = @Search(vague = true), type = EditType.REFERENCE_TABLE)
     )
     private MesCustomer supplier;
 
@@ -83,11 +80,11 @@ public class MesMould extends HyperModelVo {
     )
     private Date incomingDate;*/
 
-    @EruptField(
-            views = @View(title = "模穴数"),
-            edit = @Edit(title = "模穴数", notNull = true, numberType = @NumberType(min = 0))
-    )
-    private BigDecimal holes;
+//    @EruptField(
+//            views = @View(title = "模穴数"),
+//            edit = @Edit(title = "模穴数", notNull = true, numberType = @NumberType(min = 0))
+//    )
+//    private BigDecimal holes;
 
     @EruptField(
             views = @View(title = "标准使用寿命"),
@@ -101,12 +98,6 @@ public class MesMould extends HyperModelVo {
     )
     private BigDecimal cumulativeActiveLife;
 
-    @Transient
-    @EruptField(
-            views = @View(title = "打印", type = ViewType.LINK)
-    )
-    private String url;
-
     @ManyToMany
     @JoinTable(
             name = "mes_mould_stock",
@@ -117,8 +108,4 @@ public class MesMould extends HyperModelVo {
             edit = @Edit(title = "关联物料", type = EditType.TAB_TABLE_REFER)
     )
     private List<MesStock> stocks;
-
-
-
-    private Boolean deleted = false;
 }

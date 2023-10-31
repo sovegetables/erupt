@@ -1,7 +1,7 @@
 package com.qamslink.mes.model.supplier;
 
 import com.qamslink.mes.model.basic.MesStock;
-import com.qamslink.mes.model.production.MesOrder;
+import com.qamslink.mes.model.production.PurOrder;
 import lombok.Getter;
 import lombok.Setter;
 import xyz.erupt.annotation.Erupt;
@@ -26,7 +26,7 @@ import javax.persistence.Table;
 public class MesPurchaseArrivalOrderStockBarcode extends BaseModel {
 
     @ManyToOne
-    private MesOrder order;
+    private PurOrder order;
 
     @ManyToOne
     @EruptField(

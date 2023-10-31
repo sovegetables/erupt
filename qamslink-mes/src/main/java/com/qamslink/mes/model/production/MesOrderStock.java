@@ -14,13 +14,14 @@ import xyz.erupt.annotation.sub_field.sub_edit.NumberType;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.jpa.model.BaseModel;
-
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 import java.math.BigDecimal;
 import java.util.Date;
+
+
 
 @Entity
 @Table(name ="mes_order_stock")
@@ -66,7 +67,7 @@ public class MesOrderStock extends BaseModel {
 
     @EruptField(
             views = {@View(title = "总价")},
-            edit = @Edit(title = "总价", notNull = false, show = false,numberType = @NumberType(min = 0))
+            edit = @Edit(title = "总价", show = false,numberType = @NumberType(min = 0))
     )
     private BigDecimal amount;
 

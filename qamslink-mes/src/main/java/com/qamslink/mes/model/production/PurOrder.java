@@ -3,10 +3,8 @@ package com.qamslink.mes.model.production;
 import com.qamslink.mes.model.basic.MesCustomer;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
-import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.Readonly;
@@ -14,7 +12,7 @@ import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.ChoiceType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.annotation.sub_field.sub_edit.VL;
-import xyz.erupt.upms.filter.TenantFilter;
+import xyz.erupt.core.annotation.CodeGenerator;
 import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
@@ -22,35 +20,34 @@ import java.util.Date;
 import java.util.Set;
 
 @Entity
-@Table(name = "mes_order")
+@Table(name = "mes_order", uniqueConstraints = @UniqueConstraint(columnNames = "code"))
 @Setter
 @Getter
 @Erupt(name = "采购订单",
 //        dataProxy = MesOrderService.class,
-        orderBy = "MesOrder.createTime desc",
-        filter = @Filter(value = "MesOrder.tenantId",
-        params = {"and MesOrder.deleted = false"},
-        conditionHandler = TenantFilter.class)
+        orderBy = "MesOrder.createTime desc"
 )
-@SQLDelete(sql = "update mes_order set deleted = true where id = ?")
-public class MesOrder extends HyperModelVo {
+public class PurOrder extends HyperModelVo {
+
+    @EruptField(
+            views = {@View(title = "单据编号")},
+            edit = @Edit(title = "单据编号", placeHolder = "保存时自动生成", search = @Search(vague = true))
+    )
+    @CodeGenerator
+    private String code;
 
     @ManyToOne
     @EruptField(
             views = {@View(title = "供应商名称", column = "name")},
-            edit = @Edit(title = "供应商名称",notNull = true, search = @Search(vague = true), type = EditType.REFERENCE_TABLE)
+            edit = @Edit(title = "供应商名称",notNull = true,
+                    search = @Search(vague = true),
+                    type = EditType.REFERENCE_TABLE)
     )
     private MesCustomer supplier;
 
     @EruptField(
-            views = {@View(title = "订单号")},
-            edit = @Edit(title = "订单号", notNull = true, search = @Search(vague = true))
-    )
-    private String orderCode;
-
-    @EruptField(
-            views = {@View(title = "日期")},
-            edit = @Edit(title = "日期",
+            views = {@View(title = "单据日期")},
+            edit = @Edit(title = "单据日期",
                     search = @Search(vague = true),
                     notNull = true,
                     type = EditType.DATE)
@@ -98,16 +95,10 @@ public class MesOrder extends HyperModelVo {
     )
     private String remark;
 
-
     @JoinColumn(name = "order_id")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @EruptField(
             edit = @Edit(title = "物料", type = EditType.TAB_TABLE_ADD)
     )
     private Set<MesOrderStock> orderStocks;
-
-
-
-    private Boolean deleted = false;
-
 }

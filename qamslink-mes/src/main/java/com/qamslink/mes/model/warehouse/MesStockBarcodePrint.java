@@ -2,7 +2,7 @@ package com.qamslink.mes.model.warehouse;
 
 import com.qamslink.mes.model.basic.MesPrinter;
 import com.qamslink.mes.model.basic.MesStock;
-import com.qamslink.mes.model.production.MesOrder;
+import com.qamslink.mes.model.production.PurOrder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.SQLDelete;
@@ -45,7 +45,7 @@ public class MesStockBarcodePrint extends HyperModelCreatorVo {
             edit = @Edit(title = "采购订单", notNull = true, search = @Search(vague = true), type = EditType.REFERENCE_TABLE,
                     referenceTableType = @ReferenceTableType(label = "orderCode"))
     )
-    private MesOrder order;
+    private PurOrder order;
 
     @ManyToOne
     @EruptField(

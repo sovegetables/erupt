@@ -1,7 +1,7 @@
 package com.qamslink.mes.model.supplier;
 
 import com.qamslink.mes.model.basic.MesCustomer;
-import com.qamslink.mes.model.production.MesOrder;
+import com.qamslink.mes.model.production.PurOrder;
 import com.qamslink.mes.model.warehouse.MesLocation;
 import lombok.Getter;
 import lombok.Setter;
@@ -58,7 +58,7 @@ public class MesPurchaseArrivalOrder extends HyperModelVo {
             edit = @Edit(title = "采购订单", type = EditType.REFERENCE_TABLE, search = @Search(vague = true),
                     referenceTableType = @ReferenceTableType(label = "orderCode"))
     )
-    private MesOrder order;
+    private PurOrder order;
 
     @ManyToOne
     @EruptField(

@@ -26,16 +26,13 @@ import javax.persistence.Table;
 @Getter
 @Erupt(name = "工具上下模记录",
 //        dataProxy = MesEquipmentMouldService.class,
-        orderBy = "MesEquipmentMould.createTime desc",
-        filter = @Filter(value = "MesEquipmentMould.tenantId",
-                params = {"and MesEquipmentMould.deleted = false"},
-                conditionHandler = TenantFilter.class))
-@SQLDelete(sql = "update mes_equipment_mould set deleted = true where id = ?")
+        orderBy = "MesEquipmentMould.createTime desc"
+        )
 public class MesEquipmentMould extends HyperModelVo {
 
     @ManyToOne
     @EruptField(
-            views = {@View(title = "设备名称", column = "name"),
+            views = {@View(title = "设备名称", column = "name", highlight = true),
                     @View(title = "设备编码", column = "code")},
             edit = @Edit(title = "设备名称", notNull = true, search = @Search(vague = true), type = EditType.REFERENCE_TABLE)
     )
@@ -60,5 +57,4 @@ public class MesEquipmentMould extends HyperModelVo {
     )
     private Integer status;
     private Integer mark;
-    private Boolean deleted = false;
 }

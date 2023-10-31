@@ -3,17 +3,15 @@ package com.qamslink.mes.model.tool;
 import com.qamslink.mes.model.equipment.MesEquipment;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
-import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.ChoiceType;
+import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.annotation.sub_field.sub_edit.VL;
-import xyz.erupt.upms.filter.TenantFilter;
 import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
@@ -26,15 +24,12 @@ import javax.persistence.Table;
 @Getter
 @Erupt(name = "工具更换申请",
 //        dataProxy = MesRetoolApplyService.class,
-        orderBy = "MesRetoolApply.createTime desc",
-        filter = @Filter(value = "MesRetoolApply.tenantId",
-                params = {"and MesRetoolApply.deleted = false"},
-                conditionHandler = TenantFilter.class))
-@SQLDelete(sql = "update mes_retool_apply set deleted = true where id = ?")
+        orderBy = "MesRetoolApply.createTime desc"
+)
 public class MesRetoolApply extends HyperModelVo {
 
     @EruptField(
-            views = @View(title = "申请单号"),
+            views = @View(title = "申请单号", highlight = true),
             edit = @Edit(title = "申请单号", notNull = true, search = @Search(vague = true))
     )
     private String sn;
@@ -49,9 +44,13 @@ public class MesRetoolApply extends HyperModelVo {
 
     @ManyToOne
     @EruptField(
-            views = {@View(title = "更换后工具名称", column = "name"),
-                    @View(title = "更换后工具编码", column = "code")},
-            edit = @Edit(title = "更换前工具", notNull = true, search = @Search(vague = true), type = EditType.REFERENCE_TABLE)
+            views = {@View(title = "更换前工具名称", column = "name"),
+                    @View(title = "更换前工具编码", column = "code")},
+            edit = @Edit(title = "更换前工具",
+                    notNull = true,
+                    search = @Search(vague = true),
+                    referenceTableType = @ReferenceTableType(label = "code"),
+                    type = EditType.REFERENCE_TABLE)
     )
     private MesMould currentMould;
 
@@ -59,7 +58,11 @@ public class MesRetoolApply extends HyperModelVo {
     @EruptField(
             views = {@View(title = "更换后工具名称", column = "name"),
                     @View(title = "更换后工具编码", column = "code")},
-            edit = @Edit(title = "更换后工具", notNull = true, search = @Search(vague = true), type = EditType.REFERENCE_TABLE)
+            edit = @Edit(title = "更换后工具",
+                    notNull = true,
+                    search = @Search(vague = true),
+                    referenceTableType = @ReferenceTableType(label = "code" ),
+                    type = EditType.REFERENCE_TABLE)
     )
     private MesMould newMould;
 
@@ -74,5 +77,4 @@ public class MesRetoolApply extends HyperModelVo {
             ))
     )
     private Integer status;
-    private Boolean deleted = false;
 }

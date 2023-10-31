@@ -2,10 +2,8 @@ package com.qamslink.mes.model.tool;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
-import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_erupt.LinkTree;
 import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.Edit;
@@ -13,7 +11,7 @@ import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.NumberType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
-import xyz.erupt.upms.filter.TenantFilter;
+import xyz.erupt.core.annotation.CodeGenerator;
 import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
@@ -29,12 +27,16 @@ import java.math.BigDecimal;
 //        dataProxy = MesMouldComponentService.class,
         orderBy = "MesMouldComponent.createTime desc",
         linkTree = @LinkTree(field = "toolCategory" , fieldClass = "MesToolCategory"),
-        power = @Power(importable = true),
-        filter = @Filter(value = "MesMouldComponent.tenantId",
-                params = {"and MesMouldComponent.deleted = false"},
-                conditionHandler = TenantFilter.class))
-@SQLDelete(sql = "update mes_mould_component set deleted = true where id = ?")
+        power = @Power(importable = true)
+)
 public class MesMouldComponent extends HyperModelVo {
+
+    @EruptField(
+            views = @View(title = "构件编码", highlight = true),
+            edit = @Edit(title = "构件编码", placeHolder = "保存时自动生成", search = @Search(vague = true))
+    )
+    @CodeGenerator
+    private String code;
 
     @EruptField(
             views = @View(title = "构件名称"),
@@ -42,16 +44,10 @@ public class MesMouldComponent extends HyperModelVo {
     )
     private String name;
 
-    @EruptField(
-            views = @View(title = "构件编码"),
-            edit = @Edit(title = "构件编码", notNull = true, search = @Search(vague = true))
-    )
-    private String code;
-    
     @ManyToOne
     @EruptField(
-            views = @View(title = "分类名称", column = "name"),
-            edit = @Edit(title = "分类名称", type = EditType.REFERENCE_TABLE, notNull = true)
+            views = @View(title = "所属分类", column = "name"),
+            edit = @Edit(title = "所属分类", type = EditType.REFERENCE_TABLE, notNull = true)
     )
     private MesToolCategory toolCategory;
 
@@ -66,6 +62,4 @@ public class MesMouldComponent extends HyperModelVo {
             edit = @Edit(title = "备注", type = EditType.TEXTAREA)
     )
     private String remark;
-    private Boolean deleted = false;
-
 }

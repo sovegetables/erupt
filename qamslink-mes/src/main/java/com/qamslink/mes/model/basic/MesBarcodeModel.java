@@ -9,6 +9,7 @@ import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.NumberType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
+import xyz.erupt.core.annotation.CodeGenerator;
 import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.Entity;
@@ -26,9 +27,10 @@ import java.math.BigDecimal;
 public class MesBarcodeModel extends HyperModelVo {
 
     @EruptField(
-            views = @View(title = "编码"),
+            views = @View(title = "编码", highlight = true),
             edit = @Edit(title = "编码", placeHolder = "保存时自动生成",notNull = true, search = @Search(vague = true))
     )
+    @CodeGenerator
     private String code;
 
     @EruptField(
