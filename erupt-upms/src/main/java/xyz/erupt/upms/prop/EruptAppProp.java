@@ -37,16 +37,24 @@ public class EruptAppProp {
     private String[] locales = {
             "zh-CN",      // 简体中文
             "zh-TW",      // 繁体中文
-//            "en-US",      // English
-//            "fr-FR",      // En français
-//            "ja-JP",      // 日本語
-//            "ko-KR",      // 한국어
-//            "ru_RU",      // русск
-//            "es_ES"       // español
+            "en-US",      // English
+            "fr-FR",      // En français
+            "ja-JP",      // 日本語
+            "ko-KR",      // 한국어
+            "ru_RU",      // русск
+            "es_ES"       // español
     };
 
     //重置密码功能开关
     private Boolean resetPwd = true;
+
+    public void setLocales(String[] locales) {
+        if (null == locales || locales.length == 0) {
+            this.locales = new String[]{"zh-CN"};
+        } else {
+            this.locales = locales;
+        }
+    }
 
 
 }
