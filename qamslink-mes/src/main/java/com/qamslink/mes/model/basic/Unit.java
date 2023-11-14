@@ -10,7 +10,6 @@ import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.core.annotation.CodeGenerator;
 import xyz.erupt.upms.helper.HyperModelVo;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
@@ -20,10 +19,8 @@ import javax.persistence.UniqueConstraint;
 @Setter
 @Getter
 @Erupt(name = "计量单位",
-//        dataProxy = MesUnitMeasureCodeService.class,
-        orderBy = "MesUnitMeasureCode.createTime desc",
-        power = @Power())
-public class MesUnitMeasureCode extends HyperModelVo {
+        orderBy = "Unit.createTime desc")
+public class Unit extends HyperModelVo {
     @EruptField(
             views = @View(title = "编码", highlight = true),
             edit = @Edit(title = "编码", placeHolder = "保存时自动生成", search = @Search(vague = true), notNull = true)

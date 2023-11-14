@@ -2,17 +2,14 @@ package com.qamslink.mes.model.basic;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
-import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_erupt.LinkTree;
 import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
-import xyz.erupt.upms.filter.TenantFilter;
 import xyz.erupt.upms.helper.HyperModelVo;
 import xyz.erupt.upms.model.EruptOrg;
 
@@ -69,35 +66,35 @@ public class MesStock extends HyperModelVo {
             views = @View(title = "主计量单位", column = "name"),
             edit = @Edit(title = "主计量单位", notNull = true, type = EditType.REFERENCE_TABLE)
     )
-    private MesUnitMeasureCode unit;
+    private Unit unit;
 
     @ManyToOne
     @EruptField(
             views = @View(title = "销售默认单位" ,show = false,column = "name"),
             edit = @Edit(title = "销售默认单位", type = EditType.REFERENCE_TABLE)
     )
-    private MesUnitMeasureCode salesUnitMeasure;
+    private Unit salesUnitMeasure;
     @ManyToOne
     @EruptField(
             views = @View(title = "采购默认单位" ,show = false,column = "name"),
             edit = @Edit(title = "采购默认单位",type = EditType.REFERENCE_TABLE)
 
     )
-    private MesUnitMeasureCode procurementUnitMeasure;
+    private Unit procurementUnitMeasure;
     @ManyToOne
     @EruptField(
             views = @View(title = "生产默认单位" ,show = false,column = "name"),
             edit = @Edit(title = "生产默认单位", type = EditType.REFERENCE_TABLE)
 
     )
-    private MesUnitMeasureCode productionUnitMeasure;
+    private Unit productionUnitMeasure;
     @ManyToOne
     @EruptField(
             views = @View(title = "库存默认单位" ,show = false,column = "name"),
             edit = @Edit(title = "库存默认单位", type = EditType.REFERENCE_TABLE)
 
     )
-    private MesUnitMeasureCode inventoryUnitMeasure;
+    private Unit inventoryUnitMeasure;
 
     @EruptField(
             views = @View(title = "版本"),

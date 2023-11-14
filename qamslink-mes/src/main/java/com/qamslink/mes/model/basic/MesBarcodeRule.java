@@ -1,6 +1,5 @@
 package com.qamslink.mes.model.basic;
 
-import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.qamslink.mes.converter.BarCodeRuleTypeConverter;
 import com.qamslink.mes.converter.BarCodeTypeConverter;
 import com.qamslink.mes.converter.TicketTypeConverter;
@@ -16,7 +15,6 @@ import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.upms.helper.HyperModelVo;
-
 import javax.persistence.Convert;
 import javax.persistence.Entity;
 import javax.persistence.Table;

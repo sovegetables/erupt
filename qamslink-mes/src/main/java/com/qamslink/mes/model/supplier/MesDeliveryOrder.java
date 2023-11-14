@@ -4,7 +4,6 @@ import com.qamslink.mes.model.basic.MesCustomer;
 import com.qamslink.mes.model.production.PurOrder;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
 import xyz.erupt.annotation.sub_erupt.Power;
@@ -39,7 +38,6 @@ import java.util.List;
 //                )
 //        }
 )
-@SQLDelete(sql = "update mes_delivery_order set deleted = true where id = ?")
 public class MesDeliveryOrder extends HyperModelVo {
 
         @EruptField(
@@ -57,12 +55,11 @@ public class MesDeliveryOrder extends HyperModelVo {
         @ManyToOne
         @EruptField(
                 views = {
-//                        @View(title = "采购订单客户简称", column = "supplier.alias"),
-                        @View(title = "采购订单号", column = "orderCode")
+                        @View(title = "采购订单号", column = "code")
                 },
                 edit = @Edit(title = "采购订单号", type = EditType.REFERENCE_TABLE,
                         search = @Search(vague = true),
-                        referenceTableType = @ReferenceTableType(label = "orderCode"))
+                        referenceTableType = @ReferenceTableType(label = "code"))
         )
         private PurOrder order;
 
@@ -99,6 +96,4 @@ public class MesDeliveryOrder extends HyperModelVo {
                 edit = @Edit(title = "物料", type = EditType.TAB_TABLE_ADD)
         )
         private List<MesDeliveryOrderBarcodeDetail> barcodeDetails;
-
-        private Boolean deleted = false;
 }

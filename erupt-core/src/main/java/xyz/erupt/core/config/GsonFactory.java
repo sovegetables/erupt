@@ -25,10 +25,9 @@ public class GsonFactory {
             .setLongSerializationPolicy(LongSerializationPolicy.STRING)
             .serializeNulls().setExclusionStrategies(new EruptGsonExclusionStrategies());
 
-    private static final Gson gson = gsonBuilder.create();
-
+    // 子模块使用gsonBuilder注册registerTypeAdapter，为了保证Gson序列号一致，每次都create
     public static Gson getGson() {
-        return gson;
+        return gsonBuilder.create();
     }
 
     public static GsonBuilder getGsonBuilder() {

@@ -3,10 +3,8 @@ package com.qamslink.mes.model.supplier;
 import com.qamslink.mes.model.production.PurOrder;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
-import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_erupt.RowOperation;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
@@ -15,7 +13,6 @@ import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.BoolType;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
-import xyz.erupt.upms.filter.TenantFilter;
 import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
@@ -30,10 +27,6 @@ import java.util.UUID;
 @Erupt(name = "交货计划单",
 //        dataProxy = MesDeliveryPlanOrderService.class,
         orderBy = "MesDeliveryPlanOrder.createTime desc",
-        filter = @Filter(value = "MesDeliveryPlanOrder.tenantId",
-                params = {"and MesDeliveryPlanOrder.deleted = false"},
-                conditionHandler = TenantFilter.class
-        ),
         rowOperation = {
                 @RowOperation(
                         code = "commit",
@@ -44,7 +37,6 @@ import java.util.UUID;
                 )
         }
 )
-@SQLDelete(sql = "update mes_delivery_plan_order set deleted = true where id = ?")
 public class MesDeliveryPlanOrder extends HyperModelVo {
 
 
@@ -60,10 +52,10 @@ public class MesDeliveryPlanOrder extends HyperModelVo {
         @EruptField(
                 views = {
                         @View(title = "客户简称", column = "supplier.alias"),
-                        @View(title = "采购订单号", column = "orderCode")
+                        @View(title = "采购订单号", column = "code")
                 },
                 edit = @Edit(title = "采购订单号", type = EditType.REFERENCE_TABLE, search = @Search(vague = true),
-                        referenceTableType = @ReferenceTableType(label = "orderCode"))
+                        referenceTableType = @ReferenceTableType(label = "code"))
         )
         private PurOrder order;
 
@@ -77,15 +69,12 @@ public class MesDeliveryPlanOrder extends HyperModelVo {
         )
         private Boolean status = false;
 
-
         @JoinColumn(name = "delivery_plan_order_id")
         @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
         @EruptField(
-                edit = @Edit(title = "物料(不填物料默认是采购订单的物料)", type = EditType.TAB_TABLE_ADD)
+                edit = @Edit(title = "物料", type = EditType.TAB_TABLE_ADD)
         )
         private List<MesDeliveryPlanOrderStock> orderStocks;
-
-        private Boolean deleted = false;
 
         private String code(){
                 String subCode = "JH_";

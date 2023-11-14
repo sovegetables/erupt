@@ -1,6 +1,7 @@
 package xyz.erupt.core.util;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import lombok.SneakyThrows;
@@ -62,6 +63,10 @@ public class EruptUtil {
             Field field = fieldModel.getField();
             field.setAccessible(true);
             Object value = field.get(obj);
+            if(field.getType() == Long.class){
+                //js针对java的long会丢失进度，转成string处理
+                value = String.valueOf(value);
+            }
             if (null != value) {
                 EruptField eruptField = fieldModel.getEruptField();
                 switch (eruptField.edit().type()) {
@@ -86,9 +91,12 @@ public class EruptUtil {
                             //修复一对多情况下无法显示子类属性的问题 
                             String columnKey = view.column().replace(EruptConst.DOT, "_");
                             Object columnValue = ReflectUtil.findFieldChain(view.column(), value);
+                            if(columnValue != null && columnValue.getClass() == Long.class){
+                                //js针对java的long会丢失进度，转成string处理
+                                columnValue = String.valueOf(columnValue);
+                            }
                             referMap.put(columnKey, columnValue);
                             map.put(field.getName() + "_" + columnKey, columnValue);
-
                         }
                         map.put(field.getName(), referMap);
                         break;
@@ -247,10 +255,13 @@ public class EruptUtil {
                 .stream()
                 .filter(f -> {
                     JsonElement jsonElement = jsonObject.get(f.getFieldName());
-                    return jsonElement != null && !(jsonElement instanceof JsonObject);
+                    return jsonElement != null && !(jsonElement instanceof JsonObject) && !(jsonElement instanceof JsonArray);
                 })
                 .collect(Collectors.toMap(EruptFieldModel::getFieldName,
-                        f -> jsonObject.get(f.getFieldName()).getAsString()));
+                        f -> {
+                            JsonElement element = jsonObject.get(f.getFieldName());
+                            return element.getAsString();
+                        }));
         for (EruptFieldModel field : eruptModel.getEruptFieldModels()) {
             Edit edit = field.getEruptField().edit();
             JsonElement value = jsonObject.get(field.getFieldName());

@@ -134,7 +134,7 @@ public class EruptMenuService implements DataProxy<EruptMenu> {
 
     @Override
     public void afterUpdate(EruptMenu eruptMenu) {
-        this.afterAdd(eruptMenu);
+//        this.afterAdd(eruptMenu);
     }
 
     @Override

@@ -4,11 +4,13 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import xyz.erupt.annotation.fun.DataProxy;
+import xyz.erupt.core.annotation.CodeGenerator;
+import xyz.erupt.core.exception.EruptApiErrorTip;
 import xyz.erupt.core.service.EruptCoreService;
+import xyz.erupt.core.util.EruptSpringUtil;
 import xyz.erupt.core.view.EruptFieldModel;
 import xyz.erupt.core.view.EruptModel;
 import xyz.erupt.jpa.model.BaseModel;
-import xyz.erupt.core.annotation.CodeGenerator;
 import xyz.erupt.upms.model.EruptUserVo;
 import xyz.erupt.upms.service.EruptUserService;
 
@@ -48,27 +50,33 @@ public class HyperDataProxy implements DataProxy<HyperModel> {
         EruptModel eruptModel = EruptCoreService.getErupt(eruptName);
         List<EruptFieldModel> fieldModels = eruptModel.getEruptFieldModels();
         List<Field> fields = fieldModels.stream().map(EruptFieldModel::getField).collect(Collectors.toList());
-        Map<Field, ? extends Class<? extends CodeGenerator.CodeHandler>> fieldMap = fieldModels
+        Map<Field, CodeGenerator> fieldMap = fieldModels
                 .stream().map(EruptFieldModel::getField).filter(field -> {
                     CodeGenerator annotation = field.getAnnotation(CodeGenerator.class);
                     return annotation != null;
                 })
                 .collect(Collectors.toMap(Function.identity(),
-                        field -> field.getAnnotation(CodeGenerator.class).handler()));
+                        field -> field.getAnnotation(CodeGenerator.class)));
         for (Field field : fieldMap.keySet()) {
             try {
                 Object value = field.get(hyperModel);
                 if(value == null || (value instanceof CharSequence && StringUtils.isBlank((CharSequence) value))){
-                    Class<? extends CodeGenerator.CodeHandler> handler = fieldMap.get(field);
+                    CodeGenerator codeGenerator = fieldMap.get(field);
+                    Class<? extends CodeGenerator.CodeHandler> handler = codeGenerator.handler();
+                    CodeGenerator.KEY[] params = codeGenerator.params();
                     if(handler != CodeGenerator.NOT.class){
-                        CodeGenerator.CodeHandler codeHandler = handler.newInstance();
-                        field.set(hyperModel, codeHandler.generateCode(field, hyperModel, fields));
+                        CodeGenerator.CodeHandler codeHandler = EruptSpringUtil.getBean(handler);
+                        if(codeHandler == null){
+                            codeHandler = handler.newInstance();
+                        }
+                        field.set(hyperModel, codeHandler.generateCode(field, hyperModel, fields, params));
                     }else {
                         field.set(hyperModel, generateCode(8));
                     }
                 }
             } catch (Exception e) {
                 HyperDataProxy.log.error("CodeGenerator error:", e);
+                throw new EruptApiErrorTip(e.getMessage());
             }
         }
     }

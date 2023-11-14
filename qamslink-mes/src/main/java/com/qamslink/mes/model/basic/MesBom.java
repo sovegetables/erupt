@@ -13,7 +13,6 @@ import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.core.annotation.CodeGenerator;
 import xyz.erupt.upms.helper.HyperModelVo;
-
 import javax.persistence.*;
 import java.lang.reflect.Field;
 import java.util.List;
@@ -33,7 +32,7 @@ public class MesBom extends HyperModelVo {
 
     public static class InnerCodeGenerator implements CodeGenerator.CodeHandler{
         @Override
-        public Object generateCode(Field field, Object value, List<Field> fields) {
+        public Object generateCode(Field field, Object value, List<Field> fields, CodeGenerator.KEY[] keys) {
             Map<String, Field> fieldMap = fields.stream()
                     .collect(Collectors.toMap(Field::getName, Function.identity()));
             try {
@@ -50,8 +49,8 @@ public class MesBom extends HyperModelVo {
     }
 
     @EruptField(
-            views = @View(title = "物料清单编码", highlight = true),
-            edit = @Edit(title = "物料清单编码",
+            views = @View(title = "物料清单版本号", highlight = true),
+            edit = @Edit(title = "物料清单版本号",
                     notNull = true,
                     placeHolder = "保存时自动生成",
                     search = @Search(vague = true))
@@ -77,11 +76,11 @@ public class MesBom extends HyperModelVo {
     )
     private Boolean isDefault = true;
 
-    @EruptField(
-            views = @View(title = "版本号"),
-            edit = @Edit(title = "版本号")
-    )
-    private String version;
+//    @EruptField(
+//            views = @View(title = "版本号"),
+//            edit = @Edit(title = "版本号")
+//    )
+//    private String version;
 
     @JoinColumn(name = "bom_id")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

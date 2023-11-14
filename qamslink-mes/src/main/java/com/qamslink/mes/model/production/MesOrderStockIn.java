@@ -32,11 +32,8 @@ import java.util.Set;
 @Erupt(name = "采购入库单",
 //        dataProxy = MesOrderStockInService.class,
         orderBy = "MesOrderStockIn.createTime desc",
-        power = @Power(delete = false, add = false,edit = false),
-        filter = @Filter(value = "MesOrderStockIn.tenantId",
-                params = {"and MesOrderStockIn.deleted = false"},
-                conditionHandler = TenantFilter.class))
-@SQLDelete(sql = "update mes_order_stock_in set deleted = true where id = ?")
+        power = @Power(delete = false, add = false,edit = false)
+)
 public class MesOrderStockIn extends HyperModelVo {
 
     @EruptField(
@@ -47,9 +44,9 @@ public class MesOrderStockIn extends HyperModelVo {
 
     @ManyToOne
     @EruptField(
-            views = {@View(title = "采购单号", column = "orderCode")},
+            views = {@View(title = "采购单号", column = "code")},
             edit = @Edit(title = "采购单号", notNull = true, search = @Search(vague = true), type = EditType.REFERENCE_TABLE
-                    , referenceTableType = @ReferenceTableType(label = "orderCode"))
+                    , referenceTableType = @ReferenceTableType(label = "code"))
     )
     private PurOrder order;
 

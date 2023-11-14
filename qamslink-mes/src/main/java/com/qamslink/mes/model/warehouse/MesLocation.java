@@ -23,13 +23,9 @@ import javax.persistence.Table;
 @Getter
 @Table(name = "mes_location")
 @Erupt(name = "库位管理",linkTree = @LinkTree(field = "warehouse"),
-        orderBy = "MesLocation.createTime desc",
+        orderBy = "MesLocation.createTime desc"
 //        dataProxy = MesLocationService.class,
-        filter = @Filter(value = "MesLocation.tenantId",
-                params = {"and MesLocation.deleted = false"},
-                conditionHandler = TenantFilter.class))
-
-@SQLDelete(sql = "update mes_location set deleted = true where id = ?")
+        )
 public class MesLocation extends HyperModelVo {
     @EruptField(
             views = @View(title = "库位条码"),
@@ -47,5 +43,4 @@ public class MesLocation extends HyperModelVo {
             edit = @Edit(title = "描述")
     )
     private String description;
-    private Boolean deleted = false;
 }

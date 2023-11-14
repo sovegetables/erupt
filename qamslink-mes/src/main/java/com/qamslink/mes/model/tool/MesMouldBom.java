@@ -4,23 +4,18 @@ import com.qamslink.mes.model.basic.MesStock;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
-import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
-import xyz.erupt.annotation.sub_field.sub_edit.NumberType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.core.annotation.CodeGenerator;
-import xyz.erupt.upms.filter.TenantFilter;
 import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
 import java.lang.reflect.Field;
-import java.math.BigDecimal;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -38,7 +33,7 @@ public class MesMouldBom extends HyperModelVo {
 
     public static class InnerCodeGenerator implements CodeGenerator.CodeHandler{
         @Override
-        public Object generateCode(Field field, Object value, List<Field> fields) {
+        public Object generateCode(Field field, Object value, List<Field> fields, CodeGenerator.KEY[] keys) {
             Map<String, Field> fieldMap = fields.stream()
                     .collect(Collectors.toMap(Field::getName, Function.identity()));
             try {

@@ -1,7 +1,7 @@
 package com.qamslink.mes.model.supplier;
 
 import com.qamslink.mes.model.basic.MesStock;
-import com.qamslink.mes.model.basic.MesUnitMeasureCode;
+import com.qamslink.mes.model.basic.Unit;
 import lombok.Getter;
 import lombok.Setter;
 import xyz.erupt.annotation.Erupt;
@@ -60,7 +60,7 @@ public class MesDeliveryOrderBarcodeDetail extends BaseModel {
             edit = @Edit(title = "计量单位", notNull = true,type = EditType.REFERENCE_TREE)
 
     )
-    private MesUnitMeasureCode unitMeasureCode;
+    private Unit unitMeasureCode;
 
     @ManyToOne
     @EruptField(

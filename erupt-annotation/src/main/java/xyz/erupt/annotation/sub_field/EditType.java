@@ -16,6 +16,9 @@ public enum EditType {
     @EditTypeMapping(mapping = InputType.class, desc = "文本输入", allowType = {JavaTypeEnum.String, JavaTypeEnum.number})
     INPUT,
     @EditTypeSearch(vagueMethod = QueryExpression.RANGE)
+    @EditTypeMapping(mapping = NumberType.class, desc = "序号", allowType = {JavaTypeEnum.number})
+    SERIAL_NUMBER,
+    @EditTypeSearch(vagueMethod = QueryExpression.RANGE)
     @EditTypeMapping(mapping = NumberType.class, desc = "数字输入", allowType = {JavaTypeEnum.number})
     NUMBER,
     @EditTypeSearch(vagueMethod = QueryExpression.RANGE)

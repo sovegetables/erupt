@@ -32,7 +32,7 @@ public class MesProductLine extends HyperModelVo {
 
     @EruptField(
             views = @View(title = "线别编码", highlight = true, sortable = true),
-            edit = @Edit(title = "线别编码", notNull = true,
+            edit = @Edit(title = "线别编码",
                     placeHolder = "保存时自动生成",
                     search = @Search(vague = true))
     )

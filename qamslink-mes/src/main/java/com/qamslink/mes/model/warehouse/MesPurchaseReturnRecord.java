@@ -28,9 +28,8 @@ import java.util.Set;
 @Table(name = "mes_purchase_return_record")
 @Erupt(name = "采购退货单",
 //        dataProxy = MesPurchaseReturnRecordService.class,
-        orderBy = "MesPurchaseReturnRecord.createTime desc",
-        filter = @Filter(value = "MesPurchaseReturnRecord.tenantId",
-                conditionHandler = TenantFilter.class))
+        orderBy = "MesPurchaseReturnRecord.createTime desc"
+        )
 public class MesPurchaseReturnRecord extends HyperModelCreatorVo {
 
     @EruptField(

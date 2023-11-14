@@ -9,6 +9,8 @@ import xyz.erupt.annotation.config.Comment;
 public enum ViewType {
     @Comment("根据返回值等特征自动判断")
     AUTO,
+    @Comment("序号")
+    SERIAL_NUMBER,
     @Comment("普通文字")
     TEXT,
     @Comment("图片")

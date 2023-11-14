@@ -38,7 +38,7 @@ public class MesUnitMeasureCodeDetail extends HyperModelVo {
     public static class InnerCodeGenerator implements CodeGenerator.CodeHandler{
 
         @Override
-        public Object generateCode(Field field, Object value, List<Field> fields) {
+        public Object generateCode(Field field, Object value, List<Field> fields, CodeGenerator.KEY[] keys) {
             for (Field f : fields) {
                 if(f.getName().equals("stock")){
                     try {
@@ -74,7 +74,7 @@ public class MesUnitMeasureCodeDetail extends HyperModelVo {
                     @View(title = "转换前编码",column = "unitCode")},
             edit = @Edit(title = "转换前计量单位", notNull = true, search = @Search(vague = true), type = EditType.REFERENCE_TABLE)
     )
-    private MesUnitMeasureCode beforeUnitMeasureCode;
+    private Unit beforeUnitMeasureCode;
 
     @ManyToOne
     @EruptField(
@@ -82,7 +82,7 @@ public class MesUnitMeasureCodeDetail extends HyperModelVo {
                     @View(title = "转换后编码",column = "unitCode")},
             edit = @Edit(title = "转换后计量单位",notNull = true, search = @Search(vague = true), type = EditType.REFERENCE_TABLE)
     )
-    private MesUnitMeasureCode afterUnitMeasureCode;
+    private Unit afterUnitMeasureCode;
 
     @EruptField(
             views = @View(title = "转换率"),

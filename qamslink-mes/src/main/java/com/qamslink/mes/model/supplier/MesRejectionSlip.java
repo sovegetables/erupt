@@ -5,7 +5,6 @@ import com.qamslink.mes.model.production.PurOrder;
 import com.qamslink.mes.type.RejectionSlipStatus;
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
 import xyz.erupt.annotation.sub_erupt.Filter;
@@ -31,13 +30,8 @@ import java.util.UUID;
 @Erupt(name = "采购到货拒收单",
 //        dataProxy = MesRejectionSlipService.class,
         orderBy = "MesRejectionSlip.createTime desc",
-        filter = @Filter(value = "MesRejectionSlip.tenantId",
-                params = {"and MesRejectionSlip.deleted = false"},
-                conditionHandler = TenantFilter.class
-        ),
         power = @Power(add = false, delete = false, edit = false)
 )
-@SQLDelete(sql = "update mes_rejection_slip set deleted = true where id = ?")
 public class MesRejectionSlip extends HyperModelVo {
 
     @EruptField(
@@ -65,10 +59,10 @@ public class MesRejectionSlip extends HyperModelVo {
     @EruptField(
             views = {
                     @View(title = "客户简称", column = "supplier.alias"),
-                    @View(title = "采购订单号", column = "orderCode")
+                    @View(title = "采购订单号", column = "code")
             },
             edit = @Edit(title = "采购订单号", type = EditType.REFERENCE_TABLE, search = @Search(vague = true),
-                    referenceTableType = @ReferenceTableType(label = "orderCode"))
+                    referenceTableType = @ReferenceTableType(label = "code"))
     )
     private PurOrder order;
 

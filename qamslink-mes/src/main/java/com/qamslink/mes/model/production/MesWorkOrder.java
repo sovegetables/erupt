@@ -1,14 +1,14 @@
 package com.qamslink.mes.model.production;
 
+import com.qamslink.mes.core.OrderCodeGenerator;
 import com.qamslink.mes.model.basic.MesBom;
 import com.qamslink.mes.model.basic.MesStock;
+import com.qamslink.mes.type.TicketType;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Comment;
-import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
-import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_erupt.RowOperation;
 import xyz.erupt.annotation.sub_erupt.Tpl;
 import xyz.erupt.annotation.sub_field.Edit;
@@ -16,7 +16,7 @@ import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.Readonly;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
-import xyz.erupt.upms.filter.TenantFilter;
+import xyz.erupt.core.annotation.CodeGenerator;
 import xyz.erupt.upms.helper.HyperModelVo;
 
 import javax.persistence.*;
@@ -31,11 +31,6 @@ import java.util.List;
 @Erupt(name = "生产工单",
 //        dataProxy = MesWorkOrderService.class,
         orderBy = "MesWorkOrder.createTime desc",
-        filter = @Filter(
-                value = "MesWorkOrder.tenantId",
-                params = {"and MesWorkOrder.deleted = false"},
-                conditionHandler = TenantFilter.class
-        ),
         rowOperation = {
                 @RowOperation(
                         title = "手动排产",
@@ -62,7 +57,6 @@ import java.util.List;
                 ),
         }
 )
-@SQLDelete(sql = "update mes_work_order set deleted = true where id = ?")
 public class MesWorkOrder extends HyperModelVo {
 
     public static final int STATUS_UN_START = 0;
@@ -71,10 +65,13 @@ public class MesWorkOrder extends HyperModelVo {
     public static final int STATUS_FINISH = 3;
 
     private static final long serialVersionUID = -1238055512968301837L;
+
     @EruptField(
-            views = {@View(title = "工单编号")},
-            edit = @Edit(title = "工单编号", notNull = true, search = @Search(vague = true))
+            views = {@View(title = "单据编号", highlight = true)},
+            edit = @Edit(title = "单据编号", placeHolder = "保存时自动生成" , search = @Search(vague = true))
     )
+    @CodeGenerator(handler = OrderCodeGenerator.class,
+            params = {@CodeGenerator.KEY(key = "orderType", value = TicketType.CODE_MO_ORDER + "")})
     private String orderCode;
 
     @EruptField(
@@ -92,8 +89,8 @@ public class MesWorkOrder extends HyperModelVo {
             views = @View(title = "类型"),
             edit = @Edit(title = "类型", readonly = @Readonly, search = @Search(), type = EditType.CHOICE, choiceType = @ChoiceType(
                     vl = {
-                            @VL(label = "普通", value = "1"),
-                            @VL(label = "返工", value = "2")
+                            @VL(label = "普通类型", value = "1"),
+                            @VL(label = "返工类型", value = "2")
                     }
             ))
     )
@@ -113,11 +110,12 @@ public class MesWorkOrder extends HyperModelVo {
     @EruptField(
             views = {@View(title = "产品编码", column = "code"),
                     @View(title = "产品名称", column = "name"),
-                    @View(title = "单位", column = "unit"),
                     @View(title = "id", show = false, column = "id")},
-            edit = @Edit(title = "产品名称", notNull = true,
+            edit = @Edit(title = "产品编码", notNull = true,
                     search = @Search(vague = true),
-                    type = EditType.REFERENCE_TABLE)
+                    type = EditType.REFERENCE_TABLE,
+                    referenceTableType = @ReferenceTableType(label = "code")
+            )
     )
     private MesStock stock;
 
@@ -127,13 +125,20 @@ public class MesWorkOrder extends HyperModelVo {
                     @View(title = "客户简称", column = "customer.alias"),
                     @View(title = "订单编号", column = "orderCode")
             },
-            edit = @Edit(title = "客户订单号", type = EditType.REFERENCE_TABLE, search = @Search(vague = true))
+            edit = @Edit(title = "客户订单号",
+                    type = EditType.REFERENCE_TABLE,
+                    referenceTableType = @ReferenceTableType(label = "orderCode"),
+                    search = @Search(vague = true))
     )
     private MesCustomerOrder customerOrder;
 
     @ManyToOne
     @EruptField(
-            edit = @Edit(title = "物料清单", type = EditType.REFERENCE_TABLE)
+            edit = @Edit(title = "物料清单",
+                    type = EditType.REFERENCE_TABLE,
+                    referenceTableType = @ReferenceTableType(label = "code"),
+                    search = @Search(vague = true)
+            )
     )
     private MesBom mesBom;
 
@@ -145,10 +150,10 @@ public class MesWorkOrder extends HyperModelVo {
 
     @OneToMany()
     @JoinColumn(name = "work_order_id")
-    @EruptField(
-            views = @View(title = "工序详情"),
-            edit = @Edit(title = "工序详情", notNull = true, readonly = @Readonly, type = EditType.TAB_TABLE_ADD)
-    )
+//    @EruptField(
+//            views = @View(title = "工序详情"),
+//            edit = @Edit(title = "工序详情", notNull = true, readonly = @Readonly, type = EditType.TAB_TABLE_ADD)
+//    )
     private List<MesWorkOrderProcedure> workOrderProcedures;
 
     @EruptField(
@@ -187,8 +192,4 @@ public class MesWorkOrder extends HyperModelVo {
             edit = @Edit(title = "是否已排产", readonly = @Readonly(), search = @Search, boolType = @BoolType(trueText = "是", falseText = "否"))
     )
     private Boolean isGenerate = false;
-
-
-
-    private Boolean deleted = false;
 }

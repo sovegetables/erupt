@@ -10,13 +10,24 @@ import java.util.List;
 public @interface CodeGenerator {
     Class<? extends CodeHandler> handler() default NOT.class;
 
+    KEY[] params() default {};
+
     interface CodeHandler{
-       Object generateCode(Field field, Object value, List<Field> fields);
+       Object generateCode(Field field, Object value, List<Field> fields, KEY[] keys);
+    }
+
+
+    @interface KEY {
+        String key();
+
+        String value();
+
+        String desc() default "";
     }
 
     class NOT implements CodeHandler{
         @Override
-        public Object generateCode(Field field, Object value, List<Field> fields) {
+        public Object generateCode(Field field, Object value, List<Field> fields, KEY[] keys) {
             return null;
         }
     }

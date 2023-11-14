@@ -2,9 +2,13 @@ package xyz.erupt.core.util;
 
 import lombok.SneakyThrows;
 import org.apache.commons.lang3.math.NumberUtils;
+import xyz.erupt.core.query.IEnum;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Type;
 import java.util.Arrays;
 import java.util.function.Consumer;
+import java.util.stream.Stream;
 
 /**
  * @author YuePeng
@@ -41,8 +45,26 @@ public class TypeUtil {
             return Double.valueOf(str);
         } else if (boolean.class == targetType || Boolean.class == targetType) {
             return Boolean.valueOf(str);
-        } else if (targetType.isEnum()) {
-            return targetType.getMethod("valueOf", String.class).invoke(targetType, str);
+        }
+        else if (targetType.isEnum()) {
+            //适配自定义IEnum类型搜索
+            Class<?>[] interfaces = targetType.getInterfaces();
+            Class<?> iEnumClass = Arrays.stream(interfaces).filter(i -> i == IEnum.class)
+                    .findFirst()
+                    .orElse(null);
+            if(iEnumClass != null){
+                Method valueMethod = targetType.getMethod("values");
+                IEnum[] results = (IEnum[]) valueMethod.invoke(targetType);
+                for (IEnum result : results) {
+                    if(result.getValueStr().equals(str)){
+                        return result;
+                    }
+                }
+                return str;
+            }else {
+                Method valueOf = targetType.getMethod("valueOf", String.class);
+                return valueOf.invoke(targetType, str);
+            }
         } else {
             return str;
         }

@@ -20,7 +20,6 @@ import xyz.erupt.core.query.EruptQuery;
 import xyz.erupt.core.view.EruptModel;
 import xyz.erupt.core.view.Page;
 import xyz.erupt.jpa.model.BaseModel;
-
 import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
@@ -41,8 +40,8 @@ import java.util.List;
 public class MesProductionInDetail extends BaseModel{
 
     @EruptField(
-            views = @View(title = "产品入库单号"),
-            edit = @Edit(title = "产品入库单号", notNull = true, show = false, search = @Search(vague = true))
+            views = @View(title = "单据编号"),
+            edit = @Edit(title = "单据编号", notNull = true, show = false, search = @Search(vague = true))
     )
     private String productionCode;
 
