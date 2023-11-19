@@ -4,7 +4,7 @@ import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.qamslink.mes.type.LabelRuleType;
-import com.qamslink.mes.type.LabelType;
+import xyz.erupt.upms.converter.AbEnumConverter;
 
 import java.lang.reflect.Type;
 import java.util.Objects;

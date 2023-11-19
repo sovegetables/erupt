@@ -12,7 +12,6 @@ import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
 import xyz.erupt.upms.helper.HyperModelVo;
 import xyz.erupt.upms.model.EruptOrg;
-
 import javax.persistence.*;
 import java.math.BigDecimal;
 
@@ -95,12 +94,6 @@ public class MesStock extends HyperModelVo {
 
     )
     private Unit inventoryUnitMeasure;
-
-    @EruptField(
-            views = @View(title = "版本"),
-            edit = @Edit(title = "版本")
-    )
-    private String version;
 
     @EruptField(
             views = @View(title = "发料方式"),

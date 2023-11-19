@@ -1,7 +1,7 @@
 package com.qamslink.mes.gson;
 
 import com.google.gson.GsonBuilder;
-import com.qamslink.mes.converter.AbEnumConverter;
+import xyz.erupt.upms.converter.AbEnumConverter;
 import lombok.extern.slf4j.Slf4j;
 import org.reflections.Reflections;
 import org.springframework.stereotype.Component;
@@ -35,7 +35,6 @@ public class GsonConfig {
                     log.error("init gson config:", e);
                 }
             }
-
         }
     }
 

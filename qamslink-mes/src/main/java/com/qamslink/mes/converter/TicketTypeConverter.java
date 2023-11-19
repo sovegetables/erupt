@@ -3,8 +3,8 @@ package com.qamslink.mes.converter;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
-import com.qamslink.mes.type.BarCodeType;
 import com.qamslink.mes.type.TicketType;
+import xyz.erupt.upms.converter.AbEnumConverter;
 
 import java.lang.reflect.Type;
 import java.util.Objects;

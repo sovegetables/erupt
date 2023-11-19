@@ -49,8 +49,8 @@ public class MesBom extends HyperModelVo {
     }
 
     @EruptField(
-            views = @View(title = "物料清单版本号", highlight = true),
-            edit = @Edit(title = "物料清单版本号",
+            views = @View(title = "版本号", highlight = true),
+            edit = @Edit(title = "版本号",
                     notNull = true,
                     placeHolder = "保存时自动生成",
                     search = @Search(vague = true))
@@ -76,11 +76,7 @@ public class MesBom extends HyperModelVo {
     )
     private Boolean isDefault = true;
 
-//    @EruptField(
-//            views = @View(title = "版本号"),
-//            edit = @Edit(title = "版本号")
-//    )
-//    private String version;
+    private String version;
 
     @JoinColumn(name = "bom_id")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)

@@ -26,9 +26,9 @@ public class PurOrderStock extends SerialNumModel {
     @ManyToOne
     @EruptField(
             views = {
-                    @View(title = "物料编码", column = "code"),
-                    @View(title = "物料名称", column = "name"),
-                    @View(title = "规格型号", column = "spec"),
+                    @View(title = "物料编码", column = "code", width = "200px"),
+                    @View(title = "物料名称", column = "name", width = "200px"),
+                    @View(title = "规格型号", column = "spec", width = "200px"),
                     },
             edit = @Edit(title = "物料编码", notNull = true,
                     search = @Search(vague = true), type = EditType.REFERENCE_TABLE,

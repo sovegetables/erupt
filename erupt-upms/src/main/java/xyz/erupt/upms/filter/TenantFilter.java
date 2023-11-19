@@ -1,10 +1,7 @@
 package xyz.erupt.upms.filter;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import xyz.erupt.annotation.fun.FilterHandler;
-import xyz.erupt.upms.model.EruptUser;
-import xyz.erupt.upms.service.EruptUserService;
 
 @Component
 public class TenantFilter implements FilterHandler {

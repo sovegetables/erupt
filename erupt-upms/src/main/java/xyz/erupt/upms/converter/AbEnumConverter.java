@@ -1,4 +1,4 @@
-package com.qamslink.mes.converter;
+package xyz.erupt.upms.converter;
 
 import com.google.gson.JsonDeserializer;
 import xyz.erupt.core.query.IEnum;

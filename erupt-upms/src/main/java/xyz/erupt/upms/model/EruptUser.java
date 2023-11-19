@@ -1,5 +1,6 @@
 package xyz.erupt.upms.model;
 
+import com.google.gson.GsonBuilder;
 import lombok.Getter;
 import lombok.Setter;
 import xyz.erupt.annotation.Erupt;
@@ -12,18 +13,19 @@ import xyz.erupt.annotation.sub_erupt.LinkTree;
 import xyz.erupt.annotation.sub_erupt.RowOperation;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
-import xyz.erupt.annotation.sub_field.Readonly;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.BoolType;
 import xyz.erupt.annotation.sub_field.sub_edit.InputType;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTreeType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
+import xyz.erupt.core.config.GsonFactory;
 import xyz.erupt.core.constant.MenuTypeEnum;
 import xyz.erupt.core.constant.RegexConst;
-import xyz.erupt.upms.filter.TenantFilter;
+import xyz.erupt.upms.converter.UserTypeConverter;
 import xyz.erupt.upms.looker.LookerSelf;
 import xyz.erupt.upms.model.input.ResetPassword;
 import xyz.erupt.upms.model.input.ResetPasswordExec;
+import xyz.erupt.upms.type.UserType;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -55,6 +57,11 @@ import java.util.Set;
 @Setter
 public class EruptUser extends LookerSelf implements FilterHandler {
 
+    static {
+        GsonBuilder gsonBuilder = GsonFactory.getGsonBuilder();
+        gsonBuilder.registerTypeAdapter(UserType.class, new UserTypeConverter());
+    }
+
     @Column(length = AnnotationConst.CODE_LENGTH)
     @EruptField(
             views = @View(title = "用户名", sortable = true, highlight = true),
@@ -74,8 +81,8 @@ public class EruptUser extends LookerSelf implements FilterHandler {
     )
     private String empno;
 
-    @Convert(converter = UserType.Converter.class)
-    private UserType type;
+    @Convert(converter = UserTypeConverter.class)
+    private UserType type = UserType.NORMAL;
 
     @EruptField(
             edit = @Edit(title = "手机号码", search = @Search(vague = true), inputType = @InputType(regex = RegexConst.PHONE_REGEX))
