@@ -65,7 +65,9 @@ public class EruptUtil {
             Object value = field.get(obj);
             if(field.getType() == Long.class){
                 //js针对java的long会丢失进度，转成string处理
-                value = String.valueOf(value);
+                if(value != null){
+                    value = String.valueOf(value);
+                }
             }
             if (null != value) {
                 EruptField eruptField = fieldModel.getEruptField();

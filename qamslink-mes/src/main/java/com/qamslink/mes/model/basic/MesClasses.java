@@ -42,7 +42,6 @@ public class MesClasses extends HyperModelVo {
     @EruptField(
             views = @View(title = "所属车间", column = "name"),
             edit = @Edit(title = "所属车间", type = EditType.REFERENCE_TABLE,
-                    notNull = true,
                     search = @Search(vague = true))
     )
     private MesWorkshop workshop;

@@ -10,7 +10,7 @@ import java.util.stream.Stream;
 
 @Getter
 public enum MenuTypeEnum {
-
+    FORM("form", "表单视图", "填erupt类名"),
     TABLE("table", "表格视图", "填erupt类名"),
     TREE("tree", "树状视图", "填erupt类名"),
     BUTTON("button", "功能按钮", null),

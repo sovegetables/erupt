@@ -25,8 +25,6 @@ import java.util.List;
         orderBy = "MesProductLine.createTime desc",
         linkTree = @LinkTree(field = "workshop", fieldClass = "MesWorkshop"),
         power = @Power(importable = true)
-//        ,
-//        dataProxy = MesProductLineService.class,
 )
 public class MesProductLine extends HyperModelVo {
 
@@ -48,7 +46,7 @@ public class MesProductLine extends HyperModelVo {
     @ManyToOne
     @EruptField(
             views = @View(title = "所属车间", column = "name"),
-            edit = @Edit(title = "所属车间", type = EditType.REFERENCE_TABLE, notNull = true, search = @Search(vague = true))
+            edit = @Edit(title = "所属车间", type = EditType.REFERENCE_TABLE, search = @Search(vague = true))
     )
     private MesWorkshop workshop;
 

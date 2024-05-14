@@ -7,6 +7,8 @@ import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
 import xyz.erupt.annotation.EruptI18n;
 import xyz.erupt.annotation.constant.AnnotationConst;
+import xyz.erupt.annotation.sub_erupt.LinkTree;
+import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_erupt.Tree;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
@@ -26,7 +28,9 @@ import javax.persistence.*;
 @Table(name = "e_upms_org", uniqueConstraints = @UniqueConstraint(columnNames = "code"))
 @Erupt(
         name = "组织维护",
-        tree = @Tree(pid = "parentOrg.id", expandLevel = 5),
+        linkTree = @LinkTree(field = "parentOrg"),
+        tree = @Tree(pid = "id", expandLevel = 5),
+        power = @Power(importable = true),
         orderBy = "EruptOrg.sort asc"
 )
 @EruptI18n
@@ -51,6 +55,7 @@ public class EruptOrg extends BaseModel {
 
     @ManyToOne
     @EruptField(
+            views = @View(title = "上级组织",column = "name"),
             edit = @Edit(
                     title = "上级组织",
                     type = EditType.REFERENCE_TREE,

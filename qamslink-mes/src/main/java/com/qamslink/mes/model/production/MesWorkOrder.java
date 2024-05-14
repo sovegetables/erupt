@@ -104,7 +104,7 @@ public class MesWorkOrder extends HyperModelVo {
     private String progress;
 
     @Transient
-    private BigDecimal doing;
+    private BigDecimal doing = BigDecimal.ZERO;
 
     @ManyToOne
     @EruptField(

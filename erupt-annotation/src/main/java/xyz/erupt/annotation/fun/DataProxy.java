@@ -75,4 +75,8 @@ public interface DataProxy<@Comment("Erupt类对象") MODEL> extends MetaProxy<M
         return null;
     }
 
+    @Comment("excel导入，导入之前调用")
+    default void beforeImport(MODEL obj){
+
+    }
 }

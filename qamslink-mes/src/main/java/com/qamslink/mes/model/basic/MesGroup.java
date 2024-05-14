@@ -20,12 +20,11 @@ import java.util.Set;
 @Setter
 @Getter
 @Erupt(name = "班组管理",
-//        dataProxy = MesGroupService.class,
         orderBy = "MesGroup.createTime desc")
 public class MesGroup extends HyperModelVo {
 
     @EruptField(
-            views = @View(title = "班组编码", highlight = true),
+            views = @View(title = "班组编码"),
             edit = @Edit(title = "班组编码", placeHolder = "保存时自动生成",
                     notNull = true,
                     search = @Search(vague = true))
@@ -34,7 +33,7 @@ public class MesGroup extends HyperModelVo {
     private String code;
 
     @EruptField(
-            views = @View(title = "班组名称"),
+            views = @View(title = "班组名称", highlight = true),
             edit = @Edit(title = "班组名称", notNull = true, search = @Search(vague = true))
     )
     private String name;
@@ -42,22 +41,20 @@ public class MesGroup extends HyperModelVo {
     @ManyToOne
     @EruptField(
             views = @View(title = "班组负责人", column = "name"),
-            edit = @Edit(title = "班组负责人", type = EditType.REFERENCE_TABLE, notNull = true, search = @Search(vague = true))
+            edit = @Edit(title = "班组负责人", type = EditType.REFERENCE_TABLE, search = @Search(vague = true))
     )
     private EruptUser manager;
 
     @ManyToOne
     @EruptField(
             views = @View(title = "所属车间", column = "name"),
-            edit = @Edit(title = "所属车间", type = EditType.REFERENCE_TABLE,
-                    notNull = true,
-                    search = @Search(vague = true))
+            edit = @Edit(title = "所属车间", type = EditType.REFERENCE_TABLE, search = @Search(vague = true))
     )
     private MesWorkshop workshop;
 
     @EruptField(
-            views = @View(title = "备注"),
-            edit = @Edit(title = "备注", type = EditType.TEXTAREA)
+            views = @View(title = "说明"),
+            edit = @Edit(title = "说明", type = EditType.TEXTAREA)
     )
     private String remark;
 

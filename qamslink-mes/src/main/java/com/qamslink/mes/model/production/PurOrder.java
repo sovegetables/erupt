@@ -19,6 +19,7 @@ import xyz.erupt.core.annotation.CodeGenerator;
 import xyz.erupt.upms.helper.HyperModelVo;
 import xyz.erupt.upms.model.EruptOrg;
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -36,6 +37,7 @@ import java.util.Set;
 public class PurOrder extends HyperModelVo {
 
     public static class PurOrderDataProxy implements DataProxy<PurOrder> {
+
         public void addBehavior(PurOrder purOrder) {
             purOrder.setOrderDate(new Date());
             HashSet<PurOrderStock> purOrderStocks = new HashSet<>();
@@ -44,10 +46,12 @@ public class PurOrder extends HyperModelVo {
             LocalDate localDate = LocalDate.now().plusDays(2);
             Date date = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
             orderStock.setEndDate(date);
+            orderStock.setPrice(BigDecimal.ZERO);
             orderStock.setSerialNum(1);
             purOrderStocks.add(orderStock);
             purOrder.setOrderStocks(purOrderStocks);
         }
+
     }
 
     // 单据类型
@@ -91,23 +95,24 @@ public class PurOrder extends HyperModelVo {
     )
     private EruptOrg org;
 
-    @EruptField(
-            views = {@View(title = "单据状态")},
-            edit = @Edit(title = "单据状态",
-                    readonly = @Readonly(),
-                    notNull = true,
-                    type = EditType.CHOICE,
-                    choiceType = @ChoiceType(
-                    vl = {
-                        @VL(label = "暂存", value = "0"),
-                        @VL(label = "创建", value = "1"),
-                        @VL(label = "审核中", value = "2"),
-                        @VL(label = "已审核", value = "3"),
-                        @VL(label = "重新审核", value = "4"),
-                    } )
-            )
-    )
-    private Integer status = 0;
+//    @EruptField(
+//            views = {@View(title = "单据状态")},
+//            edit = @Edit(title = "单据状态",
+//                    readonly = @Readonly(),
+//                    editShow = false,
+//                    notNull = true,
+//                    type = EditType.CHOICE,
+//                    choiceType = @ChoiceType(
+//                    vl = {
+//                        @VL(label = "暂存", value = "0"),
+//                        @VL(label = "创建", value = "1"),
+//                        @VL(label = "审核中", value = "2"),
+//                        @VL(label = "已审核", value = "3"),
+//                        @VL(label = "重新审核", value = "4"),
+//                    } )
+//            )
+//    )
+//    private Integer status = 0;
 
     @EruptField(
             views = {@View(title = "关闭状态")},
@@ -151,7 +156,7 @@ public class PurOrder extends HyperModelVo {
     @JoinColumn(name = "pur_order_id")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @EruptField(
-            edit = @Edit(title = "订单明细", type = EditType.TAB_TABLE_ADD)
+            edit = @Edit(title = "物料明细", type = EditType.TAB_TABLE_ADD)
     )
     private Set<PurOrderStock> orderStocks;
 }

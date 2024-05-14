@@ -6,6 +6,8 @@ import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
 import xyz.erupt.annotation.sub_erupt.Filter;
+import xyz.erupt.annotation.sub_erupt.Power;
+import xyz.erupt.annotation.sub_erupt.Tree;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
@@ -22,17 +24,14 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "mes_warehouse_category")
 @Erupt(name = "仓库类型",
-//        dataProxy = MesWarehouseCategoryService.class,
         orderBy = "MesWarehouseCategory.createTime desc",
-//        power = @Power(add = false, delete = false),
-        filter = @Filter(value = "MesWarehouseCategory.tenantId",
-                params = {"and MesWarehouseCategory.deleted = false"},
-                conditionHandler = TenantFilter.class))
-@SQLDelete(sql = "update mes_warehouse_category set deleted = true where id = ?")
+        power = @Power(importable = true),
+        tree = @Tree(pid = "id"),
+        filter = @Filter(conditionHandler = TenantFilter.class))
 public class MesWarehouseCategory extends HyperModel {
     @EruptField(
-            views = @View(title = "仓库类型名称"),
-            edit = @Edit(title = "仓库类型名称", search = @Search(vague = true), notNull = true)
+            views = @View(title = "类型名称"),
+            edit = @Edit(title = "类型名称", search = @Search(vague = true), notNull = true)
     )
     private String name;
 

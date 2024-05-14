@@ -2,10 +2,10 @@ package com.qamslink.mes.model.quality;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.hibernate.annotations.SQLDelete;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
 import xyz.erupt.annotation.sub_erupt.Filter;
+import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
@@ -22,17 +22,14 @@ import java.util.List;
 @Getter
 @Setter
 @Erupt(name = "检验模板",
-//        dataProxy = MesInspectionMouldService.class,
         orderBy = "MesInspectionMould.createTime desc",
-        filter = @Filter(value = "MesInspectionMould.tenantId",
-                params = {"and MesInspectionMould.deleted = false"},
-                conditionHandler = TenantFilter.class))
-@SQLDelete(sql = "update mes_inspection_mould set deleted = true where id = ?")
+        power = @Power(importable = true),
+        filter = @Filter(conditionHandler = TenantFilter.class))
 public class MesInspectionMould extends HyperModelVo {
 
     @EruptField(
-            views = @View(title = "检验模板名称"),
-            edit = @Edit(title = "检验模板名称", notNull = true, search = @Search(vague = true))
+            views = @View(title = "模板名称"),
+            edit = @Edit(title = "模板名称", notNull = true, search = @Search(vague = true))
     )
     private String name;
 
@@ -73,8 +70,8 @@ public class MesInspectionMould extends HyperModelVo {
     @JoinColumn(name = "inspection_mould_id")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @EruptField(
-            views = @View(title = "检测项"),
-            edit = @Edit(title = "检测项", type = EditType.TAB_TABLE_ADD)
+            views = @View(title = "检验项"),
+            edit = @Edit(title = "检验项", type = EditType.TAB_TABLE_ADD)
 //            ,
 //            hasExtra = true
     )

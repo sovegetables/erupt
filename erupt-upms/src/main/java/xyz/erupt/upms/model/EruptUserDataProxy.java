@@ -6,8 +6,10 @@ import xyz.erupt.annotation.fun.DataProxy;
 import xyz.erupt.core.exception.EruptApiErrorTip;
 import xyz.erupt.core.exception.EruptWebApiRuntimeException;
 import xyz.erupt.core.i18n.I18nTranslate;
+import xyz.erupt.core.prop.EruptProp;
 import xyz.erupt.core.util.MD5Util;
 import xyz.erupt.core.view.EruptApiModel;
+import xyz.erupt.upms.prop.EruptAppProp;
 import xyz.erupt.upms.service.EruptUserService;
 
 import javax.annotation.Resource;
@@ -21,6 +23,8 @@ public class EruptUserDataProxy implements DataProxy<EruptUser> {
 
     @Resource
     private EruptUserService eruptUserService;
+    @Resource
+    private EruptProp eruptProp;
 
     @Override
     public void beforeAdd(EruptUser eruptUser) {
@@ -42,6 +46,14 @@ public class EruptUserDataProxy implements DataProxy<EruptUser> {
     @Override
     public void beforeUpdate(EruptUser eruptUser) {
         this.checkDataLegal(eruptUser);
+    }
+
+    @Override
+    public void beforeImport(EruptUser obj) {
+        String password = eruptProp.getDefaultPassword();
+//        obj.setPassword(MD5Util.digest(password));
+        obj.setPasswordA(MD5Util.digest(password));
+        obj.setPasswordB(MD5Util.digest(password));
     }
 
     private void checkDataLegal(EruptUser eruptUser) {

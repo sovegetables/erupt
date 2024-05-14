@@ -119,6 +119,8 @@ public class EruptExcelController {
         try {
             eruptModifyController.batchAddEruptData(eruptModel, list);
         } catch (Exception e) {
+//            Duplicate entry 'LAUNCH' for key 'UKsd9m4ptw2ra3hipij7jhsoois'
+//            TODO
             e.printStackTrace();
             throw new EruptWebApiRuntimeException("数据导入异常，原因：" + e.getMessage());
         }

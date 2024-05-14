@@ -1,6 +1,7 @@
 package xyz.erupt.upms.service;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import xyz.erupt.annotation.fun.DataProxy;
 import xyz.erupt.core.constant.MenuStatus;
@@ -132,9 +133,16 @@ public class EruptMenuService implements DataProxy<EruptMenu> {
         this.flushCache();
     }
 
+    @Resource
+    @Lazy
+    private EruptSessionService sessionService;
+    @Resource
+    @Lazy
+    private EruptUserService eruptUserService;
+
     @Override
     public void afterUpdate(EruptMenu eruptMenu) {
-//        this.afterAdd(eruptMenu);
+        flushCache();
     }
 
     @Override

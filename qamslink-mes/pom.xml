@@ -6,11 +6,10 @@
     <parent>
         <groupId>xyz.erupt</groupId>
         <artifactId>erupt</artifactId>
-        <version>1.12.2</version>
+        <version>1.12.7</version>
     </parent>
 
     <artifactId>qamslink-mes</artifactId>
-<!--    <version>0.0.1-SNAPSHOT</version>-->
     <name>qamslink-mes</name>
     <description>qamslink-mes</description>
 
@@ -96,13 +95,36 @@
                             <goal>process</goal>
                         </goals>
                         <configuration>
-<!--                            <outputDirectory>src/main/java</outputDirectory>-->
+                            <outputDirectory>src/main/java</outputDirectory>
                             <outputDirectory>target/generated-sources/java</outputDirectory>
                             <processor>com.querydsl.apt.jpa.JPAAnnotationProcessor</processor>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.7.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.8.0</version>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+
         </plugins>
     </build>
 </project>

@@ -10,6 +10,7 @@ import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
+import xyz.erupt.annotation.sub_field.sub_edit.InputType;
 import xyz.erupt.annotation.sub_field.sub_edit.ReferenceTableType;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
 import xyz.erupt.core.annotation.CodeGenerator;
@@ -24,11 +25,10 @@ import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
-@Table(name = "mes_unit_measure_code_detail", uniqueConstraints = @UniqueConstraint(columnNames = "stock_id"))
+@Table(name = "mes_unit_measure_code_detail", uniqueConstraints = @UniqueConstraint(columnNames = "code"))
 @Setter
 @Getter
 @Erupt(name = "计量单位转换",
-//        dataProxy = MesUnitMeasureCodeDetailService.class,
         orderBy = "MesUnitMeasureCodeDetail.createTime desc",
         power = @Power(importable = true)
         )
@@ -57,36 +57,36 @@ public class MesUnitMeasureCodeDetail extends HyperModelVo {
             views = @View(title = "编码", highlight = true),
             edit = @Edit(title = "编码", notNull = true, show = false)
     )
-    @CodeGenerator(handler = InnerCodeGenerator.class)
+    @CodeGenerator()
     private String code;
 
-    @ManyToOne
-    @EruptField(
-            views ={@View(title = "物料编码",column = "code")},
-            edit = @Edit(title = "物料编码",notNull = true, search = @Search(vague = true),
-                    type = EditType.REFERENCE_TABLE, referenceTableType = @ReferenceTableType(label = "code"))
-    )
-    private MesStock stock;
+//    @ManyToOne
+//    @EruptField(
+//            views ={@View(title = "物料编码",column = "code")},
+//            edit = @Edit(title = "物料编码",notNull = true, search = @Search(vague = true),
+//                    type = EditType.REFERENCE_TABLE, referenceTableType = @ReferenceTableType(label = "code"))
+//    )
+//    private MesStock stock;
 
     @ManyToOne
     @EruptField(
-            views ={@View(title = "转换前计量单位",column = "name"),
-                    @View(title = "转换前编码",column = "unitCode")},
-            edit = @Edit(title = "转换前计量单位", notNull = true, search = @Search(vague = true), type = EditType.REFERENCE_TABLE)
+            views ={@View(title = "单位",column = "name"),
+                    @View(title = "单位编码",column = "unitCode")},
+            edit = @Edit(title = "单位", notNull = true, search = @Search(vague = true), type = EditType.REFERENCE_TABLE)
     )
     private Unit beforeUnitMeasureCode;
 
     @ManyToOne
     @EruptField(
-            views ={@View(title = "转换后计量单位",column = "name"),
-                    @View(title = "转换后编码",column = "unitCode")},
-            edit = @Edit(title = "转换后计量单位",notNull = true, search = @Search(vague = true), type = EditType.REFERENCE_TABLE)
+            views ={@View(title = "转换单位",column = "name"),
+                    @View(title = "转换单位编码",column = "unitCode")},
+            edit = @Edit(title = "转换单位",notNull = true, search = @Search(vague = true), type = EditType.REFERENCE_TABLE)
     )
     private Unit afterUnitMeasureCode;
 
     @EruptField(
             views = @View(title = "转换率"),
-            edit = @Edit(title = "转换率", notNull = true)
+            edit = @Edit(title = "转换率", notNull = true, type = EditType.NUMBER)
     )
     private BigDecimal conversionRate;
 }

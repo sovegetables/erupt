@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.Setter;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
+import xyz.erupt.annotation.sub_erupt.Tree;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.jpa.model.BaseModel;
-
 import javax.persistence.Entity;
 import javax.persistence.Table;
 
@@ -14,7 +14,7 @@ import javax.persistence.Table;
 @Setter
 @Entity
 @Table(name = "mes_customer_type")
-@Erupt(name = "客户类型")
+@Erupt(name = "客户类型", tree = @Tree(pid = "id"))
 public class MesCustomerType extends BaseModel {
 
     public static final int CODE_CLIENT_ID = 1;

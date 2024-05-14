@@ -55,6 +55,4 @@ public class EruptAppProp {
             this.locales = locales;
         }
     }
-
-
 }

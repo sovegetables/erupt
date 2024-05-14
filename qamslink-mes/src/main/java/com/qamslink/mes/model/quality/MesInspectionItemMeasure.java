@@ -23,7 +23,6 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Erupt(name = "检测项",
-//        dataProxy = MesInspectionItemMeasureService.class,
         filter = @Filter(value = "MesInspectionItemMeasure.tenantId",
                 params = {"and MesInspectionItemMeasure.deleted = false"},
                 conditionHandler = TenantFilter.class))

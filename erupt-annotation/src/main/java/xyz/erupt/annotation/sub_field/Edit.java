@@ -8,7 +8,6 @@ import xyz.erupt.annotation.fun.AutoCompleteHandler;
 import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_erupt.Tpl;
 import xyz.erupt.annotation.sub_field.sub_edit.*;
-
 import java.beans.Transient;
 
 /**
@@ -45,6 +44,9 @@ public @interface Edit {
 
     @Comment("搜索提示信息")
     String searchPlaceHolder() default "";
+
+    @Comment("编辑建议")
+    EditRecommend recommendBy() default @EditRecommend(dependField = "", expr = "");
 
     @Match("#value.dependField() != ''")
     @Comment("显示依赖")

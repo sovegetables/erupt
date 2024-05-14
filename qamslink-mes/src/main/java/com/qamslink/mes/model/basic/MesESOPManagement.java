@@ -16,7 +16,6 @@ import java.util.List;
 @Entity
 @Table(name="mes_esop_management")
 @Erupt(name = "ESOP管理",
-//        dataProxy = MesESOPManagementService.class,
         orderBy = "MesESOPManagement.createTime desc"
 )
 @Data
@@ -36,8 +35,8 @@ public class MesESOPManagement extends HyperModelVo {
     private String ESOPName;
 
     @EruptField(
-            views = @View(title = "附件上传"),
-            edit = @Edit(title = "附件上传", type = EditType.ATTACHMENT,
+            views = @View(title = "附件"),
+            edit = @Edit(title = "附件", type = EditType.ATTACHMENT,
                     attachmentType = @AttachmentType(fileTypes = "pdf")
             )
     )

@@ -47,7 +47,7 @@ public class EruptJpaUtils {
                 return;
             }
             for (View view : field.getEruptField().views()) {
-                if (view.column().length() == 0) {
+                if (view.column().isEmpty()) {
                     cols.add(eruptNameSymbol + field.getFieldName() + AS + field.getFieldName());
                 } else {
                     cols.add(eruptNameSymbol + field.getFieldName() + EruptConst.DOT + view.column() + AS + field.getFieldName() + "_"
@@ -68,7 +68,6 @@ public class EruptJpaUtils {
             // 如果view配置了多级显示，则必须手动进行left join 关联，否则会因jpa自动生成的cross join 导致查询结果不完整。
             // 在这里调用改写的 generateEruptJoinHql 方法
             hql.append(generateEruptJoinHql(eruptModel));
-
         } else {
             hql.append("from ").append(eruptModel.getEruptName());
         }

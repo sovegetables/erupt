@@ -10,6 +10,7 @@ import xyz.erupt.annotation.constant.AnnotationConst;
 import xyz.erupt.annotation.fun.FilterHandler;
 import xyz.erupt.annotation.sub_erupt.Filter;
 import xyz.erupt.annotation.sub_erupt.LinkTree;
+import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_erupt.RowOperation;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
@@ -45,6 +46,7 @@ import java.util.Set;
         name = "用户配置",
         dataProxy = EruptUserDataProxy.class,
         linkTree = @LinkTree(field = "eruptOrg"),
+        power = @Power(importable = true),
         orderBy = "EruptUser.id",
         rowOperation = @RowOperation(title = "重置密码",
                 icon = "fa fa-refresh",
@@ -77,7 +79,7 @@ public class EruptUser extends LookerSelf implements FilterHandler {
 
     @EruptField(
             views = @View(title = "工号", column = "empno"),
-            edit = @Edit(title = "工号", search = @Search(vague = true), notNull = true)
+            edit = @Edit(title = "工号", search = @Search(vague = true))
     )
     private String empno;
 

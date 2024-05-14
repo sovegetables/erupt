@@ -6,6 +6,7 @@ import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
 import xyz.erupt.annotation.EruptI18n;
 import xyz.erupt.annotation.constant.AnnotationConst;
+import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.Search;
@@ -24,7 +25,7 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "e_upms_post", uniqueConstraints = {
         @UniqueConstraint(columnNames = "code")
 })
-@Erupt(name = "岗位维护", orderBy = "weight desc")
+@Erupt(name = "岗位维护", power = @Power(importable = true),orderBy = "weight desc")
 @EruptI18n
 @Getter
 @Setter

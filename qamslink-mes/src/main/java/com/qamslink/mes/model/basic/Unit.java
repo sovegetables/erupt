@@ -19,7 +19,9 @@ import javax.persistence.UniqueConstraint;
 @Setter
 @Getter
 @Erupt(name = "计量单位",
-        orderBy = "Unit.createTime desc")
+        power = @Power(importable = true),
+        orderBy = "Unit.createTime desc"
+)
 public class Unit extends HyperModelVo {
     @EruptField(
             views = @View(title = "编码", highlight = true),
@@ -33,4 +35,10 @@ public class Unit extends HyperModelVo {
             edit = @Edit(title = "名称", notNull = true, search = @Search(vague = true))
     )
     private String name;
+
+    @EruptField(
+            views = @View(title = "描述"),
+            edit = @Edit(title = "描述", search = @Search(vague = true))
+    )
+    private String description;
 }

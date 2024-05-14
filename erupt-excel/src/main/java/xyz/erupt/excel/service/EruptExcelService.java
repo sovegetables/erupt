@@ -204,8 +204,10 @@ public class EruptExcelService {
                                     jo.addProperty(edit.referenceTreeType().id(),
                                             cellIndexJoinEruptMap.get(cellNum).get(cell.getStringCellValue()).toString());
                                 } else if (edit.type() == EditType.REFERENCE_TABLE) {
-                                    jo.addProperty(edit.referenceTableType().id(),
-                                            cellIndexJoinEruptMap.get(cellNum).get(cell.getStringCellValue()).toString());
+                                    String id = edit.referenceTableType().id();
+                                    Map<String, Object> map = cellIndexJoinEruptMap.get(cellNum);
+                                    Object cellValue = map.get(cell.getStringCellValue());
+                                    jo.addProperty(id, cellValue.toString());
                                 }
                             } catch (Exception e) {
                                 throw new Exception(edit.title() + " -> " + getStringCellValue(cell) + "数据不存在");

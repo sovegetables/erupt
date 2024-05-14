@@ -4,6 +4,7 @@ import lombok.Data;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
 import xyz.erupt.annotation.sub_erupt.LinkTree;
+import xyz.erupt.annotation.sub_erupt.Power;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
@@ -17,19 +18,9 @@ import java.util.Set;
 @Entity
 @Table(name="mes_customer", uniqueConstraints={ @UniqueConstraint(columnNames = "code")})
 @Erupt(name = "往来单位",
-//        dataProxy = MesCustomerService.class,
         linkTree = @LinkTree(field = "customerType"),
+        power = @Power(importable = true),
         orderBy = "MesCustomer.createTime desc"
-//        ,
-//        rowOperation = {
-//                @RowOperation(
-//                        code = "customer",
-//                        title = "生成供应商账号",
-//                        mode = RowOperation.Mode.MULTI
-//                        ,
-//                        operationHandler = CustomerHandler.class
-//                )
-//        }
 )
 @Data
 public class MesCustomer extends HyperModelVo {

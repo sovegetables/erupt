@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import xyz.erupt.annotation.Erupt;
 import xyz.erupt.annotation.EruptField;
+import xyz.erupt.annotation.sub_erupt.Power;
+import xyz.erupt.annotation.sub_erupt.Tree;
 import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
@@ -21,10 +23,7 @@ import javax.persistence.UniqueConstraint;
 @Table(name = "mes_workshop", uniqueConstraints = @UniqueConstraint(columnNames = "code"))
 @Getter
 @Setter
-@Erupt(name = "车间管理"
-//        ,
-//        dataProxy = MesWorkshopService.class,
-)
+@Erupt(name = "车间管理", tree = @Tree(pid = "id"),power = @Power(importable = true))
 public class MesWorkshop extends HyperModelVo {
 
     @EruptField(

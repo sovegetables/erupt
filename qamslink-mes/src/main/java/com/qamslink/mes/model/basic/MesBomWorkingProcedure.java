@@ -8,6 +8,7 @@ import xyz.erupt.annotation.sub_field.Edit;
 import xyz.erupt.annotation.sub_field.EditType;
 import xyz.erupt.annotation.sub_field.View;
 import xyz.erupt.annotation.sub_field.sub_edit.ChoiceType;
+import xyz.erupt.annotation.sub_field.sub_edit.NumberType;
 import xyz.erupt.annotation.sub_field.sub_edit.VL;
 import xyz.erupt.jpa.model.BaseModel;
 
@@ -25,13 +26,13 @@ public class MesBomWorkingProcedure extends BaseModel {
     @ManyToOne
     @EruptField(
             views = @View(title = "工序", column = "name"),
-            edit = @Edit(title = "工序",type = EditType.REFERENCE_TABLE, notNull = true)
+            edit = @Edit(title = "工序", type = EditType.REFERENCE_TABLE, notNull = true)
     )
     private MesWorkingProcedure workingProcedure;
 
     @EruptField(
             views = @View(title = "排序"),
-            edit = @Edit(title = "排序")
+            edit = @Edit(title = "排序", numberType = @NumberType(min = 1, step = 1))
     )
     private Integer sort = 0;
 

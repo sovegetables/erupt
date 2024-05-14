@@ -24,7 +24,6 @@ import javax.persistence.Table;
 @Getter
 @Setter
 @Erupt(name = "条码规则",
-//        dataProxy = MesBarcodeRuleService.class,
         orderBy = "MesBarcodeRule.createTime desc")
 public class MesBarcodeRule extends HyperModelVo {
 
@@ -130,8 +129,5 @@ public class MesBarcodeRule extends HyperModelVo {
             )
     )
     private Boolean isUsed = true;
-
-
-
     private Boolean deleted = false;
 }

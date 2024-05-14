@@ -54,6 +54,15 @@ public class EruptService {
         List<String> conditionStrings = new ArrayList<>();
         //DependTree logic
         LinkTree dependTree = eruptModel.getErupt().linkTree();
+//        if (StringUtils.isNotBlank(dependTree.field())) {
+//            if (null == tableQuery.getLinkTreeVal()) {
+//                if (dependTree.dependNode()) return new Page();
+//            } else {
+//                String simpleName = ReflectUtil.findClassField(eruptModel.getClazz(), dependTree.field()).getType().getSimpleName();
+//                EruptModel treeErupt = EruptCoreService.getErupt(simpleName);
+//                conditionStrings.add(dependTree.field() + "." + treeErupt.getErupt().primaryKeyCol() + " = '" + tableQuery.getLinkTreeVal() + "'");
+//            }
+//        }
         if (StringUtils.isNotBlank(dependTree.field())) {
             if (null == tableQuery.getLinkTreeVal()) {
                 if (dependTree.dependNode()) return new Page();
@@ -64,7 +73,7 @@ public class EruptService {
                 Object linkTreeVal = tableQuery.getLinkTreeVal();
                 if(linkTreeVal != null){
                     // 修复树视图,父分类查询数据为空的问题
-                    Page p = new Page(1, Page.PAGE_MAX_DATA, "");
+                    Page p = new Page(1, Page.PAGE_MAX_DATA);
                     ArrayList<Condition> conditions = new ArrayList<>();
                     String pid = treeErupt.getErupt().tree().pid();
                     Condition condition = new Condition(pid, Long.parseLong(linkTreeVal.toString()), QueryExpression.EQ);

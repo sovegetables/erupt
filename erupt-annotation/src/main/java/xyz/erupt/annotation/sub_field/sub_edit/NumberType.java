@@ -6,6 +6,6 @@ package xyz.erupt.annotation.sub_field.sub_edit;
  */
 public @interface NumberType {
     long max() default Integer.MAX_VALUE;
-
     long min() default -Integer.MAX_VALUE;
+    double step() default 0.00001;
 }

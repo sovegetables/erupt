@@ -21,7 +21,6 @@ import java.math.BigDecimal;
 @Getter
 @Setter
 @Erupt(name = "标签模板",
-//        dataProxy = MesBarcodeModelService.class,
         orderBy = "MesBarcodeModel.createTime desc"
 )
 public class MesBarcodeModel extends HyperModelVo {

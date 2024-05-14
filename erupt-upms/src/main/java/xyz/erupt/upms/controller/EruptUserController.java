@@ -18,10 +18,12 @@ import xyz.erupt.core.view.EruptApiModel;
 import xyz.erupt.upms.base.LoginModel;
 import xyz.erupt.upms.constant.SessionKey;
 import xyz.erupt.upms.fun.LoginProxy;
+import xyz.erupt.upms.model.EruptMenu;
 import xyz.erupt.upms.model.EruptUser;
 import xyz.erupt.upms.prop.EruptAppProp;
 import xyz.erupt.upms.prop.EruptUpmsProp;
 import xyz.erupt.upms.service.EruptContextService;
+import xyz.erupt.upms.service.EruptMenuService;
 import xyz.erupt.upms.service.EruptSessionService;
 import xyz.erupt.upms.service.EruptUserService;
 import xyz.erupt.upms.vo.EruptMenuVo;
@@ -139,10 +141,16 @@ public class EruptUserController {
         return userinfoVo;
     }
 
+    @Resource
+    private EruptMenuService eruptMenuService;
+
     //获取菜单列表
     @GetMapping("/menu")
     @EruptRouter(verifyType = EruptRouter.VerifyType.LOGIN)
     public List<EruptMenuVo> getMenu() {
+//        EruptUser eruptUser = eruptUserService.getCurrentEruptUser();
+//        List<EruptMenu> eruptMenus = eruptMenuService.getUserAllMenu(eruptUser);
+//        List<EruptMenuVo> eruptMenuVos = eruptMenuService.geneMenuListVo(eruptMenus);
         List<EruptMenuVo> menus = sessionService.get(SessionKey.MENU_VIEW + eruptContextService.getCurrentToken(), new TypeToken<List<EruptMenuVo>>() {
         }.getType());
         menus.forEach(it -> it.setName(I18nTranslate.$translate(it.getName())));

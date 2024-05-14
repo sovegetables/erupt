@@ -43,6 +43,9 @@ public class EruptProp {
     //默认语言
     public String defaultLocales = "zh-CN";
 
+    //默认密码
+    private String defaultPassword;
+
 //
 //    //应用空间前缀
 //    private String appSpacePrefix = "erupt-app:";

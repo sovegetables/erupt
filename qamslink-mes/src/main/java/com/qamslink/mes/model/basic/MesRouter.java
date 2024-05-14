@@ -26,7 +26,6 @@ import java.util.Map;
 @Data
 @Table(name = "mes_router")
 @Erupt(name = "路由管理",
-//        dataProxy = MesRouterService.class,
         rowOperation = @RowOperation(
                 code = "router",
                 icon = "",
