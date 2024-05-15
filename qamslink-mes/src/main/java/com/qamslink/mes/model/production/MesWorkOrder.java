@@ -22,7 +22,6 @@ import xyz.erupt.upms.helper.HyperModelVo;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 
 @Entity
 @Table(name = "mes_work_order")
@@ -136,7 +135,7 @@ public class MesWorkOrder extends HyperModelVo {
     @EruptField(
             edit = @Edit(title = "物料清单",
                     type = EditType.REFERENCE_TABLE,
-                    referenceTableType = @ReferenceTableType(label = "code"),
+                    referenceTableType = @ReferenceTableType(label = "mainStock"),
                     search = @Search(vague = true)
             )
     )
@@ -148,13 +147,13 @@ public class MesWorkOrder extends HyperModelVo {
     )
     private BigDecimal num;
 
-    @OneToMany()
-    @JoinColumn(name = "work_order_id")
+//    @OneToMany()
+//    @JoinColumn(name = "work_order_id")
 //    @EruptField(
 //            views = @View(title = "工序详情"),
 //            edit = @Edit(title = "工序详情", notNull = true, readonly = @Readonly, type = EditType.TAB_TABLE_ADD)
 //    )
-    private List<MesWorkOrderProcedure> workOrderProcedures;
+//    private List<MesWorkOrderProcedure> workOrderProcedures;
 
     @EruptField(
             views = {@View(title = "计划开始时间")},
