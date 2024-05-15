@@ -14,7 +14,6 @@ import java.beans.Transient;
 public @interface View {
 
     String title();
-
     String desc() default "";
     boolean highlight() default false;
 

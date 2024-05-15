@@ -13,6 +13,8 @@ public @interface Power {
 
     boolean add() default true;
 
+    String addBtnName() default "保存";
+
     boolean edit() default true;
 
     boolean delete() default true;

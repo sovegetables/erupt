@@ -17,16 +17,12 @@ import java.beans.Transient;
 public @interface Edit {
 
     String title();
-
     @Comment("描述")
     String desc() default "";
-
     @Comment("是否必填")
     boolean notNull() default false;
-
     @Comment("是否显示")
     boolean show() default true;
-
     @Comment("新增时是否展示")
     boolean editShow() default true;
     @Comment("一对多时是否开启行编辑")

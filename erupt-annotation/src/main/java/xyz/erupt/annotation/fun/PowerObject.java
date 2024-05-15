@@ -14,6 +14,8 @@ public class PowerObject {
 
     private boolean add;
 
+    private String addBtnName;
+
     private boolean delete;
 
     private boolean edit;
@@ -28,6 +30,7 @@ public class PowerObject {
 
     public PowerObject(Power power) {
         this.add = power.add();
+        this.addBtnName = power.addBtnName();
         this.delete = power.delete();
         this.edit = power.edit();
         this.query = power.query();

@@ -30,7 +30,6 @@ import java.util.List;
 @Entity
 @Table(name = "mes_product_batch_printer")
 @Erupt(name = "产品批次条码记录",
-//        dataProxy = MesProductBatchPrinterService.class,
         orderBy = "MesProductBatchPrinter.createTime desc",
         filter = @Filter(value = "MesProductBatchPrinter.tenantId",
                 params = {"and MesProductBatchPrinter.deleted = false"},
@@ -123,8 +122,6 @@ public class MesProductBatchPrinter extends HyperModelVo {
             views = @View(title = "打印", type = ViewType.LINK)
     )
     private String url;
-
-    
 
     private Boolean deleted = false;
 }

@@ -30,11 +30,8 @@ import java.util.List;
 @Getter
 @Setter
 @Erupt(name = "物料条码记录",
-//        dataProxy = MesStockBarcodePrintService.class,
         orderBy = "MesStockBarcodePrint.createTime desc",
-        filter = @Filter(value = "MesStockBarcodePrint.tenantId",
-                params = {"and MesStockBarcodePrint.deleted = false"},
-                conditionHandler = TenantFilter.class),
+        filter = @Filter(conditionHandler = TenantFilter.class),
         power = @Power(add = false, delete = false, edit = false))
 @SQLDelete(sql = "update mes_stock_barcode_print set deleted = true where id = ?")
 public class MesStockBarcodePrint extends HyperModelCreatorVo {
@@ -108,8 +105,5 @@ public class MesStockBarcodePrint extends HyperModelCreatorVo {
             edit = @Edit(title = "详情", type = EditType.TAB_TABLE_ADD, readonly = @Readonly())
     )
     private List<MesStockBarcodePrintDetail> stockBarcodePrintDetails;
-
-
-
     private Boolean deleted = false;
 }

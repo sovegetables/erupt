@@ -81,7 +81,7 @@ public class MesBom extends HyperModelVo {
     @ManyToOne
     @EruptField(
             views = {
-                    @View(title = "物料编码", column = "code"),
+                    @View(title = "物料编码", column = "code", highlight = true),
                     @View(title = "物料名称", column = "name")
             },
             edit = @Edit(title = "物料编码", type = EditType.REFERENCE_TABLE,
@@ -89,8 +89,6 @@ public class MesBom extends HyperModelVo {
                     notNull = true, search = @Search(vague = true))
     )
     private MesStock mainStock;
-
-//    private String code;
 
 //    @EruptField(
 //            views = @View(title = "是否默认BOM"),
@@ -111,7 +109,7 @@ public class MesBom extends HyperModelVo {
     @JoinColumn(name = "bom_id")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @EruptField(
-            views = @View(title = "物料明细"),
+            views = @View(title = "物料明细", show = false),
             edit = @Edit(title = "物料明细", type = EditType.TAB_TABLE_ADD)
     )
     private List<MesBomStock> stocks;
@@ -119,7 +117,7 @@ public class MesBom extends HyperModelVo {
     @JoinColumn(name = "bom_id")
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @EruptField(
-            views = @View(title = "工序明细"),
+            views = @View(title = "工序明细", show = false),
             edit = @Edit(title = "工序明细", type = EditType.TAB_TABLE_ADD)
     )
     private List<MesBomWorkingProcedure> bomWorkingProcedures;

@@ -4,6 +4,7 @@ import com.qamslink.mes.model.basic.MesBarcodeRule;
 import com.qamslink.mes.model.basic.QMesBarcodeRule;
 import com.qamslink.mes.repository.MesBarcodeRuleRepository;
 import com.qamslink.mes.type.BarCodeRuleType;
+import com.qamslink.mes.type.BarCodeType;
 import com.qamslink.mes.type.TicketType;
 import com.querydsl.core.types.dsl.BooleanExpression;
 import org.springframework.stereotype.Service;
@@ -62,6 +63,22 @@ public class OrderCodeGenerator implements CodeGenerator.CodeHandler {
 
     private static final SimpleDateFormat DATE_FORMAT = new SimpleDateFormat("yyyyMMdd");
     private static final String FORMAT_BARCODE = "%s%s%s%s";
+
+    public String generateBarCode(BarCodeType barCodeType){
+        synchronized (OrderCodeGenerator.class) {
+            QMesBarcodeRule mesBarcodeRule = QMesBarcodeRule.mesBarcodeRule;
+            BooleanExpression booleanExpression = mesBarcodeRule.categoryType
+                    .eq(BarCodeRuleType.CATEGORY_TYPE_BAR)
+                    .and(mesBarcodeRule.type.eq(barCodeType))
+                    .and(mesBarcodeRule.isUsed.eq(true));
+            Optional<MesBarcodeRule> barcodeRuleOptional = mesBarcodeRuleRepository.findOne(booleanExpression);
+            MesBarcodeRule rule = barcodeRuleOptional.orElse(null);
+            if (rule == null) {
+                throw new EruptApiErrorTip("请维护单据编号规则！");
+            }
+            return generateBarCode(rule, rule.getCurrentIndex());
+        }
+    }
 
     private String generateBarCode(MesBarcodeRule barcodeRule, Integer currentIndex) {
         String prefix = barcodeRule.getPrefix();
